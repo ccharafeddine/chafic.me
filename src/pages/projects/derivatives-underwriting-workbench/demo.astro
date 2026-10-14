@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/Base.astro';
+const sliders=[
+ ['vol','Volatility of MtM (σ, % of notional / √yr)',5,40,1,20],
+ ['tenor','Trade tenor (years)',1,30,1,10],
+ ['thr','CSA threshold H (% of notional; 30 = no CSA)',0,30,0.5,30],
+ ['haz','Counterparty hazard rate λ (% / yr)',0.1,10,0.1,2],
+];
+---
+<Base title="Counterparty exposure & CVA demo · Chafic Charafeddine">
+<section class="max-w-6xl mx-auto px-6 py-14">
+<a href="/projects/derivatives-underwriting-workbench" class="text-sm text-gray-400 hover:text-accent">← Derivatives Underwriting Workbench</a>
+<h1 class="text-4xl font-bold mt-4">Monte Carlo exposure & CVA</h1>
+<p class="mt-3 text-gray-300 max-w-3xl">A browser version of the workbench's core idea. It simulates the mark-to-market of a swap-like trade, applies a CSA threshold, and computes Expected Exposure (EE), 95% Potential Future Exposure (PFE), and unilateral CVA.</p>
+<p class="mt-3 inline-block text-xs px-3 py-1 rounded-full bg-amber-400/15 text-amber-300">Illustrative only · synthetic data · simplified model, not a pricing tool</p>
+<div class="grid lg:grid-cols-[320px_1fr] gap-8 mt-10">
+<div class="card p-6 space-y-6">
+{sliders.map(([id,l,mn,mx,st,v])=>(<label class="block"><div class="flex justify-between text-sm"><span class="text-gray-300">{l}</span><output id={`${id}-o`} class="text-accent font-mono">{v}</output></div>
+<input id={id} type="range" min={mn} max={mx} step={st} value={v} class="w-full accent-sky-400 mt-2"/></label>))}
+<p class="text-xs text-gray-500">Notional 100 · 2,000 paths · LGD 60% · discount rate 3% · 5-day margin period of risk ignored for clarity.</p>
+</div>
+<div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="card p-4"><p class="text-xs text-gray-400">CVA</p><p id="k-cva" class="text-2xl font-bold text-accent">–</p></div>
+<div class="card p-4"><p class="text-xs text-gray-400">Peak EE</p><p id="k-ee" class="text-2xl font-bold">–</p></div>
+<div class="card p-4"><p class="text-xs text-gray-400">Peak PFE 95%</p><p id="k-pfe" class="text-2xl font-bold text-accent2">–</p></div>
+</div>
+<div class="card p-4"><canvas id="chart" class="w-full" style="height:380px"></canvas>
+<div class="flex gap-5 text-xs text-gray-400 mt-2 px-2"><span><b class="text-gray-500">━</b> sample MtM paths</span><span><b class="text-sky-400">━</b> EE</span><span><b class="text-violet-400">━</b> PFE 95%</span></div></div>
+</div></div>
+<div class="card p-6 mt-8 text-sm text-gray-400 leading-relaxed">
+<h2 class="text-gray-200 font-semibold mb-2">Model</h2>
+MtM(t) = σ·W(t)·(T−t)/T·N, a Brownian driver with linear amortization (the classic swap "hump"). Collateral posted C(t) = max(MtM(t) − H, 0), so exposure E(t) = min(max(MtM(t), 0), H). EE(t) = mean E(t); PFE(t) = 95th percentile of E(t).
+CVA = LGD · Σ DF(tᵢ) · EE(tᵢ) · [e^(−λtᵢ₋₁) − e^(−λtᵢ)].
+</div>
+</section>
+<script>
+document.addEventListener('astro:page-load',()=>{ if(!document.getElementById('chart')) return;
+const $=(id:string)=>document.getElementById(id) as HTMLInputElement;
+const ids=['vol','tenor','thr','haz']; const N=100,P=2000,STEPS=60,LGD=0.6,R=0.03;
+// fixed-seed normals so moving sliders rescales the same paths (smooth)
+let s=42; const rnd=()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};
+const Z=new Float32Array(P*STEPS); for(let i=0;i<Z.length;i++){Z[i]=Math.sqrt(-2*Math.log(rnd()||1e-9))*Math.cos(2*Math.PI*rnd());}
+const cv=document.getElementById('chart') as HTMLCanvasElement; const g=cv.getContext('2d')!;
+function run(){
+ const vol=+$('vol').value/100,T=+$('tenor').value,H=+$('thr').value>=30?Infinity:+$('thr').value/100*N,lam=+$('haz').value/100;
+ ids.forEach(i=>(document.getElementById(i+'-o')!).textContent=(i==='thr'&&+$(i).value>=30)?'none':$(i).value);
+ const dt=T/STEPS,sq=Math.sqrt(dt); const W=new Float32Array(P); const ee=[0],pfe=[0],samp:number[][]=Array.from({length:30},()=>[0]);
+ const col=new Float32Array(P); let cva=0;
+ for(let k=1;k<=STEPS;k++){ const t=k*dt;
+  for(let p=0;p<P;p++){ W[p]+=Z[p*STEPS+k-1]*sq; const m=vol*W[p]*(T-t)/T*N; col[p]=Math.min(Math.max(m,0),H); if(p<30) samp[p].push(m); }
+  let sum=0; for(let p=0;p<P;p++) sum+=col[p]; const e=sum/P; ee.push(e);
+  const sorted=Array.from(col).sort((a,b)=>a-b); pfe.push(sorted[Math.floor(0.95*P)]);
+  cva+=LGD*Math.exp(-R*t)*e*(Math.exp(-lam*(t-dt))-Math.exp(-lam*t)); }
+ $('k-cva').textContent=cva.toFixed(3); $('k-ee').textContent=Math.max(...ee).toFixed(2); $('k-pfe').textContent=Math.max(...pfe).toFixed(2);
+ draw(samp,ee,pfe,T);
+}
+function draw(samp:number[][],ee:number[],pfe:number[],T:number){
+ const d=devicePixelRatio,w=cv.width=cv.clientWidth*d,h=cv.height=cv.clientHeight*d,pad=40*d;
+ const all=samp.flat().concat(pfe); const mx=Math.max(...all.map(Math.abs),1)*1.1;
+ const X=(i:number)=>pad+(w-pad*1.5)*i/STEPS, Y=(v:number)=>h/2-(h/2-pad/2)*v/mx;
+ g.clearRect(0,0,w,h); g.strokeStyle='#334155'; g.lineWidth=d; g.beginPath(); g.moveTo(pad,Y(0)); g.lineTo(w,Y(0)); g.stroke();
+ g.fillStyle='#64748b'; g.font=`${11*d}px sans-serif`; g.fillText('0',pad-14*d,Y(0)+4*d); g.fillText(mx.toFixed(0),4*d,Y(mx*0.95)); g.fillText(`${T}y`,w-24*d,h-6*d);
+ const line=(a:number[],c:string,lw:number)=>{g.strokeStyle=c;g.lineWidth=lw*d;g.beginPath();a.forEach((v,i)=>i?g.lineTo(X(i),Y(v)):g.moveTo(X(i),Y(v)));g.stroke();};
+ samp.forEach(a=>line(a,'rgba(148,163,184,0.18)',1)); line(pfe,'#a78bfa',2.5); line(ee,'#38bdf8',2.5);
+}
+ids.forEach(i=>$(i).addEventListener('input',run)); addEventListener('resize',run); run();
+});
+</script>
+</Base>

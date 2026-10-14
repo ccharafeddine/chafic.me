@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import { projects, bootcamp } from '../data/projects.js';
+const edu=[
+ ['2018','Texas A&M University','BS Economics'],
+ ['','Rice University','FinTech Bootcamp'],
+ ['Dec 2025','University of St. Thomas','MS Finance · GPA 3.8 · M&A coursework'],
+ ['Nov 17, 2026','CFA Institute','CFA Level I candidate, exam scheduled'],
+];
+const skills={ 'Languages & data':['Python','SQL','Excel','Access'], 'Finance':['Valuation / M&A','Derivatives & counterparty credit (EE/PFE, CVA)','Portfolio optimization & risk','Systematic options strategies'], 'Python stack':['pandas','NumPy','PySide6 / Qt6','Jupyter'], 'Other':['TypeScript','Rust (Tauri apps)','Solidity (bootcamp)'] };
+---
+<Base>
+<Hero/>
+<section id="about" class="max-w-4xl mx-auto px-6 py-24 reveal">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-6">About</h2>
+<p class="text-gray-300 leading-relaxed"><span class="ph">[PLACEHOLDER]</span> Final summary pending from the resume update. Targeting M&A / investment banking analyst, trading desk analytics and reporting, and ETF research and product roles.</p>
+</section>
+<section id="experience" class="max-w-4xl mx-auto px-6 pb-12 reveal">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Experience & ventures</h2>
+<div class="card p-6 text-gray-300"><span class="ph">[PLACEHOLDER]</span> Experience entries, independent fund and company research, and the bitcoin mining business write-up are pending final resume text.</div>
+</section>
+<section id="projects" class="py-24 overflow-hidden">
+<div class="max-w-6xl mx-auto px-6"><h2 class="split text-3xl sm:text-5xl font-bold mb-3">Featured projects</h2><p class="text-gray-400 mb-10">Finance and trading tools first, then Chess Solver, then the Smith pipeline of local-first video tools: GifSmith → ClipSmith → CaptionSmith.</p></div>
+<div id="hpin" class="lg:h-screen lg:flex lg:items-center">
+<div id="htrack" class="px-6 grid sm:grid-cols-2 gap-6 lg:flex lg:w-max lg:gap-8 lg:px-[8vw] max-w-6xl mx-auto lg:max-w-none">
+{projects.map((p,i)=>(
+<a href={`/projects/${p.slug}`} class="card pcard tilt group overflow-hidden hover:border-accent/60 lg:w-[440px] shrink-0" style="transform-style:preserve-3d">
+<div class="h-52 bg-black/40 overflow-hidden flex items-center justify-center"><img src={`/shots/${p.repo}/${p.shots[0]}`} alt="" class={p.shots[0].endsWith('.svg')?'h-24':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'} style={`view-transition-name: shot-${p.slug}`}/></div>
+<div class="p-5"><p class="text-xs text-gray-500 font-mono">0{i+1}</p><p class="text-xs text-accent mb-1">{p.tag}</p><h3 class="font-semibold text-lg" style={`view-transition-name: title-${p.slug}`}>{p.name}</h3>
+<p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.desc}</p>
+{p.pipe && <span class="inline-block mt-3 mr-2 text-xs px-2 py-1 rounded-full bg-accent2/15 text-accent2">Smith pipeline · step {p.pipe}/3 {p.pipe<3?"→":"✓"}</span>}
+{p.demo && <span class="inline-block mt-3 text-xs px-2 py-1 rounded-full bg-accent/15 text-accent">● Live demo</span>}</div></a>))}
+</div></div></section>
+<section id="education" class="max-w-4xl mx-auto px-6 py-24">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Education & credentials</h2>
+<ol id="tl" class="relative ml-3"><span class="absolute left-0 top-0 bottom-0 w-px bg-white/10"></span><span id="tl-line" class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-accent to-accent2 origin-top"></span>
+{edu.map(([d,s,t])=>(<li class="tl-item mb-10 ml-6 relative"><span class="absolute -left-[31px] top-1 tl-dot w-3.5 h-3.5 rounded-full bg-accent"></span>
+<p class="text-xs text-accent">{d || <span class="ph">[PLACEHOLDER: dates]</span>}</p><h3 class="font-semibold text-lg">{s}</h3><p class="text-gray-400">{t}</p></li>))}
+</ol></section>
+<section id="skills" class="max-w-6xl mx-auto px-6 py-24">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Skills</h2>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">{Object.entries(skills).map(([k,v])=>(<div class="card tilt p-5 reveal"><h3 class="font-semibold mb-3 text-accent2">{k}</h3><div class="flex flex-wrap gap-2">{v.map(s=><span class="chip inline-block text-xs px-2 py-1 rounded bg-white/5">{s}</span>)}</div></div>))}</div>
+</section>
+<section id="bootcamp" class="max-w-6xl mx-auto px-6 py-24">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-3 reveal">Bootcamp work</h2><p class="text-gray-400 mb-8 reveal">Rice FinTech Bootcamp challenges and exercises.</p>
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">{bootcamp.map(b=>(<a href={b.url} target="_blank" rel="noopener" class="card bc p-4 hover:border-accent2/60 transition"><p class="font-mono text-sm text-accent2">{b.repo}</p><p class="text-sm text-gray-400 mt-1">{b.desc}</p></a>))}</div>
+</section>
+<section id="resume" class="max-w-4xl mx-auto px-6 py-16 reveal text-center">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-4">Resume</h2>
+<p class="text-gray-400 mb-6"><span class="ph">[PLACEHOLDER]</span> Final PDF pending.</p>
+<a href="/resume.pdf" class="px-5 py-3 rounded-full border border-white/20 opacity-60 pointer-events-none">Download PDF (coming soon)</a>
+</section>
+<section id="contact" class="max-w-4xl mx-auto px-6 py-24 reveal text-center">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Contact</h2>
+<div class="flex flex-wrap justify-center gap-4">
+<a href="mailto:ccharafeddine@protonmail.com" class="px-5 py-3 rounded-full bg-accent text-ink font-semibold">ccharafeddine@protonmail.com</a>
+<a href="https://github.com/ccharafeddine" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-accent">github.com/ccharafeddine</a>
+</div></section>
+</Base>

@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects.js';
+export function getStaticPaths(){ return projects.map(p=>({params:{slug:p.slug},props:{p}})); }
+const { p } = Astro.props;
+const imgs = p.shots.filter(s=>!s.endsWith('.svg'));
+---
+<Base title={`${p.name} · Chafic Charafeddine`}>
+<section class="max-w-5xl mx-auto px-6 py-16">
+<a href="/#projects" class="text-sm text-gray-400 hover:text-accent">← All projects</a>
+<p class="text-accent text-sm mt-6">{p.tag}</p><h1 class="text-4xl font-bold mt-1" style={`view-transition-name: title-${p.slug}`}>{p.name}</h1>
+<p class="text-gray-300 mt-4 leading-relaxed reveal">{p.desc}</p>
+{p.pipe && (<div class="flex flex-wrap items-center gap-2 mt-5 text-sm">{[["gifsmith","GifSmith"],["clipsmith","ClipSmith"],["captionsmith","CaptionSmith"]].map(([sl,n],i)=>(<>{i>0 && <span class="text-gray-500">→</span>}<a href={`/projects/${sl}`} class={`px-3 py-1 rounded-full border ${sl===p.slug?"border-accent2 text-accent2":"border-white/15 text-gray-400 hover:text-white"}`}>{n}</a></>))}</div>)}
+<div class="flex flex-wrap gap-3 mt-6">
+<a href={p.url} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 hover:border-accent text-sm">View on GitHub →</a>
+{p.demo && <a href={`/projects/${p.slug}/demo`} class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Open live demo</a>}
+</div>
+{imgs.length ? (<div class="grid md:grid-cols-2 gap-6 mt-12">{imgs.map((s,i)=>(<a href={`/shots/${p.repo}/${s}`} target="_blank" class="card tilt overflow-hidden reveal"><img src={`/shots/${p.repo}/${s}`} alt={`${p.name}: ${s}`} style={i===0?`view-transition-name: shot-${p.slug}`:undefined} loading="lazy" class="w-full"/></a>))}</div>)
+: (<div class="card p-10 mt-12 text-center reveal"><img src={`/shots/${p.repo}/${p.shots[0]}`} class="h-28 mx-auto mb-6" alt=""/><p class="text-gray-400"><span class="ph">[PLACEHOLDER]</span> Screen recording / demo GIF to come.</p></div>)}
+</section></Base>
