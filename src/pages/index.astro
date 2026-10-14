@@ -1,24 +1,42 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
-import { projects, bootcamp } from '../data/projects.js';
+import { projects } from '../data/projects.js';
+// NOTE: provisional content from Cornelius's draft; confirm before launch.
 const edu=[
- ['2018','Texas A&M University','BS Economics'],
- ['','Rice University','FinTech Bootcamp'],
- ['Dec 2025','University of St. Thomas','MS Finance · GPA 3.8 · M&A coursework'],
- ['Nov 17, 2026','CFA Institute','CFA Level I candidate, exam scheduled'],
+ ['May 2026','University of St. Thomas, Cameron School of Business','MS Finance · GPA 3.8 · Graduate coursework in Mergers & Acquisitions and Financial Modeling'],
+ ['Dec 2018','Texas A&M University','BS Economics'],
+ ['Summer 2021','Rice University','FinTech Bootcamp'],
+ ['Nov 2026','CFA Institute','Level I Candidate in the CFA Program, sitting November 2026'],
 ];
-const skills={ 'Languages & data':['Python','SQL','Excel','Access'], 'Finance':['Valuation / M&A','Derivatives & counterparty credit (EE/PFE, CVA)','Portfolio optimization & risk','Systematic options strategies'], 'Python stack':['pandas','NumPy','PySide6 / Qt6','Jupyter'], 'Other':['TypeScript','Rust (Tauri apps)','Solidity (bootcamp)'] };
+const skills={ 'Tools':['Excel','PowerPoint','Python','SQL','Access'], 'Finance':['Valuation / M&A','Derivatives & counterparty credit (EE/PFE, CVA)','Portfolio optimization & risk','Systematic options strategies'], 'Python stack':['pandas','NumPy','PySide6 / Qt6','Jupyter'], 'Other':['TypeScript','Rust (Tauri apps)',] };
 ---
 <Base>
 <Hero/>
 <section id="about" class="max-w-4xl mx-auto px-6 py-24 reveal">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-6">About</h2>
-<p class="text-gray-300 leading-relaxed"><span class="ph">[PLACEHOLDER]</span> Final summary pending from the resume update. Targeting M&A / investment banking analyst, trading desk analytics and reporting, and ETF research and product roles.</p>
+<p class="text-gray-300 leading-relaxed text-lg">Entry-level finance professional targeting corporate development and M&A. MS Finance (GPA 3.8/4.0) with graduate coursework in Mergers & Acquisitions and Financial Modeling; BS Economics; Rice FinTech Bootcamp; Level I Candidate in the CFA Program. Builds models, research notes, and client-ready materials in Excel, PowerPoint, Python, and SQL. U.S. citizen.</p>
 </section>
 <section id="experience" class="max-w-4xl mx-auto px-6 pb-12 reveal">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-6">Experience & ventures</h2>
-<div class="card p-6 text-gray-300"><span class="ph">[PLACEHOLDER]</span> Experience entries, independent fund and company research, and the bitcoin mining business write-up are pending final resume text.</div>
+<div class="card tilt p-6 text-gray-300">
+<div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Independent Market Research & Portfolio Management</h3><p class="text-sm text-accent">Jan 2019 – Present · Houston, TX</p></div>
+<ul class="mt-4 space-y-2 list-disc pl-5">
+<li>Researched and traded equities, gold futures, FX, and digital asset futures.</li>
+<li>Manages retirement and taxable accounts end to end: allocation, rebalancing, and tax-loss harvesting.</li>
+<li>Runs bitcoin mining and node infrastructure as a small operating business whose largest input cost is Texas electricity.</li>
+</ul></div>
+</section>
+<section id="case-study" class="max-w-4xl mx-auto px-6 pb-12">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-6">M&A case study</h2>
+<div class="card tilt p-6 text-gray-300 reveal">
+<p class="text-xs text-accent mb-1">Buy-side proposal</p><h3 class="font-semibold text-lg text-white">MARA acquiring Soluna</h3>
+<div class="grid sm:grid-cols-2 gap-4 mt-4">
+<div><p class="text-accent2 text-sm font-semibold">Trading comps</p><p class="text-sm">Relative valuation against a public peer set.</p></div>
+<div><p class="text-accent2 text-sm font-semibold">DCF</p><p class="text-sm">Intrinsic value across a WACC range.</p></div>
+<div><p class="text-accent2 text-sm font-semibold">Deal structure</p><p class="text-sm">Stock-based consideration with a price cap.</p></div>
+<div><p class="text-accent2 text-sm font-semibold">Synergies & accretion</p><p class="text-sm">Synergy case and accretion/dilution analysis.</p></div>
+</div></div>
 </section>
 <section id="projects" class="py-24 overflow-hidden">
 <div class="max-w-6xl mx-auto px-6"><h2 class="split text-3xl sm:text-5xl font-bold mb-3">Featured projects</h2><p class="text-gray-400 mb-10">Finance and trading tools first, then Chess Solver, then the Smith pipeline of local-first video tools: GifSmith → ClipSmith → CaptionSmith.</p></div>
@@ -36,16 +54,13 @@ const skills={ 'Languages & data':['Python','SQL','Excel','Access'], 'Finance':[
 <h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Education & credentials</h2>
 <ol id="tl" class="relative ml-3"><span class="absolute left-0 top-0 bottom-0 w-px bg-white/10"></span><span id="tl-line" class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-accent to-accent2 origin-top"></span>
 {edu.map(([d,s,t])=>(<li class="tl-item mb-10 ml-6 relative"><span class="absolute -left-[31px] top-1 tl-dot w-3.5 h-3.5 rounded-full bg-accent"></span>
-<p class="text-xs text-accent">{d || <span class="ph">[PLACEHOLDER: dates]</span>}</p><h3 class="font-semibold text-lg">{s}</h3><p class="text-gray-400">{t}</p></li>))}
+<p class="text-xs text-accent">{d}</p><h3 class="font-semibold text-lg">{s}</h3><p class="text-gray-400">{t}</p></li>))}
 </ol></section>
 <section id="skills" class="max-w-6xl mx-auto px-6 py-24">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Skills</h2>
 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">{Object.entries(skills).map(([k,v])=>(<div class="card tilt p-5 reveal"><h3 class="font-semibold mb-3 text-accent2">{k}</h3><div class="flex flex-wrap gap-2">{v.map(s=><span class="chip inline-block text-xs px-2 py-1 rounded bg-white/5">{s}</span>)}</div></div>))}</div>
 </section>
-<section id="bootcamp" class="max-w-6xl mx-auto px-6 py-24">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-3 reveal">Bootcamp work</h2><p class="text-gray-400 mb-8 reveal">Rice FinTech Bootcamp challenges and exercises.</p>
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">{bootcamp.map(b=>(<a href={b.url} target="_blank" rel="noopener" class="card bc p-4 hover:border-accent2/60 transition"><p class="font-mono text-sm text-accent2">{b.repo}</p><p class="text-sm text-gray-400 mt-1">{b.desc}</p></a>))}</div>
-</section>
+
 <section id="resume" class="max-w-4xl mx-auto px-6 py-16 reveal text-center">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-4">Resume</h2>
 <p class="text-gray-400 mb-6"><span class="ph">[PLACEHOLDER]</span> Final PDF pending.</p>
@@ -55,6 +70,6 @@ const skills={ 'Languages & data':['Python','SQL','Excel','Access'], 'Finance':[
 <h2 class="split text-3xl sm:text-5xl font-bold mb-6">Contact</h2>
 <div class="flex flex-wrap justify-center gap-4">
 <a href="mailto:ccharafeddine@protonmail.com" class="px-5 py-3 rounded-full bg-accent text-ink font-semibold">ccharafeddine@protonmail.com</a>
-<a href="https://github.com/ccharafeddine" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-accent">github.com/ccharafeddine</a>
+<a href="https://www.linkedin.com/in/ccharafeddine" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-accent">linkedin.com/in/ccharafeddine</a>
 </div></section>
 </Base>

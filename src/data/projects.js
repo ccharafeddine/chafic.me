@@ -1,10 +1,13 @@
+// NOTE: content is provisional (Cornelius draft, Oct 2026); confirm before launch.
 const G='https://github.com/ccharafeddine/';
 export const projects=[
 {slug:'derivatives-underwriting-workbench',repo:'Derivatives_Underwriting_Workbench',name:'Derivatives Underwriting Workbench',tag:'Counterparty credit · Python · PySide6/Qt6',
  desc:'Educational desktop app that teaches OTC derivatives counterparty-credit underwriting end to end: Monte Carlo exposure (EE/PFE), CVA/DVA/FVA, CSA collateral, limits, and an underwriting memo, plus a guided role-play simulator. Runs offline on synthetic data.',
+ blurb:'Scores obligor credit quality, simulates thousands of adverse scenarios to size the downside, prices the risk, and ends in an approve/decline memo.',
  shots:['exposure.png','cva.png','collateral.png','limits.png','memo.png','simulator-campaign.png'],demo:true},
 {slug:'portfolio-analyzer',repo:'Portfolio_Analyzer',name:'Portfolio Analyzer',tag:'Portfolio analytics · Python · PySide6',
  desc:'Native desktop app for portfolio analytics: inception-aware backtesting, optimization (Max-Sharpe/HRP/Black-Litterman), risk and Fama-French attribution, multi-portfolio comparison, what-if scenarios, rebalancing trades, Monte Carlo planning, and client-ready reports, with every result explained in plain English.',
+ blurb:'Began as the MS Finance capstone. An 18-step pipeline from raw market data to reports: VaR/CVaR, 8 historical stress tests, factor attribution, Monte Carlo forecasts, PDF/PPT output.',live:'https://ccportfolioanalyzer.streamlit.app',
  shots:['01-overview.png','02-performance.png','03-risk.png','04-attribution.png','06-optimization.png','07-forecast.png']},
 {slug:'crypto-quant-desk',repo:'crypto-quant-desk',name:'Crypto Quant Desk',tag:'Trading terminal · Python',
  desc:'Cross-platform desktop trading terminal for Kraken spot: adjustable workspace, live positions and cost basis, portfolio risk and analytics, real-time charts and order flow, a signal engine (sized setups, entry timing, backtest), and an order suite with safety rails. Advisory signals only; keys stay in the OS keychain.',
@@ -25,12 +28,3 @@ export const projects=[
  desc:'On-device video captioning for macOS and Windows. Transcribe locally with whisper.cpp (GPU-accelerated), edit, style, add speaker labels, batch-process, then burn in or export .srt/.vtt/.ass. No accounts, no cloud.',
  shots:['screenshot-1-load.png','screenshot-2-transcript.png','screenshot-3-style.png'],pipe:3},
 ].map(p=>({...p,url:G+p.repo}));
-export const bootcamp=[
-['ETF_Analyzer','ETF Analyzer (Module 7 challenge)'],['Financial_Planner','Emergency and retirement financial planner'],['San_Francisco_Housing','Visualize and analyze housing data'],
-['Portfolio_Risk_Return_Analysis','Risk/return analysis'],['Risk_Return_Analysis','Analyzing portfolio risk and returns'],['Crypto_Clustering','Crypto investments clustering'],
-['Crypto_Arbitrage','Historical BTC trade data across two exchanges, testing for arbitrage'],['Logistic_Regression_Model','Logistic regression on two versions of a dataset'],
-['Module_11_Challenge','Google search traffic vs. stock price time series'],['Module_13_Challenge_Neural_Network','Binary classification with a deep neural network'],
-['Module_14_Challenge','Machine learning algo trading bot'],['TOS_Trade_Signal','Momentum strategy with Fibonacci indicators → Buy/Sell/Hold'],
-['Loan_Qualifier','Match applicants with qualifying loans, export to CSV'],['Module_15_Challenge','AWS'],['Module_18_Challenge','Blockchain-based ledger with a UI'],
-['Module_19_Challenge','Ethereum payments in the Fintech Finder app'],['Module_21_Challenge','ERC-20 token with an OpenZeppelin crowdsale (Solidity)'],
-].map(([r,d])=>({repo:r,desc:d,url:G+r}));

@@ -106,8 +106,6 @@ function init() {
   gsap.utils.toArray<HTMLElement>('#skills .card').forEach(card => {
     gsap.from(card.querySelectorAll('.chip'), { y: () => gsap.utils.random(30, 70), x: () => gsap.utils.random(-30, 30), rotate: () => gsap.utils.random(-15, 15), opacity: 0, duration: 0.9, stagger: 0.05, ease: 'back.out(1.6)', scrollTrigger: { trigger: card, start: 'top 85%' } });
   });
-  // bootcamp grid
-  if (document.querySelector('.bc')) ScrollTrigger.batch('.bc', { start: 'top 92%', onEnter: b => gsap.from(b, { y: 40, opacity: 0, scale: 0.95, stagger: 0.06, duration: 0.6, ease: 'power2.out' }) });
 }
 
 document.addEventListener('astro:page-load', () => { init(); requestAnimationFrame(() => ScrollTrigger.refresh()); });
