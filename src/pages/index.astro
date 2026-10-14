@@ -81,7 +81,7 @@ const resumeLinks=[
 {projects.map((p,i)=>(<>
 {p.alias && <span id={p.alias} class="anchor-alias absolute top-0 left-0 w-0 h-0" data-target={p.slug}></span>}
 <a id={p.slug} href={`/projects/${p.slug}`} class="card pcard tilt group overflow-hidden hover:border-accent/60 lg:w-[440px] shrink-0" style="transform-style:preserve-3d">
-<div class="h-52 bg-black/40 overflow-hidden flex items-center justify-center"><img src={`/shots/${p.repo}/${p.shots[0]}`} alt="" class={p.shots[0].endsWith('.svg')?'h-24':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'} style={`view-transition-name: shot-${p.slug}`}/></div>
+<div class="h-52 bg-black/40 overflow-hidden flex items-center justify-center">{p.shots[0] ? <img src={`/shots/${p.repo}/${p.shots[0]}`} alt="" class={p.shots[0].endsWith('.svg')?'h-24':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'} style={`view-transition-name: shot-${p.slug}`}/> : <span class="text-3xl font-semibold text-gray-500">{p.name}</span>}</div>
 <div class="p-5"><p class="text-xs text-gray-500 font-mono">0{i+1}</p><p class="text-xs text-accent mb-1">{p.tag}</p><h3 class="font-semibold text-lg" style={`view-transition-name: title-${p.slug}`}>{p.name}</h3>
 <p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.desc}</p>
 {p.pipe && <span class="inline-block mt-3 mr-2 text-xs px-2 py-1 rounded-full bg-accent2/15 text-accent2">Smith pipeline · step {p.pipe}/3 {p.pipe<3?"→":"✓"}</span>}

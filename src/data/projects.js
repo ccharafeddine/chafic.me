@@ -20,7 +20,7 @@ export const projects=[
 {slug:'crypto-quant-desk',repo:'crypto-quant-desk',name:'Crypto Quant Desk',tag:'Trading terminal · Python · Jun 2026',
  desc:'A Windows/macOS trading terminal for spot trading.',
  features:['Positions','Risk analytics','Live charts','A signal engine (advisory only)','Backtests','Order safety rails'],
- shots:['analysis.png','monitor.png','signals.png','trading.png']},
+ shots:[]},
 {slug:'daily-melt',alias:'spx-income-trader',repo:'spx-income-trader',name:'SPX Income Trader',tag:'Systematic options strategy · Python · Jan 2026',caseStudy:true,
  desc:'An automated, momentum-based 0-DTE SPX options income strategy.',
  intent:'To turn my discretionary momentum approach into tested rules with hard limits: a daily loss circuit breaker, drawdown caps and position sizing from a loss budget.',
