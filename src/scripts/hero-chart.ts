@@ -1,37 +1,21 @@
-// Hero background: a calm "live" BTC/USD chart.
-// Seeds with the last ~24h of 15-minute candles from Coinbase (CORS-open, no key), falls back to CoinGecko,
-// then polls the spot ticker every 20s and eases the line toward each new print.
-// If every fetch fails it draws a static synthetic line (no label). Reduced motion: one static frame, no polling.
+// Hero background: S&P 500 over the last 2 years (daily closes) with a calm "live-style" end.
+// Data: /api/spx (Worker proxy of Yahoo, delayed quotes incl. today's 5-min bars) → fallback /data/spx.json
+// (build-time snapshot) → fallback static synthetic line (no label). Never labeled "live": quotes are delayed.
+// While the market is open and the API works, it re-polls every 60s and eases the head to the new value.
+// Reduced motion: one static frame, no polling, no draw-in.
 type Pt = { t: number; p: number };
-const fmt = (n: number) => '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+type Feed = { daily: [number, number][]; intraday: [number, number][]; last: number; asOf: number; open: boolean };
+const fmt = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-async function seed(): Promise<Pt[] | null> {
-  try {
-    const r = await fetch('https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=900');
-    if (!r.ok) throw 0;
-    const rows: number[][] = await r.json(); // [time, low, high, open, close, volume], newest first
-    const pts = rows.map(c => ({ t: c[0] * 1000, p: c[4] })).sort((a, b) => a.t - b.t);
-    const cut = Date.now() - 24 * 3600e3;
-    const out = pts.filter(x => x.t >= cut);
-    if (out.length > 10) return out;
-  } catch {}
-  try {
-    const r = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1');
-    if (!r.ok) throw 0;
-    const j = await r.json();
-    const out = (j.prices as number[][]).map(([t, p]) => ({ t, p }));
-    if (out.length > 10) return out;
-  } catch {}
-  return null;
-}
-async function tick(): Promise<number | null> {
-  try { const r = await fetch('https://api.exchange.coinbase.com/products/BTC-USD/ticker'); if (r.ok) { const j = await r.json(); const v = +j.price; if (v > 0) return v; } } catch {}
-  try { const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'); if (r.ok) { const j = await r.json(); const v = +j.bitcoin?.usd; if (v > 0) return v; } } catch {}
+async function load(): Promise<{ f: Feed; api: boolean } | null> {
+  for (const [u, api] of [['/api/spx', true], ['/data/spx.json', false]] as const) {
+    try { const r = await fetch(u); if (r.ok) { const f = await r.json(); if (f.daily?.length > 20) return { f, api }; } } catch {}
+  }
   return null;
 }
 function synthetic(): Pt[] {
-  const now = Date.now(); let p = 100; const out: Pt[] = [];
-  for (let i = 96; i >= 0; i--) { p *= 1 + (Math.sin(i / 7) * 0.002 + (Math.random() - 0.5) * 0.006); out.push({ t: now - i * 900e3, p }); }
+  let p = 100; const out: Pt[] = [];
+  for (let i = 0; i < 500; i++) { p *= 1 + 0.0005 + Math.sin(i / 23) * 0.002 + (Math.random() - 0.5) * 0.01; out.push({ t: i, p }); }
   return out;
 }
 
@@ -40,67 +24,76 @@ export function heroChart(reduce: boolean): () => void {
   const label = document.getElementById('hero-live');
   if (!c) return () => {};
   const x = c.getContext('2d')!;
-  let W = 0, H = 0, alive = true, raf = 0, timer = 0, live = false;
-  let pts: Pt[] = [];
-  let lo = 0, hi = 1, tgtLo = 0, tgtHi = 1; // eased y-range
-  let shown = 0, target = 0;               // eased last price
-  const size = () => { const d = devicePixelRatio || 1; W = c.width = c.offsetWidth * d; H = c.height = c.offsetHeight * d; };
-  size(); addEventListener('resize', size);
+  let W = 0, H = 0, alive = true, raf = 0, timer = 0, labeled = false;
+  let pts: Pt[] = [], lo = 0, hi = 1, shown = 0, target = 0, reveal = reduce ? 1 : 0;
+  const size = () => { const d = devicePixelRatio || 1; W = c.width = c.offsetWidth * d; H = c.height = c.offsetHeight * d; if (reduce || !raf) draw(); };
+  addEventListener('resize', size);
 
-  const range = () => { const ps = pts.map(q => q.p).concat(target); const mn = Math.min(...ps), mx = Math.max(...ps), pad = (mx - mn) * 0.25 || mx * 0.01; tgtLo = mn - pad; tgtHi = mx + pad; };
-  const draw = () => {
+  function draw() {
     x.clearRect(0, 0, W, H);
     if (pts.length < 2) return;
-    const now = live ? Date.now() : pts[pts.length - 1].t, span = 24 * 3600e3, t0 = now - span;
-    const X = (t: number) => ((t - t0) / span) * W * 0.92;            // leave right margin for the "head"
-    const Y = (p: number) => H * 0.82 - ((p - lo) / (hi - lo)) * H * 0.5; // keep in mid-lower band behind the text
-    const series = pts.slice(0, -1).concat({ t: now, p: shown });
-    x.beginPath(); series.forEach((q, i) => i ? x.lineTo(X(q.t), Y(q.p)) : x.moveTo(X(q.t), Y(q.p)));
-    const g = x.createLinearGradient(0, 0, W, 0); g.addColorStop(0, 'rgba(167,139,250,0.15)'); g.addColorStop(1, 'rgba(56,189,248,0.75)');
+    const N = pts.length, m = Math.max(2, Math.ceil(N * reveal));
+    const X = (i: number) => (i / (N - 1)) * W * 0.94;
+    const Y = (p: number) => H * 0.85 - ((p - lo) / (hi - lo)) * H * 0.55;
+    const s = pts.slice(0, m).map((q, i) => (i === N - 1 ? shown : q.p));
+    x.beginPath(); s.forEach((p, i) => i ? x.lineTo(X(i), Y(p)) : x.moveTo(0, Y(p)));
+    const g = x.createLinearGradient(0, 0, W, 0); g.addColorStop(0, 'rgba(167,139,250,0.12)'); g.addColorStop(1, 'rgba(56,189,248,0.75)');
     x.strokeStyle = g; x.lineWidth = 1.6 * devicePixelRatio; x.lineJoin = 'round'; x.stroke();
-    const last = series[series.length - 1];
-    x.lineTo(X(last.t), H); x.lineTo(X(series[0].t), H); x.closePath();
+    x.lineTo(X(m - 1), H); x.lineTo(0, H); x.closePath();
     const f = x.createLinearGradient(0, H * 0.3, 0, H); f.addColorStop(0, 'rgba(56,189,248,0.10)'); f.addColorStop(1, 'rgba(56,189,248,0)');
     x.fillStyle = f; x.fill();
-    if (live) { // gentle pulsing head dot
-      const r = (2.5 + Math.sin(performance.now() / 600) * 0.8) * devicePixelRatio;
-      x.beginPath(); x.arc(X(last.t), Y(last.p), r * 2.2, 0, 7); x.fillStyle = 'rgba(56,189,248,0.15)'; x.fill();
-      x.beginPath(); x.arc(X(last.t), Y(last.p), r, 0, 7); x.fillStyle = 'rgba(56,189,248,0.9)'; x.fill();
+    if (m === N && labeled) {
+      const r = (2.5 + (reduce ? 0 : Math.sin(performance.now() / 700) * 0.8)) * devicePixelRatio, hx = X(N - 1), hy = Y(shown);
+      x.beginPath(); x.arc(hx, hy, r * 2.2, 0, 7); x.fillStyle = 'rgba(56,189,248,0.15)'; x.fill();
+      x.beginPath(); x.arc(hx, hy, r, 0, 7); x.fillStyle = 'rgba(56,189,248,0.9)'; x.fill();
     }
-  };
+  }
   let lastFrame = 0;
   const loop = (ts: number) => {
     if (!alive) return; raf = requestAnimationFrame(loop);
-    if (ts - lastFrame < 33) return; lastFrame = ts; // ~30fps is plenty for a slow chart
-    const k = 0.04; shown += (target - shown) * k; lo += (tgtLo - lo) * k; hi += (tgtHi - hi) * k;
-    draw();
+    if (ts - lastFrame < 33) return; lastFrame = ts;
+    reveal = Math.min(1, reveal + (1 - reveal) * 0.03 + 0.001); // slow ease-out draw-in over a few seconds
+    shown += (target - shown) * 0.04; draw();
   };
-  const setLabel = (p: number, up: boolean | null) => {
-    if (!label) return;
-    label.hidden = false;
-    const v = label.querySelector('[data-v]'); if (v) v.textContent = fmt(p);
-    label.dataset.dir = up == null ? '' : up ? 'up' : 'down';
+  const fit = () => { const ps = pts.map(q => q.p); const mn = Math.min(...ps), mx = Math.max(...ps), pad = (mx - mn) * 0.08; lo = mn - pad; hi = mx + pad; };
+  const setLabel = (f: Feed, dir: boolean | null) => {
+    if (!label) return; labeled = true; label.hidden = false;
+    const d = new Date(f.asOf * 1000);
+    const when = f.open
+      ? 'delayed · ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago' }) + ' CT'
+      : 'close ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+    label.querySelector('[data-v]')!.textContent = fmt(f.last);
+    label.querySelector('[data-asof]')!.textContent = when;
+    label.dataset.dir = dir == null ? '' : dir ? 'up' : 'down';
+  };
+  const apply = (f: Feed) => {
+    // daily closes, with today's latest delayed print as the head while the session is open
+    pts = f.daily.map(([t, p]) => ({ t, p }));
+    const lastDay = (t: number) => new Date(t * 1000).toISOString().slice(0, 10);
+    if (f.last && pts.length) {
+      if (lastDay(pts[pts.length - 1].t) === lastDay(f.asOf)) pts[pts.length - 1] = { t: f.asOf, p: f.last };
+      else pts.push({ t: f.asOf, p: f.last });
+    }
+    fit();
   };
 
   (async () => {
-    const s = await seed();
+    const got = await load();
     if (!alive) return;
-    live = !!s; pts = s ?? synthetic();
-    target = shown = pts[pts.length - 1].p; range(); lo = tgtLo; hi = tgtHi;
-    if (live) setLabel(target, null);
-    if (reduce || !live) { draw(); return; } // static frame
+    if (got) { apply(got.f); target = shown = pts[pts.length - 1].p; setLabel(got.f, null); }
+    else { pts = synthetic(); fit(); target = shown = pts[pts.length - 1].p; }
+    size();
+    if (reduce) { draw(); return; }
     raf = requestAnimationFrame(loop);
-    const poll = async () => {
-      if (document.hidden) return;
-      const v = await tick(); if (!alive || v == null) return;
-      const prev = target;
-      // commit the eased head as a real point every ~5 min, so the line grows like a live chart
-      const lastT = pts[pts.length - 1].t;
-      if (Date.now() - lastT > 300e3) pts.push({ t: Date.now(), p: v }); else pts[pts.length - 1] = { t: lastT, p: v };
-      while (pts.length > 2 && pts[1].t < Date.now() - 24 * 3600e3) pts.shift();
-      target = v; range(); setLabel(v, v === prev ? null : v > prev);
-    };
-    timer = window.setInterval(poll, 20000);
+    if (got?.api && got.f.open) {
+      timer = window.setInterval(async () => {
+        if (document.hidden) return;
+        try { const r = await fetch('/api/spx'); if (!r.ok) return; const f: Feed = await r.json(); if (!alive) return;
+          const prev = target; apply(f); target = pts[pts.length - 1].p; setLabel(f, target === prev ? null : target > prev);
+          if (!f.open) clearInterval(timer);
+        } catch {}
+      }, 60000);
+    }
   })();
 
   return () => { alive = false; cancelAnimationFrame(raf); clearInterval(timer); removeEventListener('resize', size); };
