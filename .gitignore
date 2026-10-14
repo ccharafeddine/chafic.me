@@ -3,3 +3,4 @@ dist/
 .astro/
 shots/
 .env
+.held-assets/

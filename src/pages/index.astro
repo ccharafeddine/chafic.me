@@ -2,30 +2,59 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import { projects } from '../data/projects.js';
-// NOTE: provisional content from Cornelius's draft; confirm before launch.
+// Content: Cornelius's SITE_BRIEF_for_Vitruvius.md + OnePage resume (Oct 14, 2026). Provisional until Chafic signs off.
+// Keep-off list applies (no phone, no P&L, no exchange names, no family names, no bare GitHub profile, no bootcamp repos).
+// Resume PDF: the current OnePage PDF prints the phone number, which must never be on the site, so it is staged at
+// /workspace/chafic.me/.held-assets/resume.pdf. Set RESUME_PDF_READY = true once a phone-free PDF is in public/resume.pdf.
+const RESUME_PDF_READY = true;
 const edu=[
- ['May 2026','University of St. Thomas, Cameron School of Business','MS Finance · GPA 3.8 · Graduate coursework in Mergers & Acquisitions and Financial Modeling'],
- ['Dec 2018','Texas A&M University','BS Economics'],
- ['Summer 2021','Rice University','FinTech Bootcamp'],
- ['Nov 2026','CFA Institute','Level I Candidate in the CFA Program, sitting November 2026'],
+ ['Nov 17, 2026','CFA Institute','CFA Program, Level I candidate'],
+ ['Aug 2024 – May 2026','University of St. Thomas, Cameron School of Business, Houston','MS Finance · GPA 3.8/4.0 · Coursework: Mergers & Acquisitions; Financial Modeling; Investments & Portfolio Management; Derivatives & Risk Management; Futures, Swaps & Options; International Finance. My capstone became the Portfolio Analyzer.'],
+ ['Jun – Nov 2021','Rice University FinTech Bootcamp','Python, SQL and Solidity coursework; projects included ERCOT power prices against weather around the February 2021 winter storm, an ML trading bot, a neural network classifier and Ethereum smart contracts.'],
+ ['Aug 2014 – Dec 2018','Texas A&M University, College Station','BS Economics. Favorite class: econometrics.'],
 ];
-const skills={ 'Tools':['Excel','PowerPoint','Python','SQL','Access'], 'Finance':['Valuation / M&A','Derivatives & counterparty credit (EE/PFE, CVA)','Portfolio optimization & risk','Systematic options strategies'], 'Python stack':['pandas','NumPy','PySide6 / Qt6','Jupyter'], 'Other':['TypeScript','Rust (Tauri apps)',] };
+const timeline=[
+ ['Aug 2014 – Dec 2018','Texas A&M, BS Economics. Kappa Sigma; The Big Event; BADD (Jan 2016 – Jan 2018); Wicked Woods.'],
+ ['Jan 2019','Began independent market research and trading; Online Trading Academy courses.'],
+ ['Jan 2019 – Jan 2021','REACH Project fundraising. Houston Food Bank volunteer since Mar 2019.'],
+ ['Jun – Nov 2021','Rice University FinTech Bootcamp.'],
+ ['2021','Began bitcoin mining with a 6-GPU rack mining altcoins and converting the output to BTC.'],
+ ['Feb 2022','TOS Trade Signal. After a mining conference in Round Rock and a tour of Riot\'s Rockdale facility, moved to an Antminer S19j Pro.'],
+ ['2023 – Present','Assistant at the family medical practice.'],
+ ['Aug 2024 – May 2026','University of St. Thomas, MS Finance.'],
+ ['Nov 2025','Portfolio Analyzer begins as my capstone; v3.0.0 in Jul 2026.'],
+ ['Jan 2026','SPX Income Trader.'],
+ ['Jun 2026','Crypto Quant Desk.'],
+ ['Jul 2026','Counterparty Credit Underwriting Workbench.'],
+ ['Nov 17, 2026','CFA Level I exam.'],
+];
+const skills={ 'Tools':['Excel','PowerPoint','SQL','Python'], 'Python libraries':['pandas','NumPy','SciPy','statsmodels','scikit-learn','Plotly','Matplotlib'], 'Finance':['Valuation & M&A','Financial modeling','Derivatives & counterparty credit','Portfolio optimization & attribution'], 'Software':['PySide6 / Qt6','Automated testing & CI/CD','TypeScript','Rust (Tauri)'] };
+const resumeLinks=[
+ ['chafic.me','/'],['chafic.me/#portfolio-analyzer','/#portfolio-analyzer'],['chafic.me/#derivatives-underwriting-workbench','/#derivatives-underwriting-workbench'],
+ ['github.com/ccharafeddine/Portfolio_Analyzer','https://github.com/ccharafeddine/Portfolio_Analyzer'],['github.com/ccharafeddine/Derivatives_Underwriting_Workbench','https://github.com/ccharafeddine/Derivatives_Underwriting_Workbench'],
+];
 ---
 <Base>
 <Hero/>
 <section id="about" class="max-w-4xl mx-auto px-6 py-24 reveal">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-6">About</h2>
-<p class="text-gray-300 leading-relaxed text-lg">Entry-level finance professional targeting corporate development and M&A. MS Finance (GPA 3.8/4.0) with graduate coursework in Mergers & Acquisitions and Financial Modeling; BS Economics; Rice FinTech Bootcamp; Level I Candidate in the CFA Program. Builds models, research notes, and client-ready materials in Excel, PowerPoint, Python, and SQL. U.S. citizen.</p>
+<div class="space-y-4 text-gray-300 leading-relaxed text-lg">
+<p>My favorite class at Texas A&M was econometrics, and since graduating I have learned how markets price risk by taking part in them. Since January 2019 I have managed my own accounts and traded futures, FX and gold, teaching myself technical analysis along the way. I then went back for formal training: an MS in Finance from the University of St. Thomas (May 2026, GPA 3.8), where graduate work in Mergers & Acquisitions, Financial Modeling and reading financial statements filled in the corporate side of what I knew from trading. I sit for CFA Level I in November 2026.</p>
+<p>I taught myself to build analysis tools in Python and SQL. At the Rice FinTech Bootcamp my main lesson was how to learn from library documentation instead of memorizing code. My MS capstone began as a simple optimizer that returned portfolio weights; I kept extending it one feature at a time, testing each step, into a desktop analytics app with DCF valuation, Monte Carlo and 237 automated tests. After applying for a derivatives underwriting role, I built a counterparty credit simulator to learn what the job involves, ending each case in a written approve or decline memo. I also assist with financial accounts and management at my family's medical practice.</p>
+<p>For an M&A or valuation team, that means someone who learns a new method quickly, builds and checks the model, and explains the conclusion in writing.</p>
+<p class="text-sm text-gray-500">Houston, TX · U.S. citizen</p></div>
 </section>
 <section id="experience" class="max-w-4xl mx-auto px-6 pb-12 reveal">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Experience & ventures</h2>
-<div class="card tilt p-6 text-gray-300">
-<div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Independent Market Research & Portfolio Management</h3><p class="text-sm text-accent">Jan 2019 – Present · Houston, TX</p></div>
-<ul class="mt-4 space-y-2 list-disc pl-5">
-<li>Researched and traded equities, gold futures, FX, and digital asset futures.</li>
-<li>Manages retirement and taxable accounts end to end: allocation, rebalancing, and tax-loss harvesting.</li>
-<li>Runs bitcoin mining and node infrastructure as a small operating business whose largest input cost is Texas electricity.</li>
-</ul></div>
+<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Experience</h2>
+<div class="card tilt p-6 text-gray-300 mb-6"><div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Independent Market Research & Portfolio Management · Self-employed</h3><p class="text-sm text-accent">Jan 2019 – Present · Houston, TX</p></div><ul class="mt-4 space-y-2 list-disc pl-5"><li>Run my retirement and taxable accounts on written rules I set myself: target allocation, scheduled rebalancing, tax-loss harvesting and a note on the reason for each decision.</li><li>Taught myself technical analysis through Online Trading Academy courses in supply and demand, futures, forex and options, then applied it to my own account.</li><li>Traded Micro E-mini S&amp;P 500 futures, FX (mainly EUR/USD) and gold; ran the same candlestick momentum rules on gold almost every day, and learned to step back and rework a strategy after a drawdown.</li><li>Coded a momentum-based 0-DTE SPX options strategy in Python, backtested it, then live-tested it for about 1 month; when intraday news kept reversing the trend, I paused it to rework the rules.</li></ul></div><div class="card tilt p-6 text-gray-300 mb-6"><div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Assistant · Family medical practice</h3><p class="text-sm text-accent">2023 – Present · Houston, TX</p></div><ul class="mt-4 space-y-2 list-disc pl-5"><li>Assisting with financial accounts and management.</li></ul></div>
+<h3 id="activities" class="font-semibold text-xl mt-10 mb-4">Activities & special interests</h3>
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">Bitcoin mining · 2021 – Present</p><p class="text-sm text-gray-300 mt-1">Began with a 6-GPU rack mining altcoins and converting the output to BTC; after a February 2022 mining conference in Round Rock and a tour of Riot's Rockdale facility, moved to an Antminer S19j Pro (104 TH/s). I weigh Texas power cost against output.</p></div>
+<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">Rice University FinTech Bootcamp · Jun – Nov 2021</p><p class="text-sm text-gray-300 mt-1">Python, machine learning and blockchain (smart-contract) programming coursework; learned to work from library documentation instead of memorizing code.</p></div>
+<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">Kappa Sigma, Texas A&M</p><p class="text-sm text-gray-300 mt-1">Elected leadership positions; Wicked Woods fundraising for veterans.</p></div>
+<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">The BADD Project · Jan 2016 – Jan 2018</p><p class="text-sm text-gray-300 mt-1">Brothers Against Distracted Driving: advocated for a College Station texting-while-driving ban.</p></div>
+<div class="card tilt p-5 reveal sm:col-span-2"><p class="text-accent2 text-sm font-semibold">Service</p><p class="text-sm text-gray-300 mt-1">The Big Event, Texas A&M; The REACH Project fundraising for meals for Texas A&M staff during COVID (Jan 2019 – Jan 2021); Houston Food Bank volunteer (Mar 2019 – Present).</p></div>
+</div>
 </section>
 <section id="case-study" class="max-w-4xl mx-auto px-6 pb-12">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-6">M&A case study</h2>
@@ -38,23 +67,32 @@ const skills={ 'Tools':['Excel','PowerPoint','Python','SQL','Access'], 'Finance'
 <div><p class="text-accent2 text-sm font-semibold">Synergies & accretion</p><p class="text-sm">Synergy case and accretion/dilution analysis.</p></div>
 </div></div>
 </section>
+<section id="research" class="max-w-4xl mx-auto px-6 pb-12">
+<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Independent research</h2>
+<div class="card tilt p-6 text-gray-300 reveal space-y-2">
+<p>Research notes and a target brief on outside companies.</p>
+<p>Fund research on leveraged-fund decay, and a holdings breakdown of a crypto-infrastructure fund that found about a third had shifted to AI data centers. I also proposed screening rules and 2 product ideas, and discussed my conclusions with an experienced Morgan Stanley wealth manager.</p>
+<!-- TODO: publish individual notes only once Chafic approves which ones. -->
+</div></section>
 <section id="projects" class="py-24 overflow-hidden">
-<div class="max-w-6xl mx-auto px-6"><h2 class="split text-3xl sm:text-5xl font-bold mb-3">Featured projects</h2><p class="text-gray-400 mb-10">Finance and trading tools first, then Chess Solver, then the Smith pipeline of local-first video tools: GifSmith → ClipSmith → CaptionSmith.</p></div>
+<div class="max-w-6xl mx-auto px-6"><h2 class="split text-3xl sm:text-5xl font-bold mb-3">Featured projects</h2><p class="text-gray-400 mb-10">Finance and trading tools first, then Chess Solver, then the Smith pipeline of local-first video tools: GifSmith → ClipSmith → CaptionSmith. Built Nov 2025 – Jul 2026.</p></div>
 <div id="hpin" class="lg:h-screen lg:flex lg:items-center">
-<div id="htrack" class="px-6 grid sm:grid-cols-2 gap-6 lg:flex lg:w-max lg:gap-8 lg:px-[8vw] max-w-6xl mx-auto lg:max-w-none">
-{projects.map((p,i)=>(
-<a href={`/projects/${p.slug}`} class="card pcard tilt group overflow-hidden hover:border-accent/60 lg:w-[440px] shrink-0" style="transform-style:preserve-3d">
+<div id="htrack" class="relative px-6 grid sm:grid-cols-2 gap-6 lg:flex lg:w-max lg:gap-8 lg:px-[8vw] max-w-6xl mx-auto lg:max-w-none">
+{projects.map((p,i)=>(<>
+{p.alias && <span id={p.alias} class="anchor-alias absolute top-0 left-0 w-0 h-0" data-target={p.slug}></span>}
+<a id={p.slug} href={`/projects/${p.slug}`} class="card pcard tilt group overflow-hidden hover:border-accent/60 lg:w-[440px] shrink-0" style="transform-style:preserve-3d">
 <div class="h-52 bg-black/40 overflow-hidden flex items-center justify-center"><img src={`/shots/${p.repo}/${p.shots[0]}`} alt="" class={p.shots[0].endsWith('.svg')?'h-24':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'} style={`view-transition-name: shot-${p.slug}`}/></div>
 <div class="p-5"><p class="text-xs text-gray-500 font-mono">0{i+1}</p><p class="text-xs text-accent mb-1">{p.tag}</p><h3 class="font-semibold text-lg" style={`view-transition-name: title-${p.slug}`}>{p.name}</h3>
 <p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.desc}</p>
 {p.pipe && <span class="inline-block mt-3 mr-2 text-xs px-2 py-1 rounded-full bg-accent2/15 text-accent2">Smith pipeline · step {p.pipe}/3 {p.pipe<3?"→":"✓"}</span>}
-{p.demo && <span class="inline-block mt-3 text-xs px-2 py-1 rounded-full bg-accent/15 text-accent">● Live demo</span>}</div></a>))}
+{p.demo && <span class="inline-block mt-3 text-xs px-2 py-1 rounded-full bg-accent/15 text-accent">● Live demo</span>}</div></a></>))}
 </div></div></section>
 <section id="education" class="max-w-4xl mx-auto px-6 py-24">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Education & credentials</h2>
+<div class="grid sm:grid-cols-2 gap-4 mb-16">{edu.map(([d,s,t])=>(<div class="card tilt p-5 reveal"><p class="text-xs text-accent">{d}</p><h3 class="font-semibold mt-1">{s}</h3><p class="text-sm text-gray-400 mt-1">{t}</p></div>))}</div>
+<h3 class="font-semibold text-xl mb-6">Timeline</h3>
 <ol id="tl" class="relative ml-3"><span class="absolute left-0 top-0 bottom-0 w-px bg-white/10"></span><span id="tl-line" class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-accent to-accent2 origin-top"></span>
-{edu.map(([d,s,t])=>(<li class="tl-item mb-10 ml-6 relative"><span class="absolute -left-[31px] top-1 tl-dot w-3.5 h-3.5 rounded-full bg-accent"></span>
-<p class="text-xs text-accent">{d}</p><h3 class="font-semibold text-lg">{s}</h3><p class="text-gray-400">{t}</p></li>))}
+{timeline.map(([d,t])=>(<li class="tl-item mb-8 ml-6 relative"><span class="absolute -left-[31px] top-1 tl-dot w-3.5 h-3.5 rounded-full bg-accent"></span><p class="text-xs text-accent">{d}</p><p class="text-gray-300">{t}</p></li>))}
 </ol></section>
 <section id="skills" class="max-w-6xl mx-auto px-6 py-24">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Skills</h2>
@@ -62,10 +100,14 @@ const skills={ 'Tools':['Excel','PowerPoint','Python','SQL','Access'], 'Finance'
 </section>
 
 <section id="resume" class="max-w-4xl mx-auto px-6 py-16 reveal text-center">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-4">Resume</h2>
-<p class="text-gray-400 mb-6"><span class="ph">[PLACEHOLDER]</span> Final PDF pending.</p>
-<a href="/resume.pdf" class="px-5 py-3 rounded-full border border-white/20 opacity-60 pointer-events-none">Download PDF (coming soon)</a>
-</section>
+<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Resume</h2>
+{RESUME_PDF_READY ? (<>
+<a href="/resume.pdf" download="Chafic_Charafeddine_Resume.pdf" class="inline-block px-5 py-3 rounded-full bg-accent text-ink font-semibold mb-8">Download PDF</a>
+<div class="card overflow-hidden"><object data="/resume.pdf#view=FitH" type="application/pdf" class="w-full h-[80vh]"><p class="p-6 text-gray-400">PDF preview unavailable. <a class="text-accent underline" href="/resume.pdf">Open the resume</a>.</p></object></div></>)
+: (<p class="text-gray-400 mb-6">PDF coming soon.</p>)}
+<div class="mt-8 flex flex-col items-center gap-2 text-sm">
+{resumeLinks.map(([l,h])=>(<a href={h} target={h.startsWith('http')?'_blank':undefined} rel={h.startsWith('http')?'noopener':undefined} class="text-accent hover:underline font-mono">{l}</a>))}
+</div></section>
 <section id="contact" class="max-w-4xl mx-auto px-6 py-24 reveal text-center">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-6">Contact</h2>
 <div class="flex flex-wrap justify-center gap-4">

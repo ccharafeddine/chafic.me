@@ -6,6 +6,35 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lenis: Lenis | null = null;
 let rafId = 0;
 let cleanups: (() => void)[] = [];
+let hst: ScrollTrigger | null = null;
+
+// Scroll to an in-page anchor; cards inside the pinned horizontal track map to the matching vertical scroll position.
+function scrollToHash(hash: string, immediate = false) {
+  if (!hash || hash.length < 2) return false;
+  let el = document.getElementById(decodeURIComponent(hash.slice(1)));
+  if (!el) return false;
+  if (el.dataset.target) el = document.getElementById(el.dataset.target) || el;
+  const track = document.getElementById('htrack');
+  let y: number;
+  if (hst && track && track.contains(el)) {
+    const maxX = track.scrollWidth - innerWidth;
+    const cardX = el.getBoundingClientRect().left - track.getBoundingClientRect().left - (innerWidth - el.offsetWidth) / 2;
+    const frac = maxX > 0 ? Math.min(Math.max(cardX / maxX, 0), 1) : 0;
+    y = hst.start + frac * (hst.end - hst.start);
+  } else {
+    y = el.getBoundingClientRect().top + scrollY - 72;
+  }
+  if (lenis) lenis.scrollTo(y, { immediate, duration: 1.2 }); else scrollTo({ top: y, behavior: immediate || reduce ? 'auto' : 'smooth' });
+  return true;
+}
+document.addEventListener('click', (e) => {
+  const a = (e.target as HTMLElement).closest?.('a') as HTMLAnchorElement | null;
+  if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+  const u = new URL(a.href, location.href);
+  if (u.origin !== location.origin || u.pathname !== location.pathname || !u.hash) return;
+  if (scrollToHash(u.hash)) { e.preventDefault(); e.stopPropagation(); history.pushState(null, '', u.hash); }
+}, true);
+addEventListener('popstate', () => scrollToHash(location.hash));
 
 function splitWords(el: HTMLElement) {
   if (el.dataset.split) return el.querySelectorAll('.w > span');
@@ -82,7 +111,8 @@ function init() {
   mm.add('(min-width: 1024px)', () => {
     const track = document.getElementById('htrack'); if (!track) return;
     const dist = () => track.scrollWidth - innerWidth;
-    const tw = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '#hpin', start: 'center center', end: () => '+=' + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1 } });
+    const tw: gsap.core.Tween = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '#hpin', start: 'center center', end: () => '+=' + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1 } });
+    hst = tw.scrollTrigger!;
     gsap.utils.toArray<HTMLElement>('.pcard').forEach(card => {
       gsap.from(card, { opacity: 0.25, scale: 0.9, rotationY: -18, transformPerspective: 900, ease: 'none',
         scrollTrigger: { trigger: card, containerAnimation: tw, start: 'left 100%', end: 'left 55%', scrub: true } });
@@ -91,7 +121,7 @@ function init() {
   mm.add('(max-width: 1023px)', () => {
     gsap.utils.toArray<HTMLElement>('.pcard').forEach((c, i) => gsap.from(c, { x: i % 2 ? 60 : -60, y: 40, opacity: 0, rotate: i % 2 ? 3 : -3, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 92%' } }));
   });
-  cleanups.push(() => mm.revert());
+  cleanups.push(() => { mm.revert(); hst = null; });
 
   // timeline draw
   if (document.getElementById('tl')) {
@@ -108,7 +138,11 @@ function init() {
   });
 }
 
-document.addEventListener('astro:page-load', () => { init(); requestAnimationFrame(() => ScrollTrigger.refresh()); });
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+document.addEventListener('astro:page-load', () => {
+  init();
+  requestAnimationFrame(() => { ScrollTrigger.refresh(); if (location.hash) setTimeout(() => { ScrollTrigger.refresh(); scrollToHash(location.hash, true); }, 150); });
+});
 document.addEventListener('astro:before-swap', () => {
   cleanups.forEach(f => f()); cleanups = [];
   ScrollTrigger.getAll().forEach(t => t.kill()); gsap.globalTimeline.clear();
