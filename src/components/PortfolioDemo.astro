@@ -1,0 +1,42 @@
+---
+// In-browser Portfolio Analyzer demo. Prices: /data/demo-prices.json (daily adjusted closes, bundled at build time,
+// no runtime API). Mirrors a subset of the desktop app: Growth of Capital (Active vs Passive vs Max-Sharpe ORP),
+// performance summary, drawdowns, daily VaR/CVaR, correlation matrix and the efficient frontier with the CAL.
+const assets=[['SPY','US large cap',40],['QQQ','Nasdaq-100',15],['EFA','Intl developed',15],['AGG','US agg bonds',20],['GLD','Gold',5],['VNQ','US REITs',5]];
+---
+<section id="demo" class="mt-16">
+<div class="flex flex-wrap items-end justify-between gap-3">
+<div><p class="text-accent text-sm">Live demo</p><h2 class="text-3xl font-bold">Try a sample portfolio</h2></div>
+<p class="text-xs px-3 py-1 rounded-full bg-amber-400/15 text-amber-300">Illustrative demo with a sample ETF portfolio · not investment advice</p>
+</div>
+<p class="text-gray-400 text-sm mt-3 max-w-3xl">A browser version of a few of the app's tabs, running on real daily adjusted prices (<span id="pd-range">…</span>). Move the weights. Everything is recalculated in your browser, with monthly rebalancing and the 13-week T-bill as the risk-free rate. SPY is the passive benchmark.</p>
+<div class="grid lg:grid-cols-[300px_1fr] gap-6 mt-6">
+<div class="card p-5">
+<h3 class="font-semibold mb-3 text-sm">Sample weights <span id="pd-sum" class="float-right font-mono text-xs"></span></h3>
+{assets.map(([t,n,w])=>(<label class="block mb-3"><div class="flex justify-between text-xs"><span><b class="text-white font-mono">{t}</b> <span class="text-gray-500">{n}</span></span><span class="font-mono text-accent" data-wv={t}>{w}%</span></div>
+<input type="range" min="0" max="100" step="1" value={w} data-w={t} class="w-full accent-sky-400"/></label>))}
+<div class="flex flex-wrap gap-2 mt-4 text-xs">
+<button data-preset="sample" class="pd-btn">Reset sample</button><button data-preset="equal" class="pd-btn">Equal weight</button><button data-preset="orp" class="pd-btn">Max-Sharpe ORP</button><button data-preset="6040" class="pd-btn">60/40</button>
+</div>
+<p class="text-[11px] text-gray-500 mt-3">Weights are normalized to 100%. Long-only.</p>
+</div>
+<div class="space-y-6 min-w-0">
+<div class="card p-5"><h3 class="font-semibold text-sm mb-2">Growth of $10,000</h3><div class="flex gap-4 text-xs mb-1"><span><i class="lg" style="background:#38bdf8"></i>Active (your weights)</span><span><i class="lg" style="background:#9ca3af"></i>Passive (SPY)</span><span><i class="lg" style="background:#a78bfa"></i>Max-Sharpe ORP</span></div><svg id="pd-growth" class="w-full h-56" viewBox="0 0 800 220" preserveAspectRatio="none"></svg></div>
+<div class="card p-5 overflow-x-auto"><h3 class="font-semibold text-sm mb-3">Performance summary</h3><table id="pd-table" class="w-full text-sm font-mono"></table></div>
+</div></div>
+<div class="grid lg:grid-cols-2 gap-6 mt-6">
+<div class="card p-5"><h3 class="font-semibold text-sm mb-2">Drawdown from running peak</h3><svg id="pd-dd" class="w-full h-40" viewBox="0 0 800 160" preserveAspectRatio="none"></svg></div>
+<div class="card p-5"><h3 class="font-semibold text-sm mb-2">Efficient frontier & Capital Allocation Line</h3><svg id="pd-ef" class="w-full h-64" viewBox="0 0 520 300"></svg><p class="text-[11px] text-gray-500">Dots: 2,500 random long-only mixes, colored by Sharpe ratio. Lines show annualized volatility (x) against annualized return (y).</p></div>
+</div>
+<div class="grid lg:grid-cols-2 gap-6 mt-6">
+<div class="card p-5"><h3 class="font-semibold text-sm mb-3">Correlation of daily returns</h3><div id="pd-corr" class="overflow-x-auto"></div></div>
+<div class="card p-5"><h3 class="font-semibold text-sm mb-2">Daily return distribution (Active)</h3><svg id="pd-hist" class="w-full h-48" viewBox="0 0 520 200"></svg><p id="pd-var" class="text-xs text-gray-400 font-mono"></p></div>
+</div>
+<p id="pd-err" hidden class="text-amber-300 text-sm mt-4">Couldn't load the demo data.</p>
+<p class="text-[11px] text-gray-500 mt-4">Data: daily adjusted closes (dividends reinvested) from Yahoo Finance, saved Oct 14, 2026 and bundled with this page. Past performance doesn't predict future results. The desktop app adds attribution, factor models, tax-aware analysis, Monte Carlo forecasting and reports.</p>
+</section>
+<style>.pd-btn{padding:.3rem .7rem;border-radius:9999px;border:1px solid rgba(255,255,255,.15);color:#d1d5db}.pd-btn:hover{border-color:#38bdf8;color:#fff}.lg{display:inline-block;width:10px;height:3px;margin-right:5px;vertical-align:middle}</style>
+<script>
+import { initPortfolioDemo } from '../scripts/portfolio-demo';
+document.addEventListener('astro:page-load', () => { if (document.getElementById('demo')) initPortfolioDemo(); });
+</script>

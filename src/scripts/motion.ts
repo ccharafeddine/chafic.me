@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { heroChart } from './hero-chart';
 gsap.registerPlugin(ScrollTrigger);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lenis: Lenis | null = null;
@@ -43,22 +44,7 @@ function splitWords(el: HTMLElement) {
   return el.querySelectorAll('.w > span');
 }
 
-function heroCanvas() {
-  const c = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
-  if (!c) return;
-  const x = c.getContext('2d')!; let W = 0, H = 0; const N = 16; let paths: number[][] = [];
-  const reset = () => { W = c.width = c.offsetWidth * devicePixelRatio; H = c.height = c.offsetHeight * devicePixelRatio; paths = Array.from({ length: N }, () => [H * (0.3 + Math.random() * 0.5)]); };
-  reset(); addEventListener('resize', reset);
-  const step = 4 * devicePixelRatio; let alive = true;
-  const frame = () => { if (!alive) return; x.clearRect(0, 0, W, H);
-    paths.forEach((p, i) => { p.push(p[p.length - 1] + (Math.random() - 0.5) * H * 0.02); if (p.length * step > W) p.shift();
-      x.beginPath(); p.forEach((y, j) => j ? x.lineTo(j * step, y) : x.moveTo(0, y));
-      x.strokeStyle = `rgba(${i % 2 ? '56,189,248' : '167,139,250'},${0.15 + 0.4 * (i / N)})`; x.lineWidth = 1.2 * devicePixelRatio; x.stroke(); });
-    requestAnimationFrame(frame); };
-  if (reduce) { for (let k = 0; k < 400; k++) paths.forEach(p => { p.push(p[p.length - 1] + (Math.random() - 0.5) * H * 0.02); if (p.length * step > W) p.shift(); }); alive = true; frame(); alive = false; }
-  else frame();
-  cleanups.push(() => { alive = false; removeEventListener('resize', reset); });
-}
+function heroCanvas() { cleanups.push(heroChart(reduce)); }
 
 function tilt() {
   if (!matchMedia('(hover: hover)').matches || reduce) return;

@@ -7,3 +7,7 @@
 
 html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.45s}
+
+#hero-live[data-dir=up] [data-v]{color:#4ade80}#hero-live[data-dir=down] [data-v]{color:#f87171}
+#hero-live [data-v]{transition:color .6s}
+@media (prefers-reduced-motion:no-preference){.live-dot{animation:livepulse 2s ease-in-out infinite}}@keyframes livepulse{50%{opacity:.3}}

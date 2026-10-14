@@ -13,21 +13,6 @@ const edu=[
  ['Jun – Nov 2021','Rice University FinTech Bootcamp','Python, SQL and Solidity coursework; projects included ERCOT power prices against weather around the February 2021 winter storm, an ML trading bot, a neural network classifier and Ethereum smart contracts.'],
  ['Aug 2013 – Dec 2018','Texas A&M University, College Station','BS Economics. Favorite class: econometrics.'],
 ];
-const timeline=[
- ['Aug 2013 – Dec 2018','Texas A&M, BS Economics. Kappa Sigma; The Big Event (Fall 2013, 2014, 2016); BADD (Jan 2016 – Jan 2018); Wicked Woods (Fall 2013, 2014, 2015).'],
- ['Jan 2019','Began independent market research and trading; in-person Online Trading Academy courses.'],
- ['Jan 2019 – Jan 2021','REACH Project fundraising. Houston Food Bank volunteer since Mar 2019.'],
- ['Jun – Nov 2021','Rice University FinTech Bootcamp.'],
- ['2021','Began bitcoin mining with a 6-GPU rack mining altcoins and converting the output to BTC.'],
- ['Feb 2022','TOS Trade Signal. After a mining conference in Round Rock and a tour of Riot\'s Rockdale facility, moved to an Antminer S19j Pro.'],
- ['2023 – Present','Assistant at the family medical practice.'],
- ['Aug 2024 – May 2026','University of St. Thomas, MS Finance.'],
- ['Nov 2025','Portfolio Analyzer begins as my capstone; v3.0.0 in Jul 2026.'],
- ['Jan 2026','SPX Income Trader.'],
- ['Jun 2026','Crypto Quant Desk.'],
- ['Jul 2026','Counterparty Credit Underwriting Workbench.'],
- ['Nov 17, 2026','CFA Level I exam.'],
-];
 const skills={ 'Tools':['Excel','PowerPoint','SQL','Python'], 'Python libraries':['pandas','NumPy','SciPy','statsmodels','scikit-learn','Plotly','Matplotlib'], 'Finance':['Valuation & M&A','Financial modeling','Derivatives & counterparty credit','Portfolio optimization & attribution'], 'Software':['PySide6 / Qt6','Automated testing & CI/CD','TypeScript','Rust (Tauri)'] };
 const resumeLinks=[
  ['chafic.me','/'],['chafic.me/#portfolio-analyzer','/#portfolio-analyzer'],['chafic.me/#derivatives-underwriting-workbench','/#derivatives-underwriting-workbench'],
@@ -90,10 +75,7 @@ const resumeLinks=[
 <section id="education" class="max-w-4xl mx-auto px-6 py-24">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Education & credentials</h2>
 <div class="grid sm:grid-cols-2 gap-4 mb-16">{edu.map(([d,s,t])=>(<div class="card tilt p-5 reveal"><p class="text-xs text-accent">{d}</p><h3 class="font-semibold mt-1">{s}</h3><p class="text-sm text-gray-400 mt-1">{t}</p></div>))}</div>
-<h3 class="font-semibold text-xl mb-6">Timeline</h3>
-<ol id="tl" class="relative ml-3"><span class="absolute left-0 top-0 bottom-0 w-px bg-white/10"></span><span id="tl-line" class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-accent to-accent2 origin-top"></span>
-{timeline.map(([d,t])=>(<li class="tl-item mb-8 ml-6 relative"><span class="absolute -left-[31px] top-1 tl-dot w-3.5 h-3.5 rounded-full bg-accent"></span><p class="text-xs text-accent">{d}</p><p class="text-gray-300">{t}</p></li>))}
-</ol></section>
+<a href="/timeline" class="card tilt reveal block p-6 group hover:border-accent/50"><div class="flex items-center justify-between gap-4"><div><p class="text-xs text-accent uppercase tracking-widest">Timeline</p><h3 class="font-semibold text-xl mt-1">2013 to today, from Texas A&M to the CFA Level I exam</h3><p class="text-sm text-gray-400 mt-1">Education, projects, markets and service in one filterable timeline.</p></div><span class="text-accent text-2xl group-hover:translate-x-1 transition-transform">→</span></div></a></section>
 <section id="skills" class="max-w-6xl mx-auto px-6 py-24">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Skills</h2>
 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">{Object.entries(skills).map(([k,v])=>(<div class="card tilt p-5 reveal"><h3 class="font-semibold mb-3 text-accent2">{k}</h3><div class="flex flex-wrap gap-2">{v.map(s=><span class="chip inline-block text-xs px-2 py-1 rounded bg-white/5">{s}</span>)}</div></div>))}</div>

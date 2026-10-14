@@ -16,6 +16,7 @@ export const projects=[
  skills:'Portfolio optimization methods, factor models, performance attribution, desktop GUI development, automated testing and CI/CD.',
  stats:[['110','commits'],['11','releases'],['~35.7k','lines of Python'],['237','pytest tests']],
  releases:G+'Portfolio_Analyzer/releases',
+ demo:true,demoHref:'#demo',
  shots:['01-overview.png','02-performance.png','03-risk.png','04-attribution.png','06-optimization.png','07-forecast.png']},
 {slug:'crypto-quant-desk',repo:'crypto-quant-desk',name:'Crypto Quant Desk',tag:'Trading terminal · Python · Jun 2026',
  desc:'A Windows/macOS trading terminal for spot trading.',
