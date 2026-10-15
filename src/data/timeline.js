@@ -44,7 +44,7 @@ export const timeline = [
    summary:'A Windows/macOS spot trading terminal: positions, risk analytics, live charts, backtests and order safety rails.',
    link:['/projects/crypto-quant-desk','Project page'] },
  { date:'Jul 2026', cat:'Projects', title:'Portfolio Analyzer v3.0.0',
-   summary:'110 commits, 11 releases, about 35.7k lines of Python, 237 pytest tests.', link:['/projects/portfolio-analyzer','Project page'] },
+   summary:'110 commits, 11 releases, about 35.7k lines of Python, 316 pytest tests.', link:['/projects/portfolio-analyzer','Project page'] },
  { date:'Jul 2026', cat:'Projects', title:'Counterparty Credit Underwriting Workbench',
    summary:'OTC counterparty-credit underwriting simulator on synthetic data.',
    more:['Monte Carlo expected exposure and PFE, CVA/DVA/FVA, CSA collateral, credit limits, and a written approve-or-decline memo.'],
