@@ -1,14 +1,8 @@
 // Content source: Cornelius's SITE_BRIEF_for_Vitruvius.md (Oct 14, 2026). Provisional; confirm with Chafic before launch.
 // Keep-off: no P&L figures, no exchange names, no employer he applied to, no bare GitHub profile link.
 const G='https://github.com/ccharafeddine/';
-export const projects=[
-{slug:'derivatives-underwriting-workbench',alias:'underwriting-workbench',repo:'Derivatives_Underwriting_Workbench',name:'Counterparty Credit Underwriting Workbench',tag:'Counterparty credit · Python · PySide6/Qt6 · Jul 2026',
- desc:'An OTC counterparty-credit underwriting simulator that runs on synthetic data.',
- intent:'Built after applying for a derivatives underwriting role, to learn what the job involves and to practice it. It includes a role-play simulator.',
- features:['Monte Carlo expected exposure and PFE','CVA/DVA/FVA','CSA collateral','Credit limits','A written underwriting memo with an approve or decline recommendation'],
- skills:'Exposure simulation, credit valuation adjustments, collateral mechanics, and writing a recommendation a reviewer can challenge.',
- shots:['exposure.png','cva.png','collateral.png','limits.png','memo.png','simulator-campaign.png'],demo:true},
-{slug:'portfolio-analyzer',repo:'Portfolio_Analyzer',name:'Portfolio Analyzer',tag:'Portfolio analytics · Python · PySide6 · v3.0.0',
+const RAW=[
+{slug:'portfolio-analyzer',flagship:true,repo:'Portfolio_Analyzer',name:'Portfolio Analyzer',tag:'Portfolio analytics · Python · PySide6 · v3.0.0',
  desc:'A native desktop portfolio analytics app for Windows and macOS. Current version is v3.0.0 (Jul 2026).',
  intent:'Began on Nov 27, 2025 as my University of St. Thomas MS capstone: a simple optimizer where you enter stocks and get optimal weights. I kept extending it far beyond the optimizer.',
  steps:[['Nov 2025','The capstone optimizer, built in Streamlit.'],['Dec 2025','Added Brinson-Fachler attribution, Black-Litterman, multi-factor regression, rolling risk and a hybrid data loader.'],['Then','Moved to a native PySide6 desktop app, with GitHub Actions CI that builds the installers automatically.']],
@@ -18,6 +12,12 @@ export const projects=[
  releases:G+'Portfolio_Analyzer/releases',
  demo:true,demoHref:'#demo',
  shots:['01-overview.png','02-performance.png','03-risk.png','04-attribution.png','06-optimization.png','07-forecast.png']},
+{slug:'derivatives-underwriting-workbench',alias:'underwriting-workbench',repo:'Derivatives_Underwriting_Workbench',name:'Counterparty Credit Underwriting Workbench',tag:'Counterparty credit · Python · PySide6/Qt6 · Jul 2026',
+ desc:'An OTC counterparty-credit underwriting simulator that runs on synthetic data.',
+ intent:'Built after applying for a derivatives underwriting role, to learn what the job involves and to practice it. It includes a role-play simulator.',
+ features:['Monte Carlo expected exposure and PFE','CVA/DVA/FVA','CSA collateral','Credit limits','A written underwriting memo with an approve or decline recommendation'],
+ skills:'Exposure simulation, credit valuation adjustments, collateral mechanics, and writing a recommendation a reviewer can challenge.',
+ shots:['exposure.png','cva.png','collateral.png','limits.png','memo.png','simulator-campaign.png'],demo:true},
 {slug:'crypto-quant-desk',repo:'crypto-quant-desk',name:'Crypto Quant Desk',tag:'Trading terminal · Python · Jun 2026',
  desc:'A Windows/macOS trading terminal for spot trading.',
  features:['Positions','Risk analytics','Live charts','A signal engine (advisory only)','Backtests','Order safety rails'],
@@ -40,4 +40,24 @@ export const projects=[
 {slug:'captionsmith',repo:'CaptionSmith',name:'CaptionSmith',tag:'Desktop app · Rust · whisper.cpp',pipe:3,
  desc:'On-device video captioning for macOS and Windows. Transcribe locally with whisper.cpp (GPU-accelerated), edit, style, add speaker labels, batch-process, then burn in or export .srt/.vtt/.ass. No accounts, no cloud.',
  shots:['screenshot-1-load.png','screenshot-2-transcript.png','screenshot-3-style.png']},
-].map(p=>({...p,url:G+p.repo}));
+{slug:'cube-solver',repo:'cube-solver',name:'Cube Solver',tag:'In development · TypeScript',upcoming:true,noPage:true,
+ desc:'A puzzle-cube solver for the puzzle-solving suite. Being built now; details and a demo when it ships.',shots:[]},
+];
+// ── Section/suite metadata ──
+// category: 'finance' → "Featured projects" (pinned horizontal scroller, in this order); 'hobby' → "Side projects".
+// suite: groups hobby cards (see SUITES). Demo hook: set demo:true (+ optional demoHref) on any project and its card
+// swaps "Live demo coming soon" for "● Live demo"; the detail page shows "Open live demo" pointing at demoHref or
+// /projects/<slug>/demo (create src/pages/projects/<slug>/demo.astro, like the workbench demo).
+const META={
+ 'derivatives-underwriting-workbench':{category:'finance'},'portfolio-analyzer':{category:'finance'},'crypto-quant-desk':{category:'finance'},'daily-melt':{category:'finance'},
+ 'chess-solver':{category:'hobby',suite:'puzzle'},'cube-solver':{category:'hobby',suite:'puzzle'},
+ 'gifsmith':{category:'hobby',suite:'media'},'clipsmith':{category:'hobby',suite:'media'},'captionsmith':{category:'hobby',suite:'media'},
+};
+export const SUITES=[
+ {id:'puzzle',name:'Puzzle-solving suite',emoji:'♞',blurb:'Engines that look at a position and find the answer.'},
+ {id:'media',name:'Media suite',emoji:'🎬',blurb:'Local-first video tools that hand off to each other: GifSmith → ClipSmith → CaptionSmith.'},
+];
+
+export const projects=RAW.map(p=>({...p,url:G+p.repo,...META[p.slug]}));
+export const finance=projects.filter(p=>p.category==='finance');
+export const hobby=projects.filter(p=>p.category==='hobby');

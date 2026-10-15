@@ -2,14 +2,15 @@
 // In-browser Portfolio Analyzer demo. Prices: /data/demo-prices.json (daily adjusted closes, bundled at build time,
 // no runtime API). Mirrors a subset of the desktop app: Growth of Capital (Active vs Passive vs Max-Sharpe ORP),
 // performance summary, drawdowns, daily VaR/CVaR, correlation matrix and the efficient frontier with the CAL.
+const { compact=false } = Astro.props;
 const assets=[['SPY','US large cap',40],['QQQ','Nasdaq-100',15],['EFA','Intl developed',15],['AGG','US agg bonds',20],['GLD','Gold',5],['VNQ','US REITs',5]];
 ---
-<section id="demo" class="mt-16">
+<section id="demo" class={`pd-enter ${compact?"mt-5":"mt-16"}`}>
 <div class="flex flex-wrap items-end justify-between gap-3">
-<div><p class="text-accent text-sm">Live demo</p><h2 class="text-3xl font-bold">Try a sample portfolio</h2></div>
+<div><p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/15 text-accent"><span class="live-dot w-1.5 h-1.5 rounded-full bg-accent"></span>Live demo</p><h2 class="text-2xl sm:text-3xl font-bold mt-2">Try a sample portfolio</h2></div>
 <p class="text-xs px-3 py-1 rounded-full bg-amber-400/15 text-amber-300">Illustrative demo with a sample ETF portfolio · not investment advice</p>
 </div>
-<p class="text-gray-400 text-sm mt-3 max-w-3xl">A browser version of a few of the app's tabs, running on real daily adjusted prices (<span id="pd-range">…</span>). Move the weights. Everything is recalculated in your browser, with monthly rebalancing and the 13-week T-bill as the risk-free rate. SPY is the passive benchmark.</p>
+<p class="text-gray-400 text-xs sm:text-sm mt-2 max-w-3xl">A browser version of a few of the app's tabs, running on real daily adjusted prices (<span id="pd-range">…</span>). Move the weights. Everything is recalculated in your browser, with monthly rebalancing and the 13-week T-bill as the risk-free rate. SPY is the passive benchmark.</p>
 <div class="grid lg:grid-cols-[300px_1fr] gap-6 mt-6">
 <div class="card p-5">
 <h3 class="font-semibold mb-3 text-sm">Sample weights <span id="pd-sum" class="float-right font-mono text-xs"></span></h3>
@@ -35,7 +36,8 @@ const assets=[['SPY','US large cap',40],['QQQ','Nasdaq-100',15],['EFA','Intl dev
 <p id="pd-err" hidden class="text-amber-300 text-sm mt-4">Couldn't load the demo data.</p>
 <p class="text-[11px] text-gray-500 mt-4">Data: daily adjusted closes (dividends reinvested) from Yahoo Finance, saved Oct 14, 2026 and bundled with this page. Past performance doesn't predict future results. The desktop app adds attribution, factor models, tax-aware analysis, Monte Carlo forecasting and reports.</p>
 </section>
-<style>.pd-btn{padding:.3rem .7rem;border-radius:9999px;border:1px solid rgba(255,255,255,.15);color:#d1d5db}.pd-btn:hover{border-color:#38bdf8;color:#fff}.lg{display:inline-block;width:10px;height:3px;margin-right:5px;vertical-align:middle}</style>
+<style>.pd-enter{animation:pdIn .8s cubic-bezier(.2,.8,.2,1) both .1s}@keyframes pdIn{from{opacity:0;transform:translateY(24px)}}@media (prefers-reduced-motion:reduce){.pd-enter{animation:none}}
+.pd-btn{padding:.3rem .7rem;border-radius:9999px;border:1px solid rgba(255,255,255,.15);color:#d1d5db}.pd-btn:hover{border-color:#38bdf8;color:#fff}.lg{display:inline-block;width:10px;height:3px;margin-right:5px;vertical-align:middle}</style>
 <script>
 import { initPortfolioDemo } from '../scripts/portfolio-demo';
 document.addEventListener('astro:page-load', () => { if (document.getElementById('demo')) initPortfolioDemo(); });

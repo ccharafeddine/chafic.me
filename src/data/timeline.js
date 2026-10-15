@@ -1,19 +1,19 @@
 // Timeline entries for /timeline. Facts only from SITE_BRIEF_for_Vitruvius.md and what is already on the site.
 // Categories drive the filter chips. `more` lines show when an entry is expanded. `link` is optional (internal only;
 // never link the bare GitHub profile).
-export const categories = ['Education', 'Experience', 'Projects', 'Markets & mining', 'Activities & service', 'Certifications'];
+export const categories = ['Education', 'Experience', 'Projects', 'Side projects', 'Markets & mining', 'Activities & service', 'Certifications'];
 export const timeline = [
  { date:'Aug 2013 – Dec 2018', cat:'Education', title:'Texas A&M University · BS Economics',
    summary:'College Station. Favorite class: econometrics.',
    more:['Kappa Sigma: elected leadership positions.','The Big Event (Fall 2013, 2014, 2016).','Wicked Woods fundraising for veterans (Fall 2013, 2014, 2015).'] },
- { date:'Jan 2016 – Jan 2018', cat:'Activities & service', title:'The BADD Project',
+ { date:'2016 – 2018', cat:'Activities & service', title:'The BADD Project',
    summary:'Brothers Against Distracted Driving.', more:['Advocated for a College Station texting-while-driving ban.'] },
+ { date:'2018 – 2019', cat:'Activities & service', title:'The REACH Project',
+   summary:'Fundraising for meals for Texas A&M staff.' },
  { date:'Jan 2019', cat:'Markets & mining', title:'Independent market research & portfolio management',
    summary:'Began managing my own accounts and trading futures, FX and gold.',
    more:['Run my retirement and taxable accounts on written rules: target allocation, scheduled rebalancing, tax-loss harvesting and a note on the reason for each decision.','Taught myself technical analysis through in-person Online Trading Academy courses in supply and demand, futures, forex and options.','Traded Micro E-mini S&P 500 futures, FX (mainly EUR/USD) and gold.'],
    link:['/#experience','Experience section'] },
- { date:'Jan 2019 – Jan 2021', cat:'Activities & service', title:'The REACH Project',
-   summary:'Fundraising for meals for Texas A&M staff during COVID.' },
  { date:'Mar 2019 – Present', cat:'Activities & service', title:'Houston Food Bank', summary:'Volunteer.' },
  { date:'Jun – Nov 2021', cat:'Education', title:'Rice University FinTech Bootcamp',
    summary:'Python, SQL and Solidity coursework; learned to work from library documentation instead of memorizing code.',
@@ -38,8 +38,8 @@ export const timeline = [
    summary:'Momentum-based 0-DTE SPX options strategy with hard risk limits.',
    more:['Backtested on history, then live-tested for about 1 month.','Paused when intraday announcements kept reversing the morning momentum. Lesson: question the model when live results drift from the backtest.'],
    link:['/projects/daily-melt','Case study'] },
- { date:'Mar – Jul 2026', cat:'Projects', title:'Desktop media & utility apps',
-   summary:'GifSmith, ClipSmith, CaptionSmith and a chess analysis app.', link:['/projects/gifsmith','GifSmith'] },
+ { date:'Mar – Jul 2026', cat:'Side projects', title:'Side projects: media and puzzle-solving suites',
+   summary:'GifSmith, ClipSmith and CaptionSmith (media suite) and Chess Solver (puzzle-solving suite).', link:['/#side-projects','Side projects'] },
  { date:'Jun 2026', cat:'Projects', title:'Crypto Quant Desk',
    summary:'A Windows/macOS spot trading terminal: positions, risk analytics, live charts, backtests and order safety rails.',
    link:['/projects/crypto-quant-desk','Project page'] },
