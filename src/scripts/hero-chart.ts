@@ -26,8 +26,16 @@ export function heroChart(reduce: boolean): () => void {
   const x = c.getContext('2d')!;
   let W = 0, H = 0, alive = true, raf = 0, timer = 0, labeled = false;
   let pts: Pt[] = [], lo = 0, hi = 1, shown = 0, target = 0, reveal = reduce ? 1 : 0;
-  const size = () => { const d = devicePixelRatio || 1; W = c.width = c.offsetWidth * d; H = c.height = c.offsetHeight * d; if (reduce || !raf) draw(); };
-  addEventListener('resize', size);
+  let stroke: CanvasGradient | null = null, fill: CanvasGradient | null = null, onScreen = true, rs = 0;
+  const size = () => { const d = Math.min(devicePixelRatio || 1, 2); W = c.width = c.offsetWidth * d; H = c.height = c.offsetHeight * d; stroke = fill = null; draw(); };
+  const onResize = () => { clearTimeout(rs); rs = window.setTimeout(size, 150); };
+  addEventListener('resize', onResize);
+  // Only animate while the hero is on screen and the tab is visible.
+  const io = new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; wake(); });
+  io.observe(c);
+  const onVis = () => wake();
+  document.addEventListener('visibilitychange', onVis);
+  function wake() { if (!reduce && pts.length && onScreen && !document.hidden && !raf && alive) raf = requestAnimationFrame(loop); }
 
   function draw() {
     x.clearRect(0, 0, W, H);
@@ -35,23 +43,24 @@ export function heroChart(reduce: boolean): () => void {
     const N = pts.length, m = Math.max(2, Math.ceil(N * reveal));
     const X = (i: number) => (i / (N - 1)) * W * 0.94;
     const Y = (p: number) => H * 0.85 - ((p - lo) / (hi - lo)) * H * 0.55;
-    const s = pts.slice(0, m).map((q, i) => (i === N - 1 ? shown : q.p));
-    x.beginPath(); s.forEach((p, i) => i ? x.lineTo(X(i), Y(p)) : x.moveTo(0, Y(p)));
-    const g = x.createLinearGradient(0, 0, W, 0); g.addColorStop(0, 'rgba(167,139,250,0.12)'); g.addColorStop(1, 'rgba(56,189,248,0.75)');
-    x.strokeStyle = g; x.lineWidth = 1.6 * devicePixelRatio; x.lineJoin = 'round'; x.stroke();
+    x.beginPath(); for (let i = 0; i < m; i++) { const p = i === N - 1 ? shown : pts[i].p; i ? x.lineTo(X(i), Y(p)) : x.moveTo(0, Y(p)); }
+    if (!stroke) { stroke = x.createLinearGradient(0, 0, W, 0); stroke.addColorStop(0, 'rgba(167,139,250,0.12)'); stroke.addColorStop(1, 'rgba(56,189,248,0.75)'); }
+    x.strokeStyle = stroke; x.lineWidth = 1.6 * Math.min(devicePixelRatio || 1, 2); x.lineJoin = 'round'; x.stroke();
     x.lineTo(X(m - 1), H); x.lineTo(0, H); x.closePath();
-    const f = x.createLinearGradient(0, H * 0.3, 0, H); f.addColorStop(0, 'rgba(56,189,248,0.10)'); f.addColorStop(1, 'rgba(56,189,248,0)');
-    x.fillStyle = f; x.fill();
+    if (!fill) { fill = x.createLinearGradient(0, H * 0.3, 0, H); fill.addColorStop(0, 'rgba(56,189,248,0.10)'); fill.addColorStop(1, 'rgba(56,189,248,0)'); }
+    x.fillStyle = fill; x.fill();
     if (m === N && labeled) {
-      const r = (2.5 + (reduce ? 0 : Math.sin(performance.now() / 700) * 0.8)) * devicePixelRatio, hx = X(N - 1), hy = Y(shown);
+      const r = (2.5 + (reduce ? 0 : Math.sin(performance.now() / 700) * 0.8)) * Math.min(devicePixelRatio || 1, 2), hx = X(N - 1), hy = Y(shown);
       x.beginPath(); x.arc(hx, hy, r * 2.2, 0, 7); x.fillStyle = 'rgba(56,189,248,0.15)'; x.fill();
       x.beginPath(); x.arc(hx, hy, r, 0, 7); x.fillStyle = 'rgba(56,189,248,0.9)'; x.fill();
     }
   }
   let lastFrame = 0;
   const loop = (ts: number) => {
-    if (!alive) return; raf = requestAnimationFrame(loop);
-    if (ts - lastFrame < 33) return; lastFrame = ts;
+    raf = 0; if (!alive || !onScreen || document.hidden) return;
+    raf = requestAnimationFrame(loop);
+    // ~30fps while drawing in, ~12fps once only the head dot pulses
+    if (ts - lastFrame < (reveal < 0.999 || Math.abs(target - shown) > 0.01 ? 33 : 80)) return; lastFrame = ts;
     reveal = Math.min(1, reveal + (1 - reveal) * 0.03 + 0.001); // slow ease-out draw-in over a few seconds
     shown += (target - shown) * 0.04; draw();
   };
@@ -84,7 +93,7 @@ export function heroChart(reduce: boolean): () => void {
     else { pts = synthetic(); fit(); target = shown = pts[pts.length - 1].p; }
     size();
     if (reduce) { draw(); return; }
-    raf = requestAnimationFrame(loop);
+    wake();
     if (got?.api && got.f.open) {
       timer = window.setInterval(async () => {
         if (document.hidden) return;
@@ -96,5 +105,5 @@ export function heroChart(reduce: boolean): () => void {
     }
   })();
 
-  return () => { alive = false; cancelAnimationFrame(raf); clearInterval(timer); removeEventListener('resize', size); };
+  return () => { alive = false; cancelAnimationFrame(raf); clearInterval(timer); removeEventListener('resize', onResize); io.disconnect(); document.removeEventListener('visibilitychange', onVis); };
 }

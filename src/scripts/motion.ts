@@ -3,6 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { heroChart } from './hero-chart';
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 ScrollTrigger.addEventListener('refresh', () => setTimeout(() => unhide(), 1500));
 addEventListener('load', () => setTimeout(() => unhide(), 2500));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -64,16 +65,19 @@ function tilt() {
   document.querySelectorAll<HTMLElement>('.tilt').forEach(el => {
     const rx = gsap.quickTo(el, 'rotationX', { duration: 0.4 }), ry = gsap.quickTo(el, 'rotationY', { duration: 0.4 });
     gsap.set(el, { transformPerspective: 900 });
-    const mv = (e: PointerEvent) => { const r = el.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - 0.5) * 12); rx(-((e.clientY - r.top) / r.height - 0.5) * 12); };
+    let r = el.getBoundingClientRect();
+    el.addEventListener('pointerenter', () => { r = el.getBoundingClientRect(); });
+    const mv = (e: PointerEvent) => { ry(((e.clientX - r.left) / r.width - 0.5) * 12); rx(-((e.clientY - r.top) / r.height - 0.5) * 12); };
     const lv = () => { rx(0); ry(0); };
-    el.addEventListener('pointermove', mv); el.addEventListener('pointerleave', lv);
+    el.addEventListener('pointermove', mv, { passive: true }); el.addEventListener('pointerleave', lv);
   });
 }
 
 function glow() {
   const g = document.getElementById('cursor-glow'); if (!g || reduce || !matchMedia('(hover: hover)').matches) return;
   const xTo = gsap.quickTo(g, 'x', { duration: 0.6, ease: 'power3' }), yTo = gsap.quickTo(g, 'y', { duration: 0.6, ease: 'power3' });
-  const mv = (e: PointerEvent) => { xTo(e.clientX - 200); yTo(e.clientY - 200); gsap.to(g, { opacity: 1, duration: 0.3 }); };
+  let shown = false;
+  const mv = (e: PointerEvent) => { xTo(e.clientX - 200); yTo(e.clientY - 200); if (!shown) { shown = true; gsap.to(g, { opacity: 1, duration: 0.3 }); } };
   addEventListener('pointermove', mv); cleanups.push(() => removeEventListener('pointermove', mv));
 }
 
@@ -83,7 +87,8 @@ function init() {
   gsap.to('#progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.2 } });
   if (reduce) return;
   if (!lenis) { lenis = new Lenis({ lerp: 0.1 }); lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis!.raf(t * 1000)); gsap.ticker.lagSmoothing(0); }
-  tilt(); glow();
+  const idle = (window as any).requestIdleCallback || ((f: () => void) => setTimeout(f, 200));
+  idle(() => { tilt(); glow(); });
 
   // hero: entrance + parallax/shrink on scroll
   if (document.getElementById('hero')) {
@@ -94,7 +99,9 @@ function init() {
       .to('#hero-orb', { y: 300, x: -100, ease: 'none' }, 0)
       .to('#hero-orb2', { y: -150, x: 120, ease: 'none' }, 0)
       .to('#scroll-cue', { opacity: 0, ease: 'none' }, 0);
-    gsap.to('#scroll-cue', { y: 8, repeat: -1, yoyo: true, duration: 0.9, ease: 'sine.inOut' });
+    const cue = gsap.to('#scroll-cue', { y: 8, repeat: -1, yoyo: true, duration: 0.9, ease: 'sine.inOut' });
+    // pause the bobbing cue once the hero is off screen, so nothing ticks for it while reading the page
+    ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: 'bottom top', onLeave: () => cue.pause(), onEnterBack: () => cue.play() });
   }
 
   // split-text headings

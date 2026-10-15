@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import { finance, hobby, SUITES, projects, demoUrl, extAttrs } from '../data/projects.js';
+import { img } from '../data/img.js';
 // Content: Cornelius's SITE_BRIEF_for_Vitruvius.md + OnePage resume (Oct 14, 2026). Provisional until Chafic signs off.
 // Keep-off list applies (no phone, no P&L, no exchange names, no family names, no bare GitHub profile, no bootcamp repos).
 // Resume PDF: the current OnePage PDF prints the phone number, which must never be on the site, so it is staged at
@@ -71,7 +72,7 @@ const resumeLinks=[
 {finance.filter(p=>!p.flagship).map((p,i)=>(<>
 {p.alias && <span id={p.alias} class="anchor-alias" data-target={p.slug}></span>}
 <a id={p.slug} href={`/projects/${p.slug}`} class={`frow card tilt group grid md:grid-cols-2 overflow-hidden hover:border-accent/60 ${i%2?'md:[&>.fimg]:order-2':''}`}>
-<div class="fimg relative h-56 md:h-72 bg-black/40 overflow-hidden flex items-center justify-center">{p.shots[0] ? <img src={`/shots/${p.repo}/${p.shots[0]}`} alt="" class={p.shots[0].endsWith('.svg')||p.shots[0].startsWith('icon')?'h-24':'fpar absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-top group-hover:scale-105 transition-transform duration-700'} style={`view-transition-name: shot-${p.slug}`}/> : <span class="text-3xl font-semibold text-gray-500">{p.name}</span>}</div>
+<div class="fimg relative h-56 md:h-72 bg-black/40 overflow-hidden flex items-center justify-center">{p.shots[0] ? <img {...img(p.repo,p.shots[0],"(min-width:768px) 560px, 100vw")} alt="" loading="lazy" class={p.shots[0].endsWith('.svg')||p.shots[0].startsWith('icon')?'h-24':'fpar absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-top group-hover:scale-105 transition-transform duration-700'} style={`view-transition-name: shot-${p.slug}`}/> : <span class="text-3xl font-semibold text-gray-500">{p.name}</span>}</div>
 <div class="ftxt p-6 md:p-8 flex flex-col justify-center"><p class="text-xs text-gray-500 font-mono">0{i+2}</p><p class="text-xs text-accent mb-1">{p.tag}</p><h3 class="font-semibold text-xl sm:text-2xl" style={`view-transition-name: title-${p.slug}`}>{p.name}</h3>
 <p class="text-sm text-gray-400 mt-3 line-clamp-4">{p.desc}</p>
 <div class="flex flex-wrap gap-2 mt-4">{p.demo && <span class="text-xs px-2 py-1 rounded-full bg-accent/15 text-accent">● Live demo</span>}{p.caseStudy && <span class="text-xs px-2 py-1 rounded-full bg-white/5 text-gray-400">Case study</span>}<span class="text-xs text-gray-500 group-hover:text-accent transition">View project →</span></div></div></a></>))}
@@ -86,7 +87,7 @@ const resumeLinks=[
 <div class={`grid gap-5 ${items.length===4?'md:grid-cols-2 xl:grid-cols-4':items.length>2?'md:grid-cols-3':'md:grid-cols-2'}`}>{items.map((p,i)=>{const href=p.noPage?p.url:`/projects/${p.slug}`; return (
 <>{p.alias && <span id={p.alias} class="anchor-alias" data-target={p.slug}></span>}
 <div id={p.slug} class={`side-card card group relative overflow-hidden ${p.upcoming?'border-dashed':''}`} style={`--r:${i%2?1.2:-1.2}deg`}>
-<div class="h-36 bg-gradient-to-br from-accent2/10 via-transparent to-accent/10 flex items-center justify-center overflow-hidden">{p.shots[0] ? <img src={`/shots/${p.repo}/${p.shots[0]}`} alt={`${p.name} screenshot`} loading="lazy" class={p.shots[0].endsWith('.svg')?'h-16 group-hover:rotate-6 transition':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'}/> : <span class="text-3xl font-bold tracking-tight text-white/30">{p.name.split(/\s+/).map(w=>w[0]).join('')}</span>}</div>
+<div class="h-36 bg-gradient-to-br from-accent2/10 via-transparent to-accent/10 flex items-center justify-center overflow-hidden">{p.shots[0] ? <img {...img(p.repo,p.shots[0],"(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw")} alt={`${p.name} screenshot`} loading="lazy" class={p.shots[0].endsWith('.svg')?'h-16 group-hover:rotate-6 transition':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'}/> : <span class="text-3xl font-bold tracking-tight text-white/30">{p.name.split(/\s+/).map(w=>w[0]).join('')}</span>}</div>
 <div class="p-4"><div class="flex items-center justify-between gap-2"><h4 class="font-semibold"><a href={href} {...(p.noPage?extAttrs(href):{})} class="after:absolute after:inset-0">{p.name}</a></h4>{p.pipe && <span class="text-[10px] font-mono text-accent2">step {p.pipe}/3</span>}{p.slug==="mediasmith" && <span class="text-[10px] font-mono text-accent">all-in-one</span>}</div>
 <p class="text-[11px] text-gray-500 mt-0.5">{p.tag}</p>
 <p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.desc}</p>
