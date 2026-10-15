@@ -40,8 +40,11 @@ const RAW=[
 {slug:'captionsmith',repo:'CaptionSmith',name:'CaptionSmith',tag:'Desktop app · Rust · whisper.cpp',pipe:3,
  desc:'On-device video captioning for macOS and Windows. Transcribe locally with whisper.cpp (GPU-accelerated), edit, style, add speaker labels, batch-process, then burn in or export .srt/.vtt/.ass. No accounts, no cloud.',
  shots:['screenshot-1-load.png','screenshot-2-transcript.png','screenshot-3-style.png']},
-{slug:'cube-solver',repo:'cube-solver',name:'Cube Solver',tag:'Web app · TypeScript · 3D',demo:true,noPage:true,link:'https://cube.chafic.me',
- desc:'A 3D puzzle-cube solver: rotate the cube, set up or scramble 2x2, 3x3 and larger cubes, and get step-by-step solutions in visual and notation form.',shots:[]},
+{slug:'cube-solver',repo:'cube-solver',name:'Cube Solver',tag:'Web app · TypeScript · three.js',demo:true,demoHref:'https://cube.chafic.me',
+ desc:'Set up any cube from 2x2 to 7x7 by scrambling, turning or painting stickers, and get solutions (optimal on the 2x2 and 3x3), next moves ranked by distance, and step-by-step breakdowns, all animated on a 3D cube you can grab, turn, zoom into and take apart.',
+ features:['2x2 always optimal (full table of 3,674,160 positions)','3x3 Fast: Kociemba two-phase','3x3 Optimal: IDA* with pattern databases','4x4 to 7x7 by reduction','Next moves ranked by distance','Methods: Layer by layer, CFOP, Roux, ZZ','Paint a real cube on the 3D cube or a flat net','Solvability check','Exploded view','Share links, import/export','Notation lessons and app tour','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
+ skills:'Search algorithms (two-phase, IDA*, pattern databases), 3D rendering with three.js, Web Workers and IndexedDB caching, accessible UI, automated tests and CI.',
+ shots:['02-scrambled-solution.png','01-solved.png','03-solving.png','04-exploded.png'],icon:'icon.svg'},
 ];
 // ── Section/suite metadata ──
 // category: 'finance' → "Featured projects" (pinned horizontal scroller, in this order); 'hobby' → "Side projects".
@@ -58,6 +61,9 @@ export const SUITES=[
  {id:'media',name:'Media suite',emoji:'🎬',blurb:'Local-first video tools that hand off to each other: GifSmith → ClipSmith → CaptionSmith.'},
 ];
 
-export const projects=RAW.map(p=>({...p,url:p.link??(G+p.repo),...META[p.slug]}));
+export const projects=RAW.map(p=>({...p,url:G+p.repo,...META[p.slug]}));
 export const finance=projects.filter(p=>p.category==='finance');
 export const hobby=projects.filter(p=>p.category==='hobby');
+// Demo link helpers: external demos (other sites/subdomains) open in a new tab; internal ones stay in this tab.
+export const demoUrl=p=>p.demo?(p.demoHref??`/projects/${p.slug}/demo`):null;
+export const extAttrs=h=>/^https?:\/\//.test(h??'')?{target:'_blank',rel:'noopener'}:{};
