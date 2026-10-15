@@ -55,14 +55,14 @@ const RAW=[
  desc:'Set up any cube from 2x2 to 7x7 by scrambling, turning or painting stickers, and get solutions (optimal on the 2x2 and 3x3), next moves ranked by distance, and step-by-step breakdowns, all animated on a 3D cube you can grab, turn, zoom into and take apart.',
  features:['2x2 always optimal (full table of 3,674,160 positions)','3x3 Fast: Kociemba two-phase','3x3 Optimal: IDA* with pattern databases','4x4 to 7x7 by reduction','Next moves ranked by distance','Methods: Layer by layer, CFOP, Roux, ZZ','Paint a real cube on the 3D cube or a flat net','Solvability check','Exploded view','Share links, import/export','Notation lessons and app tour','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
  skills:'Search algorithms (two-phase, IDA*, pattern databases), 3D rendering with three.js, Web Workers and IndexedDB caching, accessible UI, automated tests and CI.',
- shots:['02-scrambled-solution.png','01-solved.png','03-solving.png','04-exploded.png'],icon:'icon.svg'},
+ shots:['02-scrambled-solution.png','01-solved.png','03-solving.png','04-exploded.png'],icon:'suite-logo.svg'},
 {slug:'chess-solver',repo:'chess-solver',name:'Chess Solver',tag:'Web + desktop app · TypeScript · Stockfish 18',demo:true,demoHref:'https://chess.chafic.me',
  desc:'Desktop chess analysis app for Windows and macOS powered by Stockfish 18. Set up any position and get engine-recommended moves with evaluations, tactical motifs, and principal variations.',
- shots:['screenshot-analysis.png','screenshot-tactics.png','screenshot-settings.png','screenshot-themes.png'],icon:'logo.png'},
+ shots:['screenshot-analysis.png','screenshot-tactics.png','screenshot-settings.png','screenshot-themes.png'],icon:'suite-logo.svg'},
 {slug:'sudoku-solver',repo:'sudoku-solver',name:'Sudoku Solver',tag:'Web app · TypeScript · Vite',demo:true,demoHref:'https://sudoku.chafic.me',
  desc:'Play, generate or type in any 9x9 Sudoku. Solve it instantly, or get hints that name the trick a person would use next, outline the squares involved and explain it in plain words, then watch the whole puzzle solved step by step.',
  features:['Classic, Diagonal, Killer, Mini 6x6 and Mini 4x4','New puzzles from Easy to Fiendish, each with exactly one answer','Level rated by the hardest trick the human-style solver needs','Hints that name, outline and explain the next step','Step-by-step playback, forwards or backwards','Pencil marks and auto notes','Conflict and mistake highlighting','Undo/redo and a History timeline','Load and share puzzles by string or link','Lessons and an app tour','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
- shots:['screenshot-main.png','screenshot-steps.png','screenshot-killer.png','screenshot-lesson.png'],icon:'icon.svg'},
+ shots:['screenshot-main.png','screenshot-steps.png','screenshot-killer.png','screenshot-lesson.png'],icon:'suite-logo.svg'},
 ];
 // ── Section/suite metadata ──
 // category: 'finance' → "Featured projects" (pinned horizontal scroller, in this order); 'hobby' → "Side projects".
