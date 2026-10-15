@@ -20,6 +20,7 @@ const imgs = p.shots.filter(s=>!s.endsWith('.svg'));
 {p.features && <div class="mt-8 reveal"><h2 class="font-semibold mb-3">Features</h2><div class="flex flex-wrap gap-2">{p.features.map(f=><span class="chip text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10">{f}</span>)}</div></div>}
 {p.skills && <p class="text-gray-400 mt-6 text-sm reveal"><span class="text-gray-200 font-semibold">Skills learned: </span>{p.skills}</p>}
 {p.pipe && (<div class="flex flex-wrap items-center gap-2 mt-5 text-sm">{[["gifsmith","GifSmith"],["clipsmith","ClipSmith"],["captionsmith","CaptionSmith"]].map(([sl,n],i)=>(<>{i>0 && <span class="text-gray-500">→</span>}<a href={`/projects/${sl}`} class={`px-3 py-1 rounded-full border ${sl===p.slug?"border-accent2 text-accent2":"border-white/15 text-gray-400 hover:text-white"}`}>{n}</a></>))}</div>)}
+{p.webNote && <p class="mt-6 text-sm text-gray-300 card p-4 border-amber-400/30 reveal"><span class="text-amber-300 font-semibold">About the browser demo: </span>{p.webNote}</p>}
 <div class="flex flex-wrap gap-3 mt-6">
 <a href={p.url} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 hover:border-accent text-sm">View on GitHub →</a>
 {p.releases && <a href={p.releases} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent2 text-ink font-semibold text-sm">Download installers (Releases) ↗</a>}

@@ -30,13 +30,24 @@ const RAW=[
  shots:['icon.png']},
 {slug:'gifsmith',repo:'GifSmith',name:'GifSmith',tag:'Desktop app · TypeScript · Tauri',pipe:1,
  desc:'Fast, local-first desktop app for macOS and Windows that turns a slice of any video, local or from a link, into a high-quality animated GIF. Trim, crop, boomerang, presets. No accounts, no telemetry, no ads.',
- shots:['gifsmith-icon.svg']},
+ demo:true,demoHref:'https://gif.chafic.me',icon:'gifsmith.svg',
+ shots:['desktop-app.png','web-demo.png','desktop-empty.png'],
+ webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser, GIFs are up to 15 seconds long. Link import, gifski quality, frame-accurate trim handles, size targets and the gallery are in the desktop app only.'},
 {slug:'clipsmith',repo:'ClipSmith',name:'ClipSmith',tag:'Desktop app · Rust · Tauri',pipe:2,
  desc:'Frame-accurate video clip cutter, reframer, and format converter for Mac and Windows, with subject-aware auto-reframe. Local-first, no accounts, no telemetry.',
- shots:['clipsmith-icon.svg']},
+ demo:true,demoHref:'https://clip.chafic.me',icon:'clipsmith.svg',
+ shots:['desktop-app.png','web-demo.png','desktop-empty.png'],
+ webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser, exports go up to 720p. Link import, auto-reframe, hardware encoding and any length or resolution are in the desktop app only.'},
 {slug:'captionsmith',repo:'CaptionSmith',name:'CaptionSmith',tag:'Desktop app · Rust · whisper.cpp',pipe:3,
  desc:'On-device video captioning for macOS and Windows. Transcribe locally with whisper.cpp (GPU-accelerated), edit, style, add speaker labels, batch-process, then burn in or export .srt/.vtt/.ass. No accounts, no cloud.',
- shots:['screenshot-1-load.png','screenshot-2-transcript.png','screenshot-3-style.png']},
+ demo:true,demoHref:'https://caption.chafic.me',icon:'captionsmith.svg',
+ shots:['screenshot-1-load.png','screenshot-2-transcript.png','screenshot-3-style.png','web-demo.png','desktop-app.png'],
+ webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser you import SRT/VTT files or type captions yourself. Whisper transcription, speaker labels, batch mode and link import are in the desktop app only.'},
+{slug:'mediasmith',repo:'media-smith',name:'MediaSmith',tag:'Desktop + web app · Tauri 2 · Rust · SolidJS · FFmpeg',demo:true,demoHref:'https://media.chafic.me',icon:'mediasmith.svg',
+ desc:'An open-source, local-first CapCut / Canva for the desktop and the browser. It merges GifSmith, ClipSmith and CaptionSmith into one editor: import a file, cut on a multi-track timeline, add text and karaoke captions, reframe for vertical, and export to TikTok, Reels, Shorts, YouTube or GIF. No accounts, no watermark, no cloud.',
+ features:['Templates by platform: TikTok/Reels, Shorts, YouTube, Instagram 4:5, square','Multi-track timeline: split, duplicate, zoom, snapping','Undo/redo and project save/open','Text presets and fade, pop or slide animations','Karaoke captions, SRT/VTT import and export','Export 9:16, 4:5, 16:9 and 1:1 MP4, plus GIF','Runs on the desktop (Tauri 2) and in the browser (ffmpeg.wasm)'],
+ shots:['home.png','editor.png','export.png','web-hub.png','web-caption.png'],
+ webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser, exports go up to 960p. Whisper auto-captions, speaker labels, AI rewrite, link import and hardware encoding are in the desktop app only.'},
 {slug:'cube-solver',repo:'cube-solver',name:'Cube Solver',tag:'Web app · TypeScript · three.js',demo:true,demoHref:'https://cube.chafic.me',
  desc:'Set up any cube from 2x2 to 7x7 by scrambling, turning or painting stickers, and get solutions (optimal on the 2x2 and 3x3), next moves ranked by distance, and step-by-step breakdowns, all animated on a 3D cube you can grab, turn, zoom into and take apart.',
  features:['2x2 always optimal (full table of 3,674,160 positions)','3x3 Fast: Kociemba two-phase','3x3 Optimal: IDA* with pattern databases','4x4 to 7x7 by reduction','Next moves ranked by distance','Methods: Layer by layer, CFOP, Roux, ZZ','Paint a real cube on the 3D cube or a flat net','Solvability check','Exploded view','Share links, import/export','Notation lessons and app tour','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
@@ -58,11 +69,11 @@ const RAW=[
 const META={
  'derivatives-underwriting-workbench':{category:'finance'},'portfolio-analyzer':{category:'finance'},'crypto-quant-desk':{category:'finance'},'daily-melt':{category:'finance'},
  'chess-solver':{category:'hobby',suite:'puzzle'},'cube-solver':{category:'hobby',suite:'puzzle'},'sudoku-solver':{category:'hobby',suite:'puzzle'},
- 'gifsmith':{category:'hobby',suite:'media'},'clipsmith':{category:'hobby',suite:'media'},'captionsmith':{category:'hobby',suite:'media'},
+ 'gifsmith':{category:'hobby',suite:'media'},'mediasmith':{category:'hobby',suite:'media'},'clipsmith':{category:'hobby',suite:'media'},'captionsmith':{category:'hobby',suite:'media'},
 };
 export const SUITES=[
  {id:'puzzle',name:'Puzzle-solving suite',emoji:'♞',blurb:'Engines that look at a position and find the answer.'},
- {id:'media',name:'Media suite',emoji:'🎬',blurb:'Local-first video tools that hand off to each other: GifSmith → ClipSmith → CaptionSmith.'},
+ {id:'media',name:'Media suite',emoji:'🎬',blurb:'Local-first video tools that hand off to each other (GifSmith → ClipSmith → CaptionSmith), then MediaSmith, which merges all three into one editor. Each one runs in the browser too.'},
 ];
 
 export const projects=RAW.map(p=>({...p,url:G+p.repo,...META[p.slug]}));
