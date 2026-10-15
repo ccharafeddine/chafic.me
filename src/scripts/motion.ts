@@ -127,7 +127,7 @@ function init() {
   if (document.getElementById('tl')) {
     gsap.fromTo('#tl-line', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#tl', start: 'top 70%', end: 'bottom 60%', scrub: true } });
     gsap.utils.toArray<HTMLElement>('.tl-item').forEach(li => {
-      reveal(li, { x: -40, opacity: 0 }, { duration: 0.8, ease: 'power3.out' }, li, 'top 78%');
+      reveal(li, { y: 50, opacity: 0 }, { duration: 0.8, ease: 'power3.out' }, li, 'top 78%');
       reveal(li.querySelector('.tl-dot'), { scale: 0 }, { duration: 0.5, ease: 'back.out(3)' }, li, 'top 78%');
     });
   }

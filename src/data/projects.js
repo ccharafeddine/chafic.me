@@ -31,23 +31,23 @@ const RAW=[
  steps:[['Backtest','Backtested it on history.'],['Live test','Live-tested it for about 1 month.'],['Outcome','It worked in backtests but not live. Intraday announcements kept reversing the morning momentum, so I paused it to rework the rules or wait for different conditions.']],
  skills:'Lesson: question the model when live results drift from the backtest.',
  shots:['icon.png']},
-{slug:'gifsmith',repo:'GifSmith',name:'GifSmith',tag:'Desktop app · TypeScript · Tauri',pipe:1,
+{slug:'gifsmith',repo:'GifSmith',name:'GifSmith',tag:'Desktop app · TypeScript · Tauri',
  desc:'Fast, local-first desktop app for macOS and Windows that turns a slice of any video, local or from a link, into a high-quality animated GIF. Trim, crop, boomerang, presets. No accounts, no telemetry, no ads.',
  demo:true,demoHref:'https://gif.chafic.me',icon:'gifsmith.svg',
  shots:['desktop-app.png','web-demo.png','desktop-empty.png'],
  webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser, GIFs are up to 15 seconds long. Link import, gifski quality, frame-accurate trim handles, size targets and the gallery are in the desktop app only.'},
-{slug:'clipsmith',repo:'ClipSmith',name:'ClipSmith',tag:'Desktop app · Rust · Tauri',pipe:2,
+{slug:'clipsmith',repo:'ClipSmith',name:'ClipSmith',tag:'Desktop app · Rust · Tauri',
  desc:'Frame-accurate video clip cutter, reframer, and format converter for Mac and Windows, with subject-aware auto-reframe. Local-first, no accounts, no telemetry.',
  demo:true,demoHref:'https://clip.chafic.me',icon:'clipsmith.svg',
  shots:['desktop-app.png','web-demo.png','desktop-empty.png'],
  webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser, exports go up to 720p. Link import, auto-reframe, hardware encoding and any length or resolution are in the desktop app only.'},
-{slug:'captionsmith',repo:'CaptionSmith',name:'CaptionSmith',tag:'Desktop app · Rust · whisper.cpp',pipe:3,
+{slug:'captionsmith',repo:'CaptionSmith',name:'CaptionSmith',tag:'Desktop app · Rust · whisper.cpp',
  desc:'On-device video captioning for macOS and Windows. Transcribe locally with whisper.cpp (GPU-accelerated), edit, style, add speaker labels, batch-process, then burn in or export .srt/.vtt/.ass. No accounts, no cloud.',
  demo:true,demoHref:'https://caption.chafic.me',icon:'captionsmith.svg',
  shots:['screenshot-1-load.png','screenshot-2-transcript.png','screenshot-3-style.png','web-demo.png','desktop-app.png'],
  webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser you import SRT/VTT files or type captions yourself. Whisper transcription, speaker labels, batch mode and link import are in the desktop app only.'},
 {slug:'mediasmith',repo:'media-smith',name:'MediaSmith',tag:'Desktop + web app · Tauri 2 · Rust · SolidJS · FFmpeg',demo:true,demoHref:'https://media.chafic.me',icon:'mediasmith.svg',
- desc:'An open-source, local-first CapCut / Canva for the desktop and the browser. It merges GifSmith, ClipSmith and CaptionSmith into one editor: import a file, cut on a multi-track timeline, add text and karaoke captions, reframe for vertical, and export to TikTok, Reels, Shorts, YouTube or GIF. No accounts, no watermark, no cloud.',
+ desc:'An open-source, local-first CapCut / Canva for the desktop and the browser, built for editing short videos end to end: import a file, cut on a multi-track timeline, add text and karaoke captions, reframe for vertical, and export to TikTok, Reels, Shorts, YouTube or GIF. No accounts, no watermark, no cloud.',
  features:['Templates by platform: TikTok/Reels, Shorts, YouTube, Instagram 4:5, square','Multi-track timeline: split, duplicate, zoom, snapping','Undo/redo and project save/open','Text presets and fade, pop or slide animations','Karaoke captions, SRT/VTT import and export','Export 9:16, 4:5, 16:9 and 1:1 MP4, plus GIF','Runs on the desktop (Tauri 2) and in the browser (ffmpeg.wasm)'],
  shots:['home.png','editor.png','export.png','web-hub.png','web-caption.png'],
  webNote:'The browser version downloads the ffmpeg video engine (about 31 MB) the first time you export; your browser keeps it after that. Files never leave your computer. In the browser, exports go up to 960p. Whisper auto-captions, speaker labels, AI rewrite, link import and hardware encoding are in the desktop app only.'},
@@ -76,7 +76,7 @@ const META={
 };
 export const SUITES=[
  {id:'puzzle',name:'Puzzle-solving suite',emoji:'♞',blurb:'Engines that look at a position and find the answer.'},
- {id:'media',name:'Media suite',emoji:'🎬',blurb:'Local-first video tools that hand off to each other (GifSmith → ClipSmith → CaptionSmith), then MediaSmith, which merges all three into one editor. Each one runs in the browser too.'},
+ {id:'media',name:'Media suite',emoji:'🎬',blurb:'Four standalone, local-first video tools, each built for its own job: GifSmith makes GIFs, ClipSmith cuts and reframes clips, CaptionSmith captions on-device, and MediaSmith is a short-form video editor. Each one runs in the browser too.'},
 ];
 
 export const projects=RAW.map(p=>({...p,url:G+p.repo,...META[p.slug]}));
