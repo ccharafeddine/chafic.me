@@ -3,6 +3,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { heroChart } from './hero-chart';
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.addEventListener('refresh', () => setTimeout(() => unhide(), 1500));
+addEventListener('load', () => setTimeout(() => unhide(), 2500));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lenis: Lenis | null = null;
 let rafId = 0;
@@ -32,6 +34,27 @@ function splitWords(el: HTMLElement) {
   el.dataset.split = '1';
   el.innerHTML = el.textContent!.trim().split(/\s+/).map(w => `<span class="w inline-block overflow-hidden align-bottom pb-1"><span class="inline-block">${w}</span></span>`).join(' ');
   return el.querySelectorAll('.w > span');
+}
+
+
+// Reveal helper: fromTo with explicit end state (so a second tween on the same element can never "lock in" a hidden
+// start value, which is what blanked the flagship card), once:true, and each element registered only once.
+const SHOWN = { opacity: 1, x: 0, y: 0, xPercent: 0, yPercent: 0, scale: 1, rotate: 0, rotationY: 0, clipPath: 'inset(0 0 0 0)' };
+function reveal(targets: gsap.TweenTarget, from: gsap.TweenVars, vars: gsap.TweenVars, trigger: Element | string, start = 'top 90%') {
+  const els = gsap.utils.toArray<HTMLElement>(targets).filter(el => !el.dataset.rv);
+  if (!els.length) return;
+  els.forEach(el => el.dataset.rv = '1');
+  const to: gsap.TweenVars = { ...vars, immediateRender: false, scrollTrigger: { trigger, start, once: true } };
+  for (const k of Object.keys(from)) (to as any)[k] = (SHOWN as any)[k] ?? 0;
+  if ('clipPath' in from) to.clearProps = 'clipPath';
+  gsap.fromTo(els, { ...from }, to);
+}
+// Safety net: anything registered as a reveal that is on/above screen but still hidden gets shown.
+function unhide() {
+  document.querySelectorAll<HTMLElement>('[data-rv]').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight && +getComputedStyle(el).opacity < 0.05) gsap.set(el, { clearProps: 'opacity,transform,clipPath' });
+  });
 }
 
 function heroCanvas() { cleanups.push(heroChart(reduce)); }
@@ -76,20 +99,19 @@ function init() {
 
   // split-text headings
   document.querySelectorAll<HTMLElement>('.split').forEach(h => {
-    gsap.from(splitWords(h), { yPercent: 110, rotate: 4, duration: 0.9, stagger: 0.06, ease: 'power4.out', scrollTrigger: { trigger: h, start: 'top 88%' } });
+    reveal(splitWords(h), { yPercent: 110, rotate: 4 }, { duration: 0.9, stagger: 0.06, ease: 'power4.out' }, h, 'top 88%');
   });
 
   // generic reveals
-  gsap.utils.toArray<HTMLElement>('.reveal').forEach(el => gsap.from(el, { y: 50, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } }));
+  gsap.utils.toArray<HTMLElement>('.reveal').forEach(el => reveal(el, { y: 50, opacity: 0 }, { duration: 0.9, ease: 'power3.out' }, el));
 
   // finance projects: flagship scale-in, then rows reveal (staggered text) with in-card image parallax
   const fl = document.getElementById('flagship');
-  if (fl) gsap.from(fl, { y: 60, scale: 0.94, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: fl, start: 'top 88%' } });
+  if (fl) reveal(fl, { y: 60, scale: 0.94, opacity: 0 }, { duration: 1, ease: 'power3.out' }, fl, 'top 88%');
   gsap.utils.toArray<HTMLElement>('.frow').forEach((row, i) => {
-    const tl = gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 85%' } });
-    tl.from(row, { y: 70, scale: 0.96, opacity: 0, duration: 0.9, ease: 'power3.out' })
-      .from(row.querySelectorAll('.ftxt > *'), { y: 24, opacity: 0, duration: 0.6, stagger: 0.07, ease: 'power2.out' }, 0.25)
-      .from(row.querySelector('.fimg'), { clipPath: i % 2 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)', duration: 0.9, ease: 'power3.inOut' }, 0.1);
+    reveal(row, { y: 70, scale: 0.96, opacity: 0 }, { duration: 0.9, ease: 'power3.out' }, row, 'top 85%');
+    reveal(row.querySelectorAll('.ftxt > *'), { y: 24, opacity: 0 }, { duration: 0.6, delay: 0.25, stagger: 0.07, ease: 'power2.out' }, row, 'top 85%');
+    reveal(row.querySelector('.fimg'), { clipPath: i % 2 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' }, { duration: 0.9, delay: 0.1, ease: 'power3.inOut' }, row, 'top 85%');
     const img = row.querySelector('.fpar');
     if (img) gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: row, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
@@ -98,14 +120,14 @@ function init() {
   if (document.getElementById('tl')) {
     gsap.fromTo('#tl-line', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#tl', start: 'top 70%', end: 'bottom 60%', scrub: true } });
     gsap.utils.toArray<HTMLElement>('.tl-item').forEach(li => {
-      gsap.from(li, { x: -40, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: li, start: 'top 78%' } });
-      gsap.from(li.querySelector('.tl-dot'), { scale: 0, duration: 0.5, ease: 'back.out(3)', scrollTrigger: { trigger: li, start: 'top 78%' } });
+      reveal(li, { x: -40, opacity: 0 }, { duration: 0.8, ease: 'power3.out' }, li, 'top 78%');
+      reveal(li.querySelector('.tl-dot'), { scale: 0 }, { duration: 0.5, ease: 'back.out(3)' }, li, 'top 78%');
     });
   }
 
   // skill chips float in
   gsap.utils.toArray<HTMLElement>('#skills .card').forEach(card => {
-    gsap.from(card.querySelectorAll('.chip'), { y: () => gsap.utils.random(30, 70), x: () => gsap.utils.random(-30, 30), rotate: () => gsap.utils.random(-15, 15), opacity: 0, duration: 0.9, stagger: 0.05, ease: 'back.out(1.6)', scrollTrigger: { trigger: card, start: 'top 85%' } });
+    reveal(card.querySelectorAll('.chip'), { y: () => gsap.utils.random(30, 70), x: () => gsap.utils.random(-30, 30), rotate: () => gsap.utils.random(-15, 15), opacity: 0 }, { duration: 0.9, stagger: 0.05, ease: 'back.out(1.6)' }, card, 'top 85%');
   });
 }
 
@@ -140,6 +162,7 @@ function restoreScroll(y: number) {
 }
 document.addEventListener('astro:page-load', () => {
   init();
+  setTimeout(unhide, 2500);
   const y = restoreY; restoreY = null;
   requestAnimationFrame(() => {
     if (y != null) { restoreScroll(y); return; }
