@@ -49,6 +49,8 @@ export const timeline = [
    summary:'OTC counterparty-credit underwriting simulator on synthetic data.',
    more:['Monte Carlo expected exposure and PFE, CVA/DVA/FVA, CSA collateral, credit limits, and a written approve-or-decline memo.'],
    link:['/projects/derivatives-underwriting-workbench/demo','Live CVA demo'] },
+ { date:'Oct 2026', cat:'Side projects', title:'Cube Solver and Sudoku Solver',
+   summary:'Two more apps for the puzzle-solving suite, alongside Chess Solver.', link:['/#side-projects','Side projects'] },
  { date:'Nov 17, 2026', cat:'Certifications', title:'CFA Program Level I exam', summary:'Level I candidate.' },
  // ── ADD MORE ENTRIES HERE ── keep chronological order; use an existing `cat` or add one to `categories` above.
 ];
