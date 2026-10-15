@@ -91,7 +91,7 @@ const resumeLinks=[
 <div class="p-4"><div class="flex items-center justify-between gap-2"><h4 class="font-semibold">{p.name}</h4>{p.pipe && <span class="text-[10px] font-mono text-accent2">step {p.pipe}/3</span>}</div>
 <p class="text-[11px] text-gray-500 mt-0.5">{p.tag}</p>
 <p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.desc}</p>
-<div class="flex flex-wrap gap-2 mt-3">{p.upcoming ? <span class="badge bg-amber-400/15 text-amber-300">In development · coming soon</span> : p.demo ? <span class="badge bg-accent/15 text-accent">● Live demo</span> : <span class="badge bg-white/5 text-gray-400">Live demo coming soon</span>}{p.noPage && <span class="badge bg-white/5 text-gray-400">Repo ↗</span>}</div>
+<div class="flex flex-wrap gap-2 mt-3">{p.upcoming ? <span class="badge bg-amber-400/15 text-amber-300">In development · coming soon</span> : p.demo ? <span class="badge bg-accent/15 text-accent">● Live demo</span> : <span class="badge bg-white/5 text-gray-400">Live demo coming soon</span>}{p.noPage && <span class="badge bg-white/5 text-gray-400">{p.link?"Open ↗":"Repo ↗"}</span>}</div>
 </div></a></>)})}</div></div>)})}</div>
 </section>
 <section id="education" class="max-w-4xl mx-auto px-6 py-24">

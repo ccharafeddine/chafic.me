@@ -28,7 +28,7 @@ const RAW=[
  steps:[['Backtest','Backtested it on history.'],['Live test','Live-tested it for about 1 month.'],['Outcome','It worked in backtests but not live. Intraday announcements kept reversing the morning momentum, so I paused it to rework the rules or wait for different conditions.']],
  skills:'Lesson: question the model when live results drift from the backtest.',
  shots:['icon.png']},
-{slug:'chess-solver',repo:'chess-solver',name:'Chess Solver',tag:'Desktop app · TypeScript · Stockfish 18',
+{slug:'chess-solver',repo:'chess-solver',name:'Chess Solver',tag:'Web + desktop app · TypeScript · Stockfish 18',demo:true,demoHref:'https://chess.chafic.me',
  desc:'Desktop chess analysis app for Windows and macOS powered by Stockfish 18. Set up any position and get engine-recommended moves with evaluations, tactical motifs, and principal variations.',
  shots:['screenshot-analysis.png','screenshot-tactics.png','screenshot-settings.png']},
 {slug:'gifsmith',repo:'GifSmith',name:'GifSmith',tag:'Desktop app · TypeScript · Tauri',pipe:1,
@@ -40,8 +40,8 @@ const RAW=[
 {slug:'captionsmith',repo:'CaptionSmith',name:'CaptionSmith',tag:'Desktop app · Rust · whisper.cpp',pipe:3,
  desc:'On-device video captioning for macOS and Windows. Transcribe locally with whisper.cpp (GPU-accelerated), edit, style, add speaker labels, batch-process, then burn in or export .srt/.vtt/.ass. No accounts, no cloud.',
  shots:['screenshot-1-load.png','screenshot-2-transcript.png','screenshot-3-style.png']},
-{slug:'cube-solver',repo:'cube-solver',name:'Cube Solver',tag:'In development · TypeScript',upcoming:true,noPage:true,
- desc:'A puzzle-cube solver for the puzzle-solving suite. Being built now; details and a demo when it ships.',shots:[]},
+{slug:'cube-solver',repo:'cube-solver',name:'Cube Solver',tag:'Web app · TypeScript · 3D',demo:true,noPage:true,link:'https://cube.chafic.me',
+ desc:'A 3D puzzle-cube solver: rotate the cube, set up or scramble 2x2, 3x3 and larger cubes, and get step-by-step solutions in visual and notation form.',shots:[]},
 ];
 // ── Section/suite metadata ──
 // category: 'finance' → "Featured projects" (pinned horizontal scroller, in this order); 'hobby' → "Side projects".
@@ -58,6 +58,6 @@ export const SUITES=[
  {id:'media',name:'Media suite',emoji:'🎬',blurb:'Local-first video tools that hand off to each other: GifSmith → ClipSmith → CaptionSmith.'},
 ];
 
-export const projects=RAW.map(p=>({...p,url:G+p.repo,...META[p.slug]}));
+export const projects=RAW.map(p=>({...p,url:p.link??(G+p.repo),...META[p.slug]}));
 export const finance=projects.filter(p=>p.category==='finance');
 export const hobby=projects.filter(p=>p.category==='hobby');
