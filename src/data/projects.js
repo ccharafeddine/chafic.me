@@ -30,7 +30,7 @@ const RAW=[
  shots:['icon.png']},
 {slug:'chess-solver',repo:'chess-solver',name:'Chess Solver',tag:'Web + desktop app · TypeScript · Stockfish 18',demo:true,demoHref:'https://chess.chafic.me',
  desc:'Desktop chess analysis app for Windows and macOS powered by Stockfish 18. Set up any position and get engine-recommended moves with evaluations, tactical motifs, and principal variations.',
- shots:['screenshot-analysis.png','screenshot-tactics.png','screenshot-settings.png']},
+ shots:['web-analysis.png','web-neon-mate.png']},
 {slug:'gifsmith',repo:'GifSmith',name:'GifSmith',tag:'Desktop app · TypeScript · Tauri',pipe:1,
  desc:'Fast, local-first desktop app for macOS and Windows that turns a slice of any video, local or from a link, into a high-quality animated GIF. Trim, crop, boomerang, presets. No accounts, no telemetry, no ads.',
  shots:['gifsmith-icon.svg']},
