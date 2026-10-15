@@ -110,12 +110,45 @@ function init() {
 }
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+// ── Return to the exact home scroll position after visiting a project ──
+// Saved on leaving "/" (keyed by path). Restored when coming back via browser Back or the "← All projects" link
+// (which acts like history.back() when the previous page was home). Fresh loads with a hash still jump to the anchor.
+const KEY = (path: string) => 'scroll:' + path;
+const norm = (p: string) => p.replace(/\/+$/, '') || '/';
+let restoreY: number | null = null;
+document.addEventListener('click', (e) => {
+  const a = (e.target as HTMLElement).closest?.('a[data-back]') as HTMLAnchorElement | null;
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  if (sessionStorage.getItem('cameFromHome') === norm(location.pathname) && history.length > 1) { e.preventDefault(); e.stopPropagation(); history.back(); }
+}, true);
+document.addEventListener('astro:before-preparation', (e: any) => {
+  const from = new URL(e.from), to = new URL(e.to);
+  if (from.pathname === '/' && to.pathname !== '/') {
+    sessionStorage.setItem(KEY('/'), String(Math.round(scrollY)));
+    sessionStorage.setItem('cameFromHome', norm(to.pathname));
+  }
+  if (to.pathname === '/' && from.pathname !== '/') {
+    const saved = sessionStorage.getItem(KEY('/'));
+    restoreY = saved != null && (e.navigationType === 'traverse' || sessionStorage.getItem('cameFromHome') === norm(from.pathname)) ? +saved : null;
+    sessionStorage.removeItem('cameFromHome');
+  } else restoreY = null;
+});
+function restoreScroll(y: number) {
+  ScrollTrigger.refresh();
+  const go = () => { if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); window.scrollTo(0, y); };
+  go(); requestAnimationFrame(go); setTimeout(() => { ScrollTrigger.refresh(); go(); }, 120); setTimeout(go, 400);
+}
 document.addEventListener('astro:page-load', () => {
   init();
-  requestAnimationFrame(() => { ScrollTrigger.refresh(); if (location.hash) setTimeout(() => { ScrollTrigger.refresh(); scrollToHash(location.hash, true); }, 150); });
+  const y = restoreY; restoreY = null;
+  requestAnimationFrame(() => {
+    if (y != null) { restoreScroll(y); return; }
+    ScrollTrigger.refresh();
+    if (location.hash) setTimeout(() => { ScrollTrigger.refresh(); scrollToHash(location.hash, true); }, 150);
+  });
 });
 document.addEventListener('astro:before-swap', () => {
   cleanups.forEach(f => f()); cleanups = [];
   ScrollTrigger.getAll().forEach(t => t.kill()); gsap.globalTimeline.clear();
 });
-document.addEventListener('astro:after-swap', () => { lenis?.scrollTo(0, { immediate: true }); });
+document.addEventListener('astro:after-swap', () => { if (restoreY == null) lenis?.scrollTo(0, { immediate: true }); });
