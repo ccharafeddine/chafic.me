@@ -1,7 +1,7 @@
 // Timeline entries for /timeline. Facts only from SITE_BRIEF_for_Vitruvius.md and what is already on the site.
 // Categories drive the filter chips. `more` lines show when an entry is expanded. `link` is optional (internal only;
 // never link the bare GitHub profile).
-export const categories = ['Education', 'Experience', 'Projects', 'Side projects', 'Markets & mining', 'Activities & service', 'Certifications'];
+export const categories = ['Education', 'Experience', 'Projects', 'Hobby projects', 'Markets & mining', 'Activities & service', 'Certifications'];
 export const timeline = [
  { date:'Aug 2013 – Dec 2018', cat:'Education', title:'Texas A&M University · BS Economics',
    summary:'College Station. Favorite class: econometrics.',
@@ -38,8 +38,8 @@ export const timeline = [
    summary:'Momentum-based 0-DTE SPX options strategy with hard risk limits.',
    more:['Backtested on history, then live-tested for about 1 month.','Paused when intraday announcements kept reversing the morning momentum. Lesson: question the model when live results drift from the backtest.'],
    link:['/projects/daily-melt','Case study'] },
- { date:'Mar – Jul 2026', cat:'Side projects', title:'Side projects: media and puzzle-solving suites',
-   summary:'GifSmith, ClipSmith and CaptionSmith (media suite) and Chess Solver (puzzle-solving suite).', link:['/#side-projects','Side projects'] },
+ { date:'Mar – Jul 2026', cat:'Hobby projects', title:'Hobby projects: media and puzzle-solving suites',
+   summary:'GifSmith, ClipSmith and CaptionSmith (media suite) and Chess Solver (puzzle-solving suite).', link:['/#side-projects','Hobby projects'] },
  { date:'Jun 2026', cat:'Projects', title:'Crypto Quant Desk',
    summary:'A Windows/macOS spot trading terminal: positions, risk analytics, live charts, backtests and order safety rails.',
    link:['/projects/crypto-quant-desk','Project page'] },
@@ -49,8 +49,8 @@ export const timeline = [
    summary:'OTC counterparty-credit underwriting simulator on synthetic data.',
    more:['Monte Carlo expected exposure and PFE, CVA/DVA/FVA, CSA collateral, credit limits, and a written approve-or-decline memo.'],
    link:['/projects/derivatives-underwriting-workbench/demo','Live CVA demo'] },
- { date:'Oct 2026', cat:'Side projects', title:'Cube Solver and Sudoku Solver',
-   summary:'Two more apps for the puzzle-solving suite, alongside Chess Solver.', link:['/#side-projects','Side projects'] },
+ { date:'Oct 2026', cat:'Hobby projects', title:'Cube Solver, Sudoku Solver and Card Solver',
+   summary:'Three more apps for the puzzle-solving suite, alongside Chess Solver.', link:['/#side-projects','Hobby projects'] },
  { date:'Nov 17, 2026', cat:'Certifications', title:'CFA Program Level I exam', summary:'Level I candidate.' },
  // ── ADD MORE ENTRIES HERE ── keep chronological order; use an existing `cat` or add one to `categories` above.
 ];

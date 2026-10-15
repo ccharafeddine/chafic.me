@@ -20,17 +20,17 @@ const RAW=[
  intent:'Built after applying for a derivatives underwriting role, to learn what the job involves and to practice it. It includes a role-play simulator.',
  features:['Monte Carlo expected exposure and PFE','CVA/DVA/FVA','CSA collateral','Credit limits','A written underwriting memo with an approve or decline recommendation'],
  skills:'Exposure simulation, credit valuation adjustments, collateral mechanics, and writing a recommendation a reviewer can challenge.',
- shots:['exposure.png','cva.png','collateral.png','limits.png','memo.png','simulator-campaign.png'],demo:true},
+ shots:['exposure.png','cva.png','collateral.png','limits.png','memo.png','simulator-campaign.png'],demo:true,icon:'logo.svg'},
 {slug:'crypto-quant-desk',repo:'crypto-quant-desk',name:'Crypto Quant Desk',tag:'Trading terminal · Python · Jun 2026',
  desc:'A Windows/macOS trading terminal for spot trading.',
  features:['Positions','Risk analytics','Live charts','A signal engine (advisory only)','Backtests','Order safety rails'],
- shots:['analysis.png','monitor.png','signals.png','trading.png']},
+ shots:['analysis.png','monitor.png','signals.png','trading.png'],icon:'logo.svg'},
 {slug:'daily-melt',alias:'spx-income-trader',repo:'spx-income-trader',name:'SPX Income Trader',tag:'Systematic options strategy · Python · Jan 2026',caseStudy:true,
  desc:'An automated, momentum-based 0-DTE SPX options income strategy.',
  intent:'To turn my discretionary momentum approach into tested rules with hard limits: a daily loss circuit breaker, drawdown caps and position sizing from a loss budget.',
  steps:[['Backtest','Backtested it on history.'],['Live test','Live-tested it for about 1 month.'],['Outcome','It worked in backtests but not live. Intraday announcements kept reversing the morning momentum, so I paused it to rework the rules or wait for different conditions.']],
  skills:'Lesson: question the model when live results drift from the backtest.',
- shots:['icon.png']},
+ shots:['icon.png'],icon:'logo.svg'},
 {slug:'gifsmith',repo:'GifSmith',name:'GifSmith',tag:'Desktop app · TypeScript · Tauri',
  desc:'Fast, local-first desktop app for macOS and Windows that turns a slice of any video, local or from a link, into a high-quality animated GIF. Trim, crop, boomerang, presets. No accounts, no telemetry, no ads.',
  demo:true,demoHref:'https://gif.chafic.me',icon:'gifsmith.svg',
@@ -63,15 +63,19 @@ const RAW=[
  desc:'Play, generate or type in any 9x9 Sudoku. Solve it instantly, or get hints that name the trick a person would use next, outline the squares involved and explain it in plain words, then watch the whole puzzle solved step by step.',
  features:['Classic, Diagonal, Killer, Mini 6x6 and Mini 4x4','New puzzles from Easy to Fiendish, each with exactly one answer','Level rated by the hardest trick the human-style solver needs','Hints that name, outline and explain the next step','Step-by-step playback, forwards or backwards','Pencil marks and auto notes','Conflict and mistake highlighting','Undo/redo and a History timeline','Load and share puzzles by string or link','Lessons and an app tour','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
  shots:['screenshot-main.png','screenshot-steps.png','screenshot-killer.png','screenshot-lesson.png'],icon:'suite-logo.svg'},
+{slug:'card-solver',repo:'card-solver',name:'Card Solver',tag:'Web + desktop app · TypeScript · Vite',demo:true,demoHref:'https://cards.chafic.me',
+ desc:'Poker odds and perfect blackjack, with the game theory behind every choice explained in plain words. One app with two tabs: Texas Hold\'em equity, outs, pot odds and fold/call/raise EV, and exact blackjack EV for every action under any table rules.',
+ features:['Poker equity vs random hands or a painted range, 1 to 8 opponents','Exact counting for one opponent up to 1.2M deals; Monte Carlo in a background thread otherwise','Outs with exact odds next to the rule of 4 and 2','Fold, call or raise EV bars (labelled simple model, not a solver)','Preflop reference charts for a 6-player table','Blackjack table rules with live house edge','Exact EV of hit, stand, double, split and surrender','Strategy chart, a scoring trainer and optional Hi-Lo counting with the Illustrious 18','Spotlight tour and 13 lessons with quizzes','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
+ shots:['screenshot-poker.png','screenshot-blackjack.png','screenshot-aero.png','screenshot-tour.png','screenshot-mobile.png'],icon:'suite-logo.svg'},
 ];
 // ── Section/suite metadata ──
-// category: 'finance' → "Featured projects" (pinned horizontal scroller, in this order); 'hobby' → "Side projects".
+// category: 'finance' → "Featured projects" (pinned horizontal scroller, in this order); 'hobby' → "Hobby projects".
 // suite: groups hobby cards (see SUITES). Demo hook: set demo:true (+ optional demoHref) on any project and its card
 // swaps "Live demo coming soon" for "● Live demo"; the detail page shows "Open live demo" pointing at demoHref or
 // /projects/<slug>/demo (create src/pages/projects/<slug>/demo.astro, like the workbench demo).
 const META={
  'derivatives-underwriting-workbench':{category:'finance'},'portfolio-analyzer':{category:'finance'},'crypto-quant-desk':{category:'finance'},'daily-melt':{category:'finance'},
- 'chess-solver':{category:'hobby',suite:'puzzle'},'cube-solver':{category:'hobby',suite:'puzzle'},'sudoku-solver':{category:'hobby',suite:'puzzle'},
+ 'chess-solver':{category:'hobby',suite:'puzzle'},'cube-solver':{category:'hobby',suite:'puzzle'},'sudoku-solver':{category:'hobby',suite:'puzzle'},'card-solver':{category:'hobby',suite:'puzzle'},
  'gifsmith':{category:'hobby',suite:'media'},'mediasmith':{category:'hobby',suite:'media'},'clipsmith':{category:'hobby',suite:'media'},'captionsmith':{category:'hobby',suite:'media'},
 };
 export const SUITES=[

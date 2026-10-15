@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { timeline, categories } from '../data/timeline.js';
-const color = { 'Education':'#38bdf8','Experience':'#34d399','Projects':'#a78bfa','Side projects':'#2dd4bf','Markets & mining':'#fbbf24','Activities & service':'#f472b6','Certifications':'#f97316' };
+const color = { 'Education':'#38bdf8','Experience':'#34d399','Projects':'#a78bfa','Hobby projects':'#2dd4bf','Markets & mining':'#fbbf24','Activities & service':'#f472b6','Certifications':'#f97316' };
 const years = [...new Set(timeline.map(e=>e.date.match(/\d{4}/)[0]))];
 ---
 <Base title="Timeline · Chafic Charafeddine">
