@@ -7,7 +7,6 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lenis: Lenis | null = null;
 let rafId = 0;
 let cleanups: (() => void)[] = [];
-let hst: ScrollTrigger | null = null;
 
 // Scroll to an in-page anchor; cards inside the pinned horizontal track map to the matching vertical scroll position.
 function scrollToHash(hash: string, immediate = false) {
@@ -15,16 +14,7 @@ function scrollToHash(hash: string, immediate = false) {
   let el = document.getElementById(decodeURIComponent(hash.slice(1)));
   if (!el) return false;
   if (el.dataset.target) el = document.getElementById(el.dataset.target) || el;
-  const track = document.getElementById('htrack');
-  let y: number;
-  if (hst && track && track.contains(el)) {
-    const maxX = track.scrollWidth - innerWidth;
-    const cardX = el.getBoundingClientRect().left - track.getBoundingClientRect().left - (innerWidth - el.offsetWidth) / 2;
-    const frac = maxX > 0 ? Math.min(Math.max(cardX / maxX, 0), 1) : 0;
-    y = hst.start + frac * (hst.end - hst.start);
-  } else {
-    y = el.getBoundingClientRect().top + scrollY - 72;
-  }
+  const y = el.getBoundingClientRect().top + scrollY - 72;
   if (lenis) lenis.scrollTo(y, { immediate, duration: 1.2 }); else scrollTo({ top: y, behavior: immediate || reduce ? 'auto' : 'smooth' });
   return true;
 }
@@ -92,22 +82,17 @@ function init() {
   // generic reveals
   gsap.utils.toArray<HTMLElement>('.reveal').forEach(el => gsap.from(el, { y: 50, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } }));
 
-  // featured projects: pinned horizontal on desktop, stagger on mobile
-  const mm = gsap.matchMedia();
-  mm.add('(min-width: 1024px)', () => {
-    const track = document.getElementById('htrack'); if (!track) return;
-    const dist = () => track.scrollWidth - innerWidth;
-    const tw: gsap.core.Tween = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '#hpin', start: 'center center', end: () => '+=' + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1 } });
-    hst = tw.scrollTrigger!;
-    gsap.utils.toArray<HTMLElement>('.pcard').forEach(card => {
-      gsap.from(card, { opacity: 0.25, scale: 0.9, rotationY: -18, transformPerspective: 900, ease: 'none',
-        scrollTrigger: { trigger: card, containerAnimation: tw, start: 'left 100%', end: 'left 55%', scrub: true } });
-    });
+  // finance projects: flagship scale-in, then rows reveal (staggered text) with in-card image parallax
+  const fl = document.getElementById('flagship');
+  if (fl) gsap.from(fl, { y: 60, scale: 0.94, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: fl, start: 'top 88%' } });
+  gsap.utils.toArray<HTMLElement>('.frow').forEach((row, i) => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 85%' } });
+    tl.from(row, { y: 70, scale: 0.96, opacity: 0, duration: 0.9, ease: 'power3.out' })
+      .from(row.querySelectorAll('.ftxt > *'), { y: 24, opacity: 0, duration: 0.6, stagger: 0.07, ease: 'power2.out' }, 0.25)
+      .from(row.querySelector('.fimg'), { clipPath: i % 2 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)', duration: 0.9, ease: 'power3.inOut' }, 0.1);
+    const img = row.querySelector('.fpar');
+    if (img) gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: row, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
-  mm.add('(max-width: 1023px)', () => {
-    gsap.utils.toArray<HTMLElement>('.pcard').forEach((c, i) => gsap.from(c, { x: i % 2 ? 60 : -60, y: 40, opacity: 0, rotate: i % 2 ? 3 : -3, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 92%' } }));
-  });
-  cleanups.push(() => { mm.revert(); hst = null; });
 
   // timeline draw
   if (document.getElementById('tl')) {

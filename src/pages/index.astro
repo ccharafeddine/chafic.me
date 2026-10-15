@@ -61,22 +61,21 @@ const resumeLinks=[
 </div></section>
 <section id="projects" class="py-24 overflow-hidden">
 <div class="max-w-6xl mx-auto px-6"><h2 class="split text-3xl sm:text-5xl font-bold mb-3">Featured projects</h2><p class="text-gray-400 mb-10">Finance, valuation and trading tools, built Nov 2025 – Jul 2026. For apps built for fun, see <a href="#side-projects" class="text-accent2 hover:underline">side projects</a>.</p></div>
-<div class="max-w-6xl mx-auto px-6 mb-6"><div id="flagship" class="card tilt reveal group grid lg:grid-cols-[1.25fr_1fr] overflow-hidden border-accent/40 hover:border-accent relative" style="box-shadow:0 0 60px -20px rgba(56,189,248,.45)">
+<div class="max-w-6xl mx-auto px-6 mb-6"><span id="portfolio-analyzer" class="anchor-alias" data-target="flagship"></span><div id="flagship" class="card tilt reveal group grid lg:grid-cols-[1.25fr_1fr] overflow-hidden border-accent/40 hover:border-accent relative" style="box-shadow:0 0 60px -20px rgba(56,189,248,.45)">
 <a href="/projects/portfolio-analyzer" class="bg-black/40 overflow-hidden block"><img src="/shots/Portfolio_Analyzer/01-overview.png" alt="Portfolio Analyzer overview tab" class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition duration-700"/></a>
 <div class="p-6 sm:p-8 flex flex-col justify-center"><p class="text-xs font-semibold uppercase tracking-widest text-accent">★ Flagship project</p>
 <h3 class="text-2xl sm:text-3xl font-bold mt-2">Portfolio Analyzer</h3><p class="text-xs text-gray-500 mt-1">Python · PySide6 · v3.0.0 · began as my MS capstone</p>
 <p class="text-gray-300 mt-3 text-sm leading-relaxed">A native desktop portfolio analytics app: an 18-step pipeline with backtesting, Max-Sharpe/HRP/Black-Litterman optimization, factor loadings, attribution and Monte Carlo. 237 automated tests.</p>
 <div class="flex flex-wrap gap-3 mt-5"><a href="/projects/portfolio-analyzer#demo" class="px-5 py-2.5 rounded-full bg-accent text-ink font-semibold text-sm inline-flex items-center gap-2 cursor-pointer"><span class="live-dot w-1.5 h-1.5 rounded-full bg-ink"></span>Try the live demo →</a><a href="/projects/portfolio-analyzer" class="px-4 py-2.5 rounded-full border border-white/20 hover:border-accent text-sm">Project details</a></div></div></div></div>
-<div id="hpin" class="lg:h-screen lg:flex lg:items-center">
-<div id="htrack" class="relative px-6 grid sm:grid-cols-2 gap-6 lg:flex lg:w-max lg:gap-8 lg:px-[8vw] max-w-6xl mx-auto lg:max-w-none">
-{finance.map((p,i)=>(<>
-{p.alias && <span id={p.alias} class="anchor-alias absolute top-0 left-0 w-0 h-0" data-target={p.slug}></span>}
-<a id={p.slug} href={`/projects/${p.slug}`} class="card pcard tilt group overflow-hidden hover:border-accent/60 lg:w-[440px] shrink-0" style="transform-style:preserve-3d">
-<div class="h-52 bg-black/40 overflow-hidden flex items-center justify-center">{p.shots[0] ? <img src={`/shots/${p.repo}/${p.shots[0]}`} alt="" class={p.shots[0].endsWith('.svg')?'h-24':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'} style={`view-transition-name: shot-${p.slug}`}/> : <span class="text-3xl font-semibold text-gray-500">{p.name}</span>}</div>
-<div class="p-5"><p class="text-xs text-gray-500 font-mono">0{i+1}</p><p class="text-xs text-accent mb-1">{p.tag}</p><h3 class="font-semibold text-lg" style={`view-transition-name: title-${p.slug}`}>{p.name}</h3>
-<p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.desc}</p>
-{p.demo && <span class="inline-block mt-3 text-xs px-2 py-1 rounded-full bg-accent/15 text-accent">● Live demo</span>}</div></a></>))}
-</div></div></section>
+<div id="frows" class="max-w-6xl mx-auto px-6 space-y-10 lg:space-y-16 mt-10">
+{finance.filter(p=>!p.flagship).map((p,i)=>(<>
+{p.alias && <span id={p.alias} class="anchor-alias" data-target={p.slug}></span>}
+<a id={p.slug} href={`/projects/${p.slug}`} class={`frow card tilt group grid md:grid-cols-2 overflow-hidden hover:border-accent/60 ${i%2?'md:[&>.fimg]:order-2':''}`}>
+<div class="fimg relative h-56 md:h-72 bg-black/40 overflow-hidden flex items-center justify-center">{p.shots[0] ? <img src={`/shots/${p.repo}/${p.shots[0]}`} alt="" class={p.shots[0].endsWith('.svg')||p.shots[0].startsWith('icon')?'h-24':'fpar absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-top group-hover:scale-105 transition-transform duration-700'} style={`view-transition-name: shot-${p.slug}`}/> : <span class="text-3xl font-semibold text-gray-500">{p.name}</span>}</div>
+<div class="ftxt p-6 md:p-8 flex flex-col justify-center"><p class="text-xs text-gray-500 font-mono">0{i+2}</p><p class="text-xs text-accent mb-1">{p.tag}</p><h3 class="font-semibold text-xl sm:text-2xl" style={`view-transition-name: title-${p.slug}`}>{p.name}</h3>
+<p class="text-sm text-gray-400 mt-3 line-clamp-4">{p.desc}</p>
+<div class="flex flex-wrap gap-2 mt-4">{p.demo && <span class="text-xs px-2 py-1 rounded-full bg-accent/15 text-accent">● Live demo</span>}{p.caseStudy && <span class="text-xs px-2 py-1 rounded-full bg-white/5 text-gray-400">Case study</span>}<span class="text-xs text-gray-500 group-hover:text-accent transition">View project →</span></div></div></a></>))}
+</div></section>
 <section id="side-projects" class="max-w-6xl mx-auto px-6 py-24">
 <p class="text-accent2 text-sm tracking-widest uppercase mb-2 reveal">Built for fun</p>
 <h2 class="split text-3xl sm:text-5xl font-bold mb-3">Side projects</h2>
