@@ -1,0 +1,77 @@
+---
+import Base from '../../layouts/Base.astro';
+import raw from '../../content/unp-nsc.md?raw';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+const md = await createMarkdownProcessor();
+const D = '/case-study/unp-nsc';
+// Drop the title block (rendered in the hero); split the narrative into its "## " sections.
+const body = raw.slice(raw.indexOf('\n## '));
+const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
+const slugify = (t) => t.toLowerCase().replace(/^\d+\.\s*/, '').replace(/\(.*?\)/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const navName = {
+  'recommendation': 'Recommendation', 'the-deal': 'The deal',
+  'why-do-it-the-first-single-line-coast-to-coast-railroad': 'Strategic rationale',
+  'standalone-value-the-deal-pays-21-over-nsc-s-dcf': 'Standalone value',
+  'synergies-against-the-premium': 'Synergies', 'what-unp-shareholders-get': 'Value to UNP',
+  'the-stb-review-is-the-swing-factor': 'STB review', 'the-spread-and-what-it-implies': 'Spread & implied odds',
+  'scenarios-and-the-trade': 'Scenarios & trade', 'risks': 'Risks',
+  'what-would-change-our-mind': 'What changes our mind', 'what-could-not-be-verified': 'Not verified',
+};
+const figs = {
+  'recommendation': [['02_exec_summary', 'Executive summary: qualified support; long NSC / short 1.0 UNP at 9.5% NAV']],
+  'the-deal': [['03_transaction_overview', 'Transaction overview'], ['04_timeline', 'Deal timeline']],
+  'why-do-it-the-first-single-line-coast-to-coast-railroad': [['05_strategic_rationale', 'Strategic rationale'], ['06_market_reaction', 'Market reaction']],
+  'standalone-value-the-deal-pays-21-over-nsc-s-dcf': [['07_standalone_financials', 'Standalone financials'], ['08_trading_comps', 'Trading comparables'], ['09_dcf', 'DCF'], ['10_precedents', 'Precedent transactions'], ['11_football_field', 'Football field: valuation methods vs. the offer']],
+  'synergies-against-the-premium': [['12_synergies', 'Synergy NPV vs. the premium']],
+  'what-unp-shareholders-get': [['13_value_to_unp', 'Value to UNP shareholders'], ['14_accretion_dilution', 'Accretion / dilution'], ['15_financing_leverage', 'Financing and leverage'], ['16_contribution', 'Contribution analysis']],
+  'the-stb-review-is-the-swing-factor': [['17_regulatory_framework', 'STB regulatory framework'], ['18_stb_schedule_cpkc', 'STB schedule and the CPKC precedent']],
+  'the-spread-and-what-it-implies': [['19_spread_history', 'Spread history'], ['20_implied_probability', 'Market-implied probability of close']],
+  'scenarios-and-the-trade': [['21_scenarios', 'Scenarios and the hedged trade']],
+  'risks': [['22_risks', 'Risks and mitigants']],
+  'what-would-change-our-mind': [['23_recommendation', 'Recommendation and decision rules']],
+  'what-could-not-be-verified': [['24_appendix', 'Appendix']],
+};
+const sections = await Promise.all(parts.map(async (s) => {
+  const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim(); const id = slugify(title);
+  const html = (await md.render(s.slice(nl + 1).replace(/---\s*$/, '').trim())).code;
+  return { id, title, nav: navName[id] ?? title, html, figs: figs[id] ?? [] };
+}));
+---
+<Base title="Union Pacific / Norfolk Southern M&A case study · Chafic Charafeddine">
+<article class="max-w-6xl mx-auto px-6 py-16">
+<a data-back href="/#case-study" class="text-sm text-gray-400 hover:text-accent">← Back to home</a>
+<header class="mt-6 max-w-3xl">
+<p class="text-accent text-sm">Independent M&amp;A and merger-arbitrage case study · Public information only</p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">Union Pacific / Norfolk Southern: the first transcontinental railroad</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">UNP is paying a full price: $375.25 per NSC share, 17.7x LTM EBITDA and 21% above NSC's standalone DCF. But $19.3B of net synergies cover the $12.6B premium 1.53x, so UNP holders gain $6.9B. The STB review is the swing factor: the $51.52 spread (15.9%) implies a 25% chance of closing against our 55%.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-8">
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem] border-accent/40"><p class="text-[10px] uppercase tracking-widest text-accent">Recommendation</p><p class="text-base sm:text-lg font-semibold leading-snug text-white mt-2">Long NSC / short 1.0 UNP at 9.5% NAV</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Qualified support on deal merit · break costs 0.5% NAV</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Synergies vs. premium</p><p class="text-xl sm:text-2xl font-bold text-emerald-400 leading-tight mt-2">1.53x</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">$19.3B net vs $12.6B · UNP holders +$6.9B</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">P(close): mkt vs. ours</p><p class="text-xl sm:text-2xl font-bold text-amber-400 leading-tight mt-2">25% <span class="text-sm text-gray-400">vs</span> 55%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">STB review is the swing factor</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Spread</p><p class="text-xl sm:text-2xl font-bold text-sky-400 leading-tight mt-2">$51.52</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">15.9% to $375.25 per NSC share</p></div>
+</div>
+<div class="flex flex-wrap gap-3 mt-8">
+<a href={`${D}/UNP_NSC_merger_deck.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Deck (PDF) ↓</a>
+<a href={`${D}/UNP_NSC_merger_report.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 text-gray-200 hover:border-accent hover:text-white font-semibold text-sm transition-colors">Report (PDF) ↓</a>
+</div>
+<p class="text-xs text-gray-500 mt-6">Not prepared for, reviewed by, or affiliated with Union Pacific, Norfolk Southern, their advisors, or any employer or client. Not investment advice. All figures in US$.</p>
+</header>
+<div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
+<nav aria-label="Case study sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10">
+{sections.map(s => <li><a href={`#${s.id}`} data-sec={s.id} class="block pl-4 -ml-px py-1 border-l-2 border-transparent text-gray-400 hover:text-white transition-colors">{s.nav}</a></li>)}
+</ul></nav>
+<div class="min-w-0 max-w-3xl">
+{sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
+<div class="cs-prose reveal" set:html={s.html}/>
+{s.figs.map(([f, cap]) => (<figure class="card overflow-hidden mt-8 reveal"><a href={`${D}/${f}.1600.webp`} target="_blank" class="block"><img src={`${D}/${f}.1600.webp`} srcset={`${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w`} sizes="(min-width:1024px) 768px, 100vw" width="1600" height="900" loading="lazy" decoding="async" alt={`Slide: ${cap}`} class="w-full"/></a><figcaption class="px-4 py-3 border-t border-white/10 text-xs text-gray-400">{cap}</figcaption></figure>))}
+</section>))}
+</div></div>
+</article>
+<script>
+function csNav(){ const links=[...document.querySelectorAll<HTMLAnchorElement>('#cs-nav a')]; if(!links.length) return;
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>{const on=l.dataset.sec===e.target.id; l.classList.toggle('text-white',on); l.classList.toggle('border-accent',on); l.classList.toggle('text-gray-400',!on);}); } });},{rootMargin:'-30% 0px -60% 0px'});
+ document.querySelectorAll('.cs-sec').forEach(s=>io.observe(s)); }
+document.addEventListener('astro:page-load', csNav);
+</script>
+</Base>
