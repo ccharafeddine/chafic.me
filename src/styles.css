@@ -35,3 +35,8 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
 .cta{font-size:.9rem;color:#7dd3fc;font-weight:500}
 .cs-card{transition:border-color .2s,transform .2s}.cs-card:hover{transform:translateY(-2px)}
 .text-accent{color:#7dd3fc}
+.rs-prose img{width:100%;height:auto;border-radius:.75rem;border:1px solid #1f2937;background:#fff;margin-top:1.6rem}
+.rs-prose p:has(> img){margin:0}.rs-prose p:has(> img)+p>em:only-child{display:block;font-size:.78rem;color:#9ca3af;line-height:1.5;margin-top:-.2rem}
+.rs-prose blockquote{border-left:2px solid var(--color-accent);padding-left:1rem;color:#9ca3af;margin:1.2rem 0}
+.rs-prose a{color:var(--color-accent);text-decoration:underline;text-underline-offset:2px}.rs-prose hr{border-color:#1f2937;margin:1.5rem 0}
+.rs-prose h4{color:#fff;font-weight:600;margin:1.4rem 0 .5rem}

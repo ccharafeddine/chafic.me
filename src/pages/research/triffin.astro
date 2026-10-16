@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import raw from '../../content/triffin.md?raw';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+const md = await createMarkdownProcessor();
+const D = '/research/triffin';
+const body = raw.slice(raw.indexOf('\n## '));
+const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
+const slugify = (t) => t.toLowerCase().replace(/^\d+\.\s*/, '').replace(/^appendix ([a-z])\.\s*/, 'appendix-$1-').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const navFor = (t) => {
+  const m = {
+    'Summary': 'Summary', '1. The question': 'The question', '2. What Triffin actually argued': 'What Triffin argued',
+    '3. The Bretton Woods record': 'Bretton Woods record', '4. Why reserve status does not mechanically require trade deficits': 'Deficits not required',
+    '5. The modern constraint is fiscal': 'The fiscal constraint', '6. The income test: a dated measure of the exorbitant privilege': 'The income test',
+    '7. The strongest objections, and responses': 'Objections', '8. Gold and bitcoin: insurance, not replacement': 'Gold & bitcoin',
+    '9. Policy implications': 'Policy implications', '10. What would change the view': 'What changes the view', '11. Conclusion': 'Conclusion',
+    'Appendix A. Data and method': 'Data & method', 'Appendix B. Full annual income-test series': 'Income-test series', 'References': 'References',
+  };
+  return m[t] ?? t.replace(/^\d+\.\s*/, '');
+};
+const sections = await Promise.all(parts.map(async (s) => {
+  const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim(); const id = slugify(title);
+  let html = (await md.render(s.slice(nl + 1).replace(/---\s*$/, '').trim())).code;
+  html = html.replace(/<img src="\/research\/triffin\/([a-z0-9_]+)\.1600\.webp" alt="([^"]*)"\s*\/?>/g,
+    (_, f, alt) => `<a href="${D}/${f}.1600.webp" target="_blank"><img src="${D}/${f}.1600.webp" srcset="${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w" sizes="(min-width:1024px) 768px, 100vw" width="1600" height="853" loading="lazy" decoding="async" alt="${alt}"></a>`);
+  return { id, title: title.replace(/^\d+\.\s*/, ''), nav: navFor(title), html };
+}));
+---
+<Base title="The reserve currency does not have to run a trade deficit · Independent research · Chafic Charafeddine">
+<article class="max-w-6xl mx-auto px-6 py-16">
+<a data-back href="/#research" class="text-sm text-gray-400 hover:text-accent">← Back to home</a>
+<header class="mt-6 max-w-3xl">
+<p class="text-accent text-sm">Independent research · Macro · monetary systems · Public information only</p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">The reserve currency does not have to run a trade deficit</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">Triffin's dilemma was about official dollar claims outgrowing a fixed gold stock, not the trade balance: reserve status enables deficits but does not require them. What survives is a fiscal confidence problem, and a dated income test shows the spread the US earns on its external balance sheet fell below its leverage-driven break-even in 2024.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-8">
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem] border-accent/40"><p class="text-[10px] uppercase tracking-widest text-accent">Spread vs break-even</p><p class="text-xl sm:text-2xl font-bold text-amber-400 leading-tight mt-2">1.32 <span class="text-sm text-gray-400">vs</span> 1.44pp</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">2025 · below break-even since 2024</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Net primary income</p><p class="text-xl sm:text-2xl font-bold text-rose-400 leading-tight mt-2">−$47.6bn</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">2025 · after −$68.7bn in 2024</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Net int'l investment position</p><p class="text-xl sm:text-2xl font-bold text-sky-400 leading-tight mt-2">−$22.42tn</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Q2 2026 · ≈ −69% of GDP</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Federal net interest</p><p class="text-xl sm:text-2xl font-bold text-emerald-400 leading-tight mt-2">3.20% <span class="text-sm text-gray-400">of GDP</span></p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">FY2025 · ties the FY1991 record</p></div>
+</div>
+<div class="flex flex-wrap gap-3 mt-8">
+<a href={`${D}/triffin-reserve-currency.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Full note (PDF, 28 pp.) ↓</a>
+</div>
+<p class="text-xs text-gray-500 mt-6">Independent research written in a personal capacity. Not prepared for, reviewed by, or affiliated with any employer, client or institution. Not investment advice. Every data-derived figure was recomputed from public sources.</p>
+</header>
+<div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
+<nav aria-label="Research note sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10 max-h-[calc(100vh-7rem)] overflow-y-auto">
+{sections.map(s => <li><a href={`#${s.id}`} data-sec={s.id} class="block pl-4 -ml-px py-1 border-l-2 border-transparent text-gray-400 hover:text-white transition-colors">{s.nav}</a></li>)}
+</ul></nav>
+<div class="min-w-0 max-w-3xl">
+{sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
+<div class="cs-prose rs-prose" set:html={s.html}/>
+</section>))}
+</div></div>
+</article>
+<script>
+function csNav(){ const links=[...document.querySelectorAll<HTMLAnchorElement>('#cs-nav a')]; if(!links.length) return;
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>{const on=l.dataset.sec===e.target.id; l.classList.toggle('text-white',on); l.classList.toggle('border-accent',on); l.classList.toggle('text-gray-400',!on);}); } });},{rootMargin:'-30% 0px -60% 0px'});
+ document.querySelectorAll('.cs-sec').forEach(s=>io.observe(s)); }
+document.addEventListener('astro:page-load', csNav);
+</script>
+</Base>
