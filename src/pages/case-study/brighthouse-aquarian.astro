@@ -49,13 +49,15 @@ const sections = await Promise.all(parts.map(async (s) => {
 <p class="text-accent text-sm">Independent merger-arbitrage case study · Public information only</p>
 <h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">Brighthouse / Aquarian: a $22 spread priced for failure</h1>
 <p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">Aquarian's $70.00 cash deal has cleared the vote, HSR and FINRA, but Delaware has posted no hearing notice 296 days after the Form A filings. At $47.80 the $22.20 spread (46.4%) implies only a 15.2% chance of closing. We put it at 25%, so the trade is a small, hedged option on approval — not a classic low-risk arb.</p>
-<div class="grid sm:grid-cols-3 gap-4 mt-8">
-<div class="card p-5 reveal border-accent/40"><p class="text-xs uppercase tracking-widest text-accent">Recommendation</p><p class="text-white font-semibold mt-2">Long BHF: 2% NAV starter, 3% max</p><p class="text-xs text-gray-400 mt-1">Hedged with a 0.43x CRBG/JXN/LNC short</p></div>
-<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">Expected PV</p><p class="text-3xl font-bold text-emerald-400 mt-1">$51.00</p><p class="text-xs text-gray-400 mt-1">+6.7% vs $47.80 · base break $44.50</p></div>
-<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">P(close): market vs. ours</p><p class="text-3xl font-bold text-amber-400 mt-1">15.2% <span class="text-lg text-gray-400">vs</span> 25%</p><p class="text-xs text-gray-400 mt-1">Spread $22.20 (46.4%) to the $70.00 offer</p></div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-8">
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem] border-accent/40"><p class="text-[10px] uppercase tracking-widest text-accent">Recommendation</p><p class="text-base sm:text-lg font-semibold leading-snug text-white mt-2">Long BHF: 2% NAV starter, 3% max</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Hedged 0.43x CRBG/JXN/LNC short</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Expected PV</p><p class="text-xl sm:text-2xl font-bold text-emerald-400 leading-tight mt-2">$51.00</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">+6.7% vs $47.80 · base break $44.50</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">P(close): mkt vs. ours</p><p class="text-xl sm:text-2xl font-bold text-amber-400 leading-tight mt-2">15.2% <span class="text-sm text-gray-400">vs</span> 25%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Market-implied vs. our estimate</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Spread</p><p class="text-xl sm:text-2xl font-bold text-sky-400 leading-tight mt-2">$22.20</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">46.4% to the $70.00 cash offer</p></div>
 </div>
 <div class="flex flex-wrap gap-3 mt-8">
 <a href={`${D}/BHF_Aquarian_merger_arb_deck.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Deck (PDF) ↓</a>
+<a href={`${D}/BHF_Aquarian_merger_arb_report.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 text-gray-200 hover:border-accent hover:text-white font-semibold text-sm transition-colors">Report (PDF) ↓</a>
 </div>
 <p class="text-xs text-gray-500 mt-6">Not prepared for, reviewed by, or affiliated with Brighthouse Financial, Aquarian Capital, Talcott Financial Group, or any employer or client. Not investment advice. All figures in US$.</p>
 </header>
