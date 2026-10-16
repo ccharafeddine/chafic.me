@@ -593,7 +593,7 @@ The August note ended with three recommendations addressed to an issuer. I keep 
 
 ## Appendix C. Reproduction
 
-Everything in this note is produced by the scripts in `scripts/`. `fetch_data.py` downloads prices (Yahoo Finance via yfinance) and rates (FRED). `compute.py` runs every calculation and writes `data/*.csv` and `figures.json`. `sources.py` adds the externally sourced facts. `charts.py` draws the figures. `render_article.py` fills the tables and inline numbers into this article from the computed outputs, and `build_pdf.py` renders the PDF. `run_all.sh` runs the chain. Random seeds are fixed. Each number in the text is recorded in `figures.json` with its basis: computed, assumption or source.
+Figures were produced with the author's own Python scripts from the public sources cited: prices from Yahoo Finance and rates from FRED. Random seeds are fixed. Each number in the text is recorded with its basis: computed, assumption or source.
 
 ## References
 

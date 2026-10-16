@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import raw from '../../content/crypto-infra-ai-pivot.md?raw';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+const md = await createMarkdownProcessor();
+const D = '/research/crypto-infra-ai-pivot';
+const body = raw.slice(raw.indexOf('\n## '));
+const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
+const slugify = (t) => t.toLowerCase().replace(/^\d+\.\s*/, '').replace(/^appendix ([a-z])\.\s*/, 'appendix-$1-').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const navFor = (t) => {
+  const m = {
+    'Summary': 'Summary', '1. What this note updates': 'What changed', '2. The fund and the data': 'Fund & data',
+    '3. What a BLCK shareholder is buying': 'What BLCK holds', '4. Drift without trading': 'Drift without trading',
+    '5. Screening rules': 'Screening rules', '6. What the AI sleeve actually owns: revenue, megawatts and counterparties': 'Revenue & megawatts',
+    '7. Market behaviour: bitcoin versus semiconductors': 'Bitcoin vs semis', '8. Finding 3 tested: one bet or two?': 'One bet or two?',
+    '9. Valuation: what the market pays per contracted megawatt': 'Valuation', "10. Style drift against each fund's own rulebook": 'Index rule test',
+    '11. Products': 'Products', '12. Risks and caveats': 'Risks & caveats', '13. What would change the view': 'What would change it',
+    'Appendix A. BLCK full book with classification': 'BLCK full book', 'Appendix B. Data and method': 'Data & method', 'References': 'References',
+  };
+  return m[t] ?? t.replace(/^\d+\.\s*/, '');
+};
+const H = { fig02_ai_share_by_fund: 889, fig03_blck_price_drift: 960, fig04_rolling_betas: 818, fig05_blck_sleeves: 889, fig07_event_study: 818, fig08_valuation: 818, fig11_dat_mnav_rule: 889 };
+const sections = await Promise.all(parts.map(async (s) => {
+  const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim(); const id = slugify(title);
+  let html = (await md.render(s.slice(nl + 1).replace(/---\s*$/, '').trim())).code;
+  html = html.replace(/<img src="\/research\/crypto-infra-ai-pivot\/([a-z0-9_]+)\.1600\.webp" alt="([^"]*)"\s*\/?>/g,
+    (_, f, alt) => `<a href="${D}/${f}.1600.webp" target="_blank"><img src="${D}/${f}.1600.webp" srcset="${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w" sizes="(min-width:1024px) 768px, 100vw" width="1600" height="${H[f] ?? 853}" loading="lazy" decoding="async" alt="${alt}"></a>`);
+  return { id, title: title.replace(/^\d+\.\s*/, ''), nav: navFor(title), html };
+}));
+---
+<Base title="A data-centre trade under a crypto label · Independent research · Chafic Charafeddine">
+<article class="max-w-6xl mx-auto px-6 py-16">
+<a data-back href="/#research" class="text-sm text-gray-400 hover:text-accent">← Back to home</a>
+<header class="mt-6 max-w-3xl">
+<p class="text-accent text-sm">Independent research · Funds · holdings analysis · Public information only</p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">A Data-Centre Trade Under a Crypto Label</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">Using the issuer's own holdings files, AI/HPC-tied names were 31.8% of the Corgi Crypto Infrastructure ETF (BLCK) in August and 26.0% by mid-October, with no trades: the AI exposure is set by prices, not the manager. Weighted by actual AI/HPC revenue it is only about 5%; the rest is ~5.7 GW of signed leases.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-8">
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem] border-accent/40"><p class="text-[10px] uppercase tracking-widest text-accent">BLCK AI-tied weight</p><p class="text-xl sm:text-2xl font-bold text-amber-400 leading-tight mt-2">31.8% → 26.0%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">14 Aug → 15 Oct · no trades, price only</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Revenue-weighted AI</p><p class="text-xl sm:text-2xl font-bold text-rose-400 leading-tight mt-2">5.1%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Of BLCK · vs 26.0% by holdings</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Peer median, 8 funds</p><p class="text-xl sm:text-2xl font-bold text-sky-400 leading-tight mt-2">33.0%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">AI-tied weight · range 14.6–75.8%</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">PCA first component</p><p class="text-xl sm:text-2xl font-bold text-emerald-400 leading-tight mt-2">43.7%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Below 70% one-bet test · two bets</p></div>
+</div>
+<div class="flex flex-wrap gap-3 mt-8">
+<a href={`${D}/crypto-infra-ai-pivot.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Full note (PDF, 24 pp.) ↓</a>
+</div>
+<p class="text-xs text-gray-500 mt-6">Independent research written in a personal capacity. Not prepared for, reviewed by, or affiliated with any employer, client or institution. Not investment advice. Every data-derived figure was recomputed from public sources.</p>
+</header>
+<div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
+<nav aria-label="Research note sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10 max-h-[calc(100vh-7rem)] overflow-y-auto">
+{sections.map(s => <li><a href={`#${s.id}`} data-sec={s.id} class="block pl-4 -ml-px py-1 border-l-2 border-transparent text-gray-400 hover:text-white transition-colors">{s.nav}</a></li>)}
+</ul></nav>
+<div class="min-w-0 max-w-3xl">
+{sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
+<div class="cs-prose rs-prose" set:html={s.html}/>
+</section>))}
+</div></div>
+</article>
+<script>
+function csNav(){ const links=[...document.querySelectorAll<HTMLAnchorElement>('#cs-nav a')]; if(!links.length) return;
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>{const on=l.dataset.sec===e.target.id; l.classList.toggle('text-white',on); l.classList.toggle('border-accent',on); l.classList.toggle('text-gray-400',!on);}); } });},{rootMargin:'-30% 0px -60% 0px'});
+ document.querySelectorAll('.cs-sec').forEach(s=>io.observe(s)); }
+document.addEventListener('astro:page-load', csNav);
+</script>
+</Base>

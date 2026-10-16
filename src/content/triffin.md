@@ -13,7 +13,7 @@ type: "Independent research"
 
 **Chafic Charafeddine** · Independent research · 15 October 2026
 
-> This is an independent piece written in a personal capacity. It is not written for or on behalf of any employer, client or institution, and it is not investment advice. Every data-derived number below was recomputed from public sources. The scripts, data and chart code are published with the article, so anyone can check the work.
+> This is an independent piece written in a personal capacity. It is not written for or on behalf of any employer, client or institution, and it is not investment advice. Every data-derived number below was recomputed from public sources.
 
 ## Summary
 
@@ -424,11 +424,7 @@ Gold and bitcoin answer a different question. They insure against counterparty a
 
 ## Appendix A. Data and method
 
-All data-derived figures were computed by the scripts in `scripts/`:
-
-- `fetch_data.py` downloads every input into `data/raw/`: FRED series from BEA, Treasury, OMB and the Federal Reserve; TIC Table 5; ERP 2005 Table B-103; the BEA current-account history; IMF COFER via DBnomics; Yahoo Finance daily closes.
-- `compute.py` builds the tables in `data/` and writes every key number to `figures.json`.
-- `charts.py` draws all figures into `charts/`; `build_pdf.py` renders this article to PDF; `run_all.sh` runs the whole chain.
+Figures were produced with the author's own Python scripts from the public sources cited. Inputs: FRED series from BEA, Treasury, OMB and the Federal Reserve; TIC Table 5; ERP 2005 Table B-103; the BEA current-account history; IMF COFER via DBnomics; Yahoo Finance daily closes.
 
 FRED series used: IEAXIA, IEAMIA, IEAXIIA, IEAMIIA, IEABCPIA, IEAXI, IEAMI, IEAXII, IEAMII, IEABCPI, IEABCA, IEABC, IEABCGS, IEABCSI, IEASDA, IIPUSASSA, IIPUSLIAA, IIPUSNETIA, IIPUSASSQ, IIPUSLIAQ, IIPUSNETIQ, GDP, GDPA, FYOINT, FYGDP, FYPUGDA188S, FYFSD, FYGFDPUN, FDHBFIN, BOGZ1LM263064105Q, DGS5, DGS10, DGS30, DFII10, T10YIE, THREEFYTP10. Retrieved 15 October 2026.
 
@@ -505,7 +501,7 @@ Hand-entered inputs, sourced in the references: World Gold Council central-bank 
 35. World Gold Council, *Central Bank Gold Reserves Survey 2026*. https://www.gold.org/goldhub/research/central-banks
 36. World Gold Council, "How much gold has been mined?". https://www.gold.org/goldhub/data/how-much-gold
 37. LBMA, Precious Metals Market Report Q4 and full year 2025, https://www.lbma.org.uk/articles/lbma-precious-metals-market-report-q4-and-full-year-2025 ; VanEck, "A Golden Year with More Leverage Ahead", 14 Jan 2026, https://www.vaneck.com/us/en/blogs/gold-investing/ima-casanova-a-golden-year-with-more-leverage-ahead/
-38. Yahoo Finance daily closes for GC=F, SI=F, GDX, BTC-USD and DX-Y.NYB, retrieved 15 Oct 2026; returns computed in `scripts/compute.py`.
+38. Yahoo Finance daily closes for GC=F, SI=F, GDX, BTC-USD and DX-Y.NYB, retrieved 15 Oct 2026; returns are author's calculations.
 39. Executive Order 14233, "Establishment of the Strategic Bitcoin Reserve and United States Digital Asset Stockpile", 90 FR 11789, 11 March 2025. https://www.federalregister.gov/documents/2025/03/11/2025-03992/establishment-of-the-strategic-bitcoin-reserve-and-united-states-digital-asset-stockpile
 40. Axios, "Treasury secretary clarifies Trump administration's crypto plans", 14 Aug 2025, https://www.axios.com/2025/08/14/treasury-secretary-clarifies-trump-administrations-crypto-plans ; Decrypt, "Bessent Backtracks on Bitcoin", https://decrypt.co/335355/bessent-backtracks-bitcoin-treasury-committed-budget-neutral-btc-buys
 41. CryptoSlate, "The US says it has a Bitcoin reserve, but nobody can agree on how much it owns", https://cryptoslate.com/the-us-says-it-has-a-bitcoin-reserve-but-nobody-can-agree-on-how-much-it-owns/ ; Arkham Intelligence, "U.S. Government Bitcoin Holdings 101", https://info.arkm.com/research/u-s-government-bitcoin-holdings-101 ; crypto.news, "Inside the Strategic Bitcoin Reserve: promise vs reality", 1 June 2026.
