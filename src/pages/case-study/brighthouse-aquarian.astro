@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import raw from '../../content/brighthouse-aquarian.md?raw';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+const md = await createMarkdownProcessor();
+const D = '/case-study/brighthouse-aquarian';
+// Drop the title block (rendered in the hero); split the narrative into its "## " sections.
+const body = raw.slice(raw.indexOf('\n## '));
+const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
+const slugify = (t) => t.toLowerCase().replace(/^\d+\.\s*/, '').replace(/\(.*?\)/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const navName = {
+  'recommendation': 'Recommendation',
+  'the-deal-and-where-it-stands': 'The deal',
+  'the-contract-protects-aquarian-not-bhf-if-the-regulators-say-no': 'Contract terms',
+  'the-spread-and-the-return-if-it-closes': 'Spread & returns',
+  'standalone-value-statutory-capital-explains-the-discount': 'Standalone value',
+  'the-break-price-textbook-methods-sit-above-the-stock': 'Break price',
+  'what-the-market-implies-and-what-we-think': 'Implied probability',
+  'sizing-and-hedging': 'Sizing & hedging',
+  'catalysts': 'Catalysts',
+  'risks-and-mitigants': 'Risks',
+  'decision-rules': 'Decision rules',
+  'assumptions-and-what-could-not-be-verified': 'Assumptions',
+};
+const figs = {
+  'recommendation': [['02_exec_summary', 'Executive summary: long BHF, 2% NAV starter (3% max), hedged']],
+  'the-deal-and-where-it-stands': [['03_timeline', 'Deal timeline: from the sale process to the Delaware review']],
+  'the-contract-protects-aquarian-not-bhf-if-the-regulators-say-no': [['04_deal_terms', 'Deal terms and conditions']],
+  'the-spread-and-the-return-if-it-closes': [['05_spread_history', 'Spread history'], ['06_returns', 'Returns if the deal closes']],
+  'standalone-value-statutory-capital-explains-the-discount': [['07_standalone_valuation', 'Standalone valuation']],
+  'the-break-price-textbook-methods-sit-above-the-stock': [['08_break_price', 'Break price build'], ['09_football_field', 'Football field: break-price methods vs. the stock']],
+  'what-the-market-implies-and-what-we-think': [['10_implied_probability', 'Market-implied probability of close'], ['11_scenario_tree', 'Scenario tree and expected value'], ['12_sensitivity', 'Sensitivity']],
+  'sizing-and-hedging': [['13_sizing_hedging', 'Sizing and hedging']],
+  'catalysts': [['14_catalysts', 'Catalysts']],
+  'risks-and-mitigants': [['15_risks', 'Risks and mitigants']],
+  'decision-rules': [['16_recommendation', 'Recommendation and decision rules']],
+  'assumptions-and-what-could-not-be-verified': [['17_appendix', 'Appendix']],
+};
+const sections = await Promise.all(parts.map(async (s) => {
+  const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim(); const id = slugify(title);
+  const html = (await md.render(s.slice(nl + 1).replace(/---\s*$/, '').trim())).code;
+  return { id, title, nav: navName[id] ?? title, html, figs: figs[id] ?? [] };
+}));
+---
+<Base title="Brighthouse / Aquarian merger-arbitrage case study · Chafic Charafeddine">
+<article class="max-w-6xl mx-auto px-6 py-16">
+<a data-back href="/#case-study" class="text-sm text-gray-400 hover:text-accent">← Back to home</a>
+<header class="mt-6 max-w-3xl">
+<p class="text-accent text-sm">Independent merger-arbitrage case study · Public information only · Valuation date: close of 14 October 2026 (BHF $47.80)</p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">Brighthouse / Aquarian: a $22 spread priced for failure</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">Aquarian's $70.00 cash deal has cleared the vote, HSR and FINRA, but Delaware has posted no hearing notice 296 days after the Form A filings. At $47.80 the $22.20 spread (46.4%) implies only a 15.2% chance of closing. We put it at 25%, so the trade is a small, hedged option on approval — not a classic low-risk arb.</p>
+<div class="grid sm:grid-cols-3 gap-4 mt-8">
+<div class="card p-5 reveal border-accent/40"><p class="text-xs uppercase tracking-widest text-accent">Recommendation</p><p class="text-white font-semibold mt-2">Long BHF: 2% NAV starter, 3% max</p><p class="text-xs text-gray-400 mt-1">Hedged with a 0.43x CRBG/JXN/LNC short</p></div>
+<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">Expected PV</p><p class="text-3xl font-bold text-emerald-400 mt-1">$51.00</p><p class="text-xs text-gray-400 mt-1">+6.7% vs $47.80 · base break $44.50</p></div>
+<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">P(close): market vs. ours</p><p class="text-3xl font-bold text-amber-400 mt-1">15.2% <span class="text-lg text-gray-400">vs</span> 25%</p><p class="text-xs text-gray-400 mt-1">Spread $22.20 (46.4%) to the $70.00 offer</p></div>
+</div>
+<div class="flex flex-wrap gap-3 mt-8">
+<a href={`${D}/BHF_Aquarian_merger_arb_deck.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Deck (PDF) ↓</a>
+</div>
+<p class="text-xs text-gray-500 mt-6">Not prepared for, reviewed by, or affiliated with Brighthouse Financial, Aquarian Capital, Talcott Financial Group, or any employer or client. Not investment advice. All figures in US$.</p>
+</header>
+<div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
+<nav aria-label="Case study sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10">
+{sections.map(s => <li><a href={`#${s.id}`} data-sec={s.id} class="block pl-4 -ml-px py-1 border-l-2 border-transparent text-gray-400 hover:text-white transition-colors">{s.nav}</a></li>)}
+</ul></nav>
+<div class="min-w-0 max-w-3xl">
+{sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
+<div class="cs-prose reveal" set:html={s.html}/>
+{s.figs.map(([f, cap]) => (<figure class="card overflow-hidden mt-8 reveal"><a href={`${D}/${f}.1600.webp`} target="_blank" class="block"><img src={`${D}/${f}.1600.webp`} srcset={`${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w`} sizes="(min-width:1024px) 768px, 100vw" width="1600" height="900" loading="lazy" decoding="async" alt={`Slide: ${cap}`} class="w-full"/></a><figcaption class="px-4 py-3 border-t border-white/10 text-xs text-gray-400">{cap}</figcaption></figure>))}
+</section>))}
+</div></div>
+</article>
+<script>
+function csNav(){ const links=[...document.querySelectorAll<HTMLAnchorElement>('#cs-nav a')]; if(!links.length) return;
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>{const on=l.dataset.sec===e.target.id; l.classList.toggle('text-white',on); l.classList.toggle('border-accent',on); l.classList.toggle('text-gray-400',!on);}); } });},{rootMargin:'-30% 0px -60% 0px'});
+ document.querySelectorAll('.cs-sec').forEach(s=>io.observe(s)); }
+document.addEventListener('astro:page-load', csNav);
+</script>
+</Base>
