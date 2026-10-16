@@ -72,7 +72,7 @@ Two dating points are worth correcting because they strengthen the case. The dol
 
 *Figure 2. US current-account balance, % of GDP, 1946–2025. Sources: ERP 2005 Table B-103 (1946–59) [4]; BEA current-account history (1960–98) [5]; BEA via FRED IEABCA (1999–2025) [6]; GDP from FRED GDPA.*
 
-If reserve status mechanically produced trade deficits, the quarter-century when the dollar's position was least contested should have produced the biggest ones. It produced surpluses. The current account has been in deficit every year since 1977 except 1980–81 and 1991, when Gulf War transfers produced a surplus, and continuously since 1992. Deficits averaged −3.8% of GDP in 2003–2014 and −2.8% in 2015–2025 (author's calculation from [5][6]).
+If reserve status mechanically produced trade deficits, the quarter-century when the dollar's position was least contested should have produced the biggest ones. It produced surpluses. The current account has been in deficit every year since 1977 except 1980–81 and 1991, when Gulf War transfers produced a surplus, and continuously since 1992. Deficits averaged −3.8% of GDP in 2003–2014 and −2.8% in 2015–2025 (my calculation from [5][6]).
 
 ## 4. Why reserve status does not mechanically require trade deficits
 
@@ -108,7 +108,7 @@ Bordo and McCauley compare two decades [14]. In 2003–2014, foreign official in
 
 *Figure 3. Federal debt held by foreign and international investors, % of debt held by the public. Source: FRED (FDHBFIN, FYGFDPUN) [20].*
 
-The stock data tell the same story. The foreign share of federal debt held by the public peaked at about **49% in Q2 2008** and was **about 30% in Q1 2026** [20]. Within foreign holdings, official holders' share fell to **40.8% in July 2026 from 42.7% a year earlier** (TIC: $3,773bn of $9,248bn) [19]. Foreign official holdings now amount to roughly **12%** of the $31.7tn of debt held by the public (author's calculation from [19][20]).
+The stock data tell the same story. The foreign share of federal debt held by the public peaked at about **49% in Q2 2008** and was **about 30% in Q1 2026** [20]. Within foreign holdings, official holders' share fell to **40.8% in July 2026 from 42.7% a year earlier** (TIC: $3,773bn of $9,248bn) [19]. Foreign official holdings now amount to roughly **12%** of the $31.7tn of debt held by the public (my calculation from [19][20]).
 
 If official reserve accumulation drove the deficit, the deficit should have closed when accumulation stopped. It did not. That is about as close to falsifying the *flow* version of the reserve-cause claim as open-economy macroeconomics gets. But the episode proves less than it seems to. The financing changed hands, from official buyers to private ones, so the test separates official from private demand. It does not separate demand-driven deficits from saving-driven ones, and it leaves the Pettis view intact.
 
@@ -187,7 +187,7 @@ and the gap s − b = N / Ā is just net income scaled by assets. With a balance
 
 ![Figure 5](/research/triffin/fig05_spread_vs_breakeven_annual.1600.webp)
 
-*Figure 5. Measured spread vs break-even spread, 1999–2025. Author's calculation from BEA via FRED (IEAXIA, IEAMIA, IIPUSASSA, IIPUSLIAA) [6].*
+*Figure 5. Measured spread vs break-even spread, 1999–2025. My calculation from BEA via FRED (IEAXIA, IEAMIA, IIPUSASSA, IIPUSLIAA) [6].*
 
 | Year | Yield earned | Yield paid | Spread | L̄/Ā | Break-even | Net primary income |
 |---|---|---|---|---|---|---|
@@ -210,7 +210,7 @@ Three findings:
 
 ![Figure 6](/research/triffin/fig06_spread_vs_breakeven_quarterly.1600.webp)
 
-*Figure 6. The same measure, quarterly, 2006 Q2 – 2026 Q2. Flows annualized ×4. Author's calculation from BEA via FRED (IEAXI, IEAMI, IIPUSASSQ, IIPUSLIAQ) [6].*
+*Figure 6. The same measure, quarterly, 2006 Q2 – 2026 Q2. Flows annualized ×4. My calculation from BEA via FRED (IEAXI, IEAMI, IIPUSASSQ, IIPUSLIAQ) [6].*
 
 ![Figure 7](/research/triffin/fig07_net_primary_income.1600.webp)
 
@@ -220,7 +220,7 @@ Three findings:
 
 ### 6.3 What moved the gap: leverage, rates or the spread?
 
-Since gap = s − r<sub>L</sub>(λ − 1), a change in the gap splits exactly into a spread effect, a yield-paid effect and a leverage effect (midpoint weights; author's calculation):
+Since gap = s − r<sub>L</sub>(λ − 1), a change in the gap splits exactly into a spread effect, a yield-paid effect and a leverage effect (midpoint weights; my calculation):
 
 | Period | Change in gap | Spread | Yield paid | Leverage |
 |---|---|---|---|---|
@@ -240,7 +240,7 @@ US external liabilities were 0.78 times assets in 1976, passed parity in 1989, a
 
 ![Figure 9](/research/triffin/fig09_niip_decomposition.1600.webp)
 
-*Figure 9. Cumulative change in NIIP since end-2007, split into financial flows (current account plus statistical discrepancy) and price, exchange-rate and other changes. Author's calculation from BEA via FRED (IIPUSNETIA, IEABCA, IEASDA) [6].*
+*Figure 9. Cumulative change in NIIP since end-2007, split into financial flows (current account plus statistical discrepancy) and price, exchange-rate and other changes. My calculation from BEA via FRED (IIPUSNETIA, IEABCA, IEASDA) [6].*
 
 Atkeson, Heathcote and Perri showed that the post-2007 collapse in the US net position was driven largely by valuation [29]. Foreigners hold much of their US exposure in equities, and the long US bull market revalued those claims faster than US holdings abroad. My decomposition supports a qualified version of that claim:
 
@@ -270,7 +270,7 @@ At 4% nominal growth the required spread (≈1.33pp) is about 0.2pp above the me
 
 ![Figure 10](/research/triffin/fig10_sensitivity.1600.webp)
 
-*Figure 10. Spread minus break-even under alternative definitions. Author's calculation [6].*
+*Figure 10. Spread minus break-even under alternative definitions. My calculation [6].*
 
 | Variant | Gap 2019 | Gap 2024 | Gap 2025 | Years with negative gap |
 |---|---|---|---|---|
@@ -305,7 +305,7 @@ Break-even spread (pp) as a function of the yield paid and leverage:
 
 **The objection.** Surplus countries' suppressed consumption pushes excess saving into US assets. The United States absorbs it through lower saving, higher debt or unemployment. Trade wars are class wars, and the US deficit is the mirror of policy elsewhere [12][13].
 
-**Response.** Much of this is consistent with the argument here, not opposed to it. (i) It is an argument about **open capital markets**, not reserve status as such. (ii) The 2015–24 episode, with official inflows gone and private inflows taking their place, is *compatible* with the Pettis view, so I do not claim it refutes him (Section 4.4). (iii) Where we differ is on the remedy and the binding constraint. If the deficit is imposed from abroad, the coherent fix is a tax on inflows or coordinated rebalancing abroad. If it is generated at home, the fix is fiscal. The interest-burden arithmetic in Section 5 binds either way. A country absorbing the world's excess saving through federal borrowing still has to service the debt.
+**Response.** Much of this is consistent with the argument here, not opposed to it. (i) It is an argument about **open capital markets**, not reserve status as such. (ii) The 2015–24 episode, with official inflows gone and private inflows taking their place, is *compatible* with the Pettis view, so I do not claim it refutes him (Section 4.4). (iii) Where I differ is on the remedy and the binding constraint. If the deficit is imposed from abroad, the coherent fix is a tax on inflows or coordinated rebalancing abroad. If it is generated at home, the fix is fiscal. The interest-burden arithmetic in Section 5 binds either way. A country absorbing the world's excess saving through federal borrowing still has to service the debt.
 
 ### 7.2 Miran: the stock-based price channel
 
@@ -363,7 +363,7 @@ The regime break dates to February 2022, when Russian central-bank reserves were
 
 ![Figure 13](/research/triffin/fig13_asset_returns.1600.webp)
 
-*Figure 13. Price returns, calendar 2025 and 2026 to 15 October. Author's calculation from Yahoo Finance daily closes [38].*
+*Figure 13. Price returns, calendar 2025 and 2026 to 15 October. My calculation from Yahoo Finance daily closes [38].*
 
 | Asset | 2025 | 2026 to 15 Oct | Note |
 |---|---|---|---|
@@ -424,7 +424,7 @@ Gold and bitcoin answer a different question. They insure against counterparty a
 
 ## Appendix A. Data and method
 
-Figures were produced with the author's own Python scripts from the public sources cited. Inputs: FRED series from BEA, Treasury, OMB and the Federal Reserve; TIC Table 5; ERP 2005 Table B-103; the BEA current-account history; IMF COFER via DBnomics; Yahoo Finance daily closes.
+Figures were produced with my own Python scripts from the public sources cited. Inputs: FRED series from BEA, Treasury, OMB and the Federal Reserve; TIC Table 5; ERP 2005 Table B-103; the BEA current-account history; IMF COFER via DBnomics; Yahoo Finance daily closes.
 
 FRED series used: IEAXIA, IEAMIA, IEAXIIA, IEAMIIA, IEABCPIA, IEAXI, IEAMI, IEAXII, IEAMII, IEABCPI, IEABCA, IEABC, IEABCGS, IEABCSI, IEASDA, IIPUSASSA, IIPUSLIAA, IIPUSNETIA, IIPUSASSQ, IIPUSLIAQ, IIPUSNETIQ, GDP, GDPA, FYOINT, FYGDP, FYPUGDA188S, FYFSD, FYGFDPUN, FDHBFIN, BOGZ1LM263064105Q, DGS5, DGS10, DGS30, DFII10, T10YIE, THREEFYTP10. Retrieved 15 October 2026.
 
@@ -501,7 +501,7 @@ Hand-entered inputs, sourced in the references: World Gold Council central-bank 
 35. World Gold Council, *Central Bank Gold Reserves Survey 2026*. https://www.gold.org/goldhub/research/central-banks
 36. World Gold Council, "How much gold has been mined?". https://www.gold.org/goldhub/data/how-much-gold
 37. LBMA, Precious Metals Market Report Q4 and full year 2025, https://www.lbma.org.uk/articles/lbma-precious-metals-market-report-q4-and-full-year-2025 ; VanEck, "A Golden Year with More Leverage Ahead", 14 Jan 2026, https://www.vaneck.com/us/en/blogs/gold-investing/ima-casanova-a-golden-year-with-more-leverage-ahead/
-38. Yahoo Finance daily closes for GC=F, SI=F, GDX, BTC-USD and DX-Y.NYB, retrieved 15 Oct 2026; returns are author's calculations.
+38. Yahoo Finance daily closes for GC=F, SI=F, GDX, BTC-USD and DX-Y.NYB, retrieved 15 Oct 2026; returns are my calculations.
 39. Executive Order 14233, "Establishment of the Strategic Bitcoin Reserve and United States Digital Asset Stockpile", 90 FR 11789, 11 March 2025. https://www.federalregister.gov/documents/2025/03/11/2025-03992/establishment-of-the-strategic-bitcoin-reserve-and-united-states-digital-asset-stockpile
 40. Axios, "Treasury secretary clarifies Trump administration's crypto plans", 14 Aug 2025, https://www.axios.com/2025/08/14/treasury-secretary-clarifies-trump-administrations-crypto-plans ; Decrypt, "Bessent Backtracks on Bitcoin", https://decrypt.co/335355/bessent-backtracks-bitcoin-treasury-committed-budget-neutral-btc-buys
 41. CryptoSlate, "The US says it has a Bitcoin reserve, but nobody can agree on how much it owns", https://cryptoslate.com/the-us-says-it-has-a-bitcoin-reserve-but-nobody-can-agree-on-how-much-it-owns/ ; Arkham Intelligence, "U.S. Government Bitcoin Holdings 101", https://info.arkm.com/research/u-s-government-bitcoin-holdings-101 ; crypto.news, "Inside the Strategic Bitcoin Reserve: promise vs reality", 1 June 2026.
@@ -513,4 +513,4 @@ Hand-entered inputs, sourced in the references: World Gold Council central-bank 
 
 ---
 
-*Chafic Charafeddine writes independent research at chafic.me. This article reflects only the author's views. It is not affiliated with, commissioned by, or written on behalf of any employer, client or institution, and it is not investment advice or a recommendation to buy or sell any security or asset. Data as retrieved on 15 October 2026. Figures will be revised; refresh before relying on them.*
+*Chafic Charafeddine writes independent research at chafic.me. This article reflects only my views. It is not affiliated with, commissioned by, or written on behalf of any employer, client or institution, and it is not investment advice or a recommendation to buy or sell any security or asset. Data as retrieved on 15 October 2026. Figures will be revised; refresh before relying on them.*

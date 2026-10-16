@@ -209,7 +209,7 @@ The funds with the most AI-tied weight have moved most toward semiconductors. WG
 
 ![Figure 4](/research/crypto-infra-ai-pivot/fig04_rolling_betas.1600.webp)
 
-*Figure 4. Rolling 126-day two-factor betas to IBIT and SMH for selected funds. Source: Yahoo Finance adjusted closes, author's calculations.*
+*Figure 4. Rolling 126-day two-factor betas to IBIT and SMH for selected funds. Source: Yahoo Finance adjusted closes, my calculations.*
 
 To isolate the drift within BLCK, I rebuilt the fund from its 15 October holdings and split it into three sleeves. The rebuilt book's returns correlate 0.989 with BLCK's actual returns.
 
@@ -222,7 +222,7 @@ To isolate the drift within BLCK, I rebuilt the fund from its 15 October holding
 
 ![Figure 5](/research/crypto-infra-ai-pivot/fig05_blck_sleeves.1600.webp)
 
-*Figure 5. Two-factor betas to bitcoin (IBIT) and semiconductors (SMH) for BLCK's three sleeves and the peer funds, 7 May to 15 October 2026. Source: issuer holdings file, Yahoo Finance, author's calculations.*
+*Figure 5. Two-factor betas to bitcoin (IBIT) and semiconductors (SMH) for BLCK's three sleeves and the peer funds, 7 May to 15 October 2026. Source: issuer holdings file, Yahoo Finance, my calculations.*
 
 The AI sleeve is about a quarter of the weight and a much larger share of the risk. Its volatility is 84%, almost twice that of the operating businesses, and its main exposure is to semiconductors. In a fund called "Crypto Infrastructure", that is the sleeve that would most surprise the holder.
 
@@ -249,7 +249,7 @@ In August I proposed a test without running it: if the first principal component
 
 ![Figure 7](/research/crypto-infra-ai-pivot/fig06_pca.1600.webp)
 
-*Figure 7. PCA of BLCK constituents: variance explained and PC2 loadings by sleeve. Source: Yahoo Finance adjusted closes, author's calculations.*
+*Figure 7. PCA of BLCK constituents: variance explained and PC2 loadings by sleeve. Source: Yahoo Finance adjusted closes, my calculations.*
 
 The strong version of the claim fails, since 43.7% is well below 70%. A weaker version holds. The book has the diversification of about four or five independent positions, not 33. Its largest factor is mostly bitcoin. The second factor separates the AI-tied names from the crypto operating businesses and correlates −0.47 with bitcoin. So the fund is two bets: crypto beta, and a smaller AI-capex bet that partly offsets it.
 
@@ -312,7 +312,7 @@ The August study proposed one fix and two new funds. All three are kept here, sp
 
 ![Figure 9](/research/crypto-infra-ai-pivot/fig10_backtest_p2.1600.webp)
 
-*Figure 9. BLCK-Pure against the rebuilt BLCK book, the AI-tied sleeve, IBIT and COIN, 15 October 2025 to 15 October 2026. Quarterly rebalance, 20 bp per unit of turnover. Source: author's calculations.*
+*Figure 9. BLCK-Pure against the rebuilt BLCK book, the AI-tied sleeve, IBIT and COIN, 15 October 2025 to 15 October 2026. Quarterly rebalance, 20 bp per unit of turnover. Source: my calculations.*
 
 | 15 Oct 2025 – 15 Oct 2026 | Return | Vol | Max drawdown | β BTC | β SMH |
 |---|---|---|---|---|---|
@@ -343,7 +343,7 @@ Qualifying dates, taken from the 8-Ks: CORZ 3 Jun 2024; APLD 2 Jun 2025; WULF 14
 
 ![Figure 10](/research/crypto-infra-ai-pivot/fig09_backtest_p1.1600.webp)
 
-*Figure 10. Conversion fund backtest against a control basket of not-yet-qualified miners, WGMI, IBIT and SMH (the table adds GCPU and DTCR), 2 September 2025 to 15 October 2026. Monthly rebalance, 20 bp per unit of turnover. Source: author's calculations.*
+*Figure 10. Conversion fund backtest against a control basket of not-yet-qualified miners, WGMI, IBIT and SMH (the table adds GCPU and DTCR), 2 September 2025 to 15 October 2026. Monthly rebalance, 20 bp per unit of turnover. Source: my calculations.*
 
 | 2 Sep 2025 – 15 Oct 2026 | Return | Vol | Max drawdown | β BTC | β SMH |
 |---|---|---|---|---|---|
@@ -450,10 +450,10 @@ Qualifying dates, taken from the 8-Ks: CORZ 3 Jun 2024; APLD 2 Jun 2025; WULF 14
 ## Appendix B. Data and method
 
 - **Holdings.** Issuer holdings files, normalised to fund, as-of date, ticker, name, weight, market value and source URL. The 14 August BLCK book comes from the Wayback Machine capture of 17 August 2026.
-- **Classification.** The author keeps one record per company: business type, AI revenue share and period, contracted MW, contract value, counterparty, first qualifying date, rename and mining exit. Each record carries a source URL.
+- **Classification.** I keep one record per company: business type, AI revenue share and period, contracted MW, contract value, counterparty, first qualifying date, rename and mining exit. Each record carries a source URL.
 - **Prices.** Yahoo Finance adjusted closes, 2 January 2023 to 15 October 2026. Returns are taken on US trading days only. Bitfarms is analysed under its current ticker KEEL. Some tickers carry the price history of predecessor entities and are excluded from the event study.
 - **Fundamentals.** Market cap, EV and TTM revenue from Yahoo Finance, retrieved 15 October 2026.
-- **Computations.** Figures were produced with the author's own Python scripts from the public sources cited. Each derived figure is recorded with a source URL or tagged as computed or an assumption.
+- **Computations.** Figures were produced with my own Python scripts from the public sources cited. Each derived figure is recorded with a source URL or tagged as computed or an assumption.
 
 ## References
 
@@ -483,8 +483,8 @@ Qualifying dates, taken from the 8-Ks: CORZ 3 Jun 2024; APLD 2 Jun 2025; WULF 14
 24. Soluna Holdings, Q2 2026 results. https://www.solunacomputing.com/news/q2-2026-results/
 25. Digi Power X (DGXX), Cerebras agreement (Exhibit 99.1). https://www.sec.gov/Archives/edgar/data/1854368/000121390026089450/ea030173001ex99-1.htm
 26. datcap.io, digital-asset treasury mNAV dashboard, retrieved 15 Oct 2026. https://datcap.io/
-27. Yahoo Finance daily adjusted closes and quote fundamentals, retrieved 15 Oct 2026; author's calculations.
+27. Yahoo Finance daily adjusted closes and quote fundamentals, retrieved 15 Oct 2026; my calculations.
 
 ---
 
-*Chafic Charafeddine writes independent research at chafic.me. This article reflects only the author's views. It is not affiliated with, commissioned by, or written on behalf of any employer, client or institution, and it is not investment advice or a recommendation to buy or sell any security or asset. Holdings and prices as retrieved on 14–15 October 2026. Figures will be revised; refresh before relying on them.*
+*Chafic Charafeddine writes independent research at chafic.me. This article reflects only my views. It is not affiliated with, commissioned by, or written on behalf of any employer, client or institution, and it is not investment advice or a recommendation to buy or sell any security or asset. Holdings and prices as retrieved on 14–15 October 2026. Figures will be revised; refresh before relying on them.*

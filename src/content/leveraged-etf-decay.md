@@ -593,7 +593,7 @@ The August note ended with three recommendations addressed to an issuer. I keep 
 
 ## Appendix C. Reproduction
 
-Figures were produced with the author's own Python scripts from the public sources cited: prices from Yahoo Finance and rates from FRED. Random seeds are fixed. Each number in the text is recorded with its basis: computed, assumption or source.
+Figures were produced with my own Python scripts from the public sources cited: prices from Yahoo Finance and rates from FRED. Random seeds are fixed. Each number in the text is recorded with its basis: computed, assumption or source.
 
 ## References
 
