@@ -11,7 +11,7 @@ type: "Independent research"
 
 *What Triffin actually argued, why today's constraint is fiscal, and a dated test of the exorbitant privilege*
 
-**Chafic Charafeddine** · Independent research · October 2026
+**Chafic Charafeddine** · Independent research · Originally written August 2026 · Updated October 2026
 
 > This is an independent piece written in a personal capacity. It is not written for or on behalf of any employer, client or institution, and it is not investment advice. Every data-derived number below was recomputed from public sources.
 
