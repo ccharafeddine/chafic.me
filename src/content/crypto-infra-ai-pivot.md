@@ -11,7 +11,7 @@ type: "Independent research"
 
 *Mandate drift in the Corgi Crypto Infrastructure ETF (BLCK), checked against the issuer's own holdings file, measured against seven peer funds, and turned into three product designs*
 
-**Chafic Charafeddine** · Independent research · 15 October 2026
+**Chafic Charafeddine** · Independent research · October 2026
 
 > This is an independent piece written in a personal capacity. It is not written for or on behalf of any employer, client or institution, and it is not investment advice. Every data-derived number below was recomputed from public sources.
 

@@ -11,7 +11,7 @@ type: "Independent research"
 
 *Daily reset, volatility drag, and when it pays: a verified and expanded update of my August 2026 study of 2× crypto and fintech funds*
 
-**Chafic Charafeddine** · Independent research · 15 October 2026
+**Chafic Charafeddine** · Independent research · October 2026
 
 > This is an independent piece written in a personal capacity, from public data only. It is not written for or on behalf of any employer, client, issuer or institution, and it is not investment advice.
 
