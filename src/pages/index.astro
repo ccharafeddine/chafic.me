@@ -22,80 +22,71 @@ const resumeLinks=[
 ---
 <Base>
 <Hero/>
-<section id="about" class="max-w-4xl mx-auto px-6 py-24 reveal">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-6">About</h2>
+<section id="about" class="sec reveal"><div class="wrap">
+<p class="eyebrow reveal">Profile</p>
+<h2 class="split sec-h">About</h2>
+
 <div class="space-y-4 text-gray-300 leading-relaxed text-lg">
 <p>My favorite class at Texas A&M was econometrics, and since graduating I have learned how markets price risk by taking part in them. Since January 2019 I have managed my own accounts and traded futures, FX and gold, teaching myself technical analysis along the way. I then went back for formal training: an MS in Finance from the University of St. Thomas (May 2026, GPA 3.8), where graduate work in Mergers & Acquisitions, Financial Modeling and reading financial statements filled in the corporate side of what I knew from trading. I sit for CFA Level I in November 2026.</p>
 <p>I taught myself to build analysis tools with Python and SQL. The Rice University FinTech Bootcamp (Jun – Nov 2021) didn't make me a proficient coder on its own, but it gave me the foundation and taught me to learn from library documentation instead of memorizing code. By the time I started my MS in Finance at St. Thomas (Aug 2024 – May 2026), that background made my projects far more interesting. Our capstone assignment was to optimize a single portfolio; I figured it would be more interesting to build an app that could optimize any portfolio. That sent me down the path of extending it one feature at a time, testing each step, until it became a desktop analytics app with DCF valuation, Monte Carlo and 316 automated tests. After applying for a derivatives underwriting role, I built a counterparty credit simulator to learn what the job involves, ending each case in a written approve or decline memo. I also assist with financial accounts and management at my family's medical practice.</p>
 <p>For an M&A or valuation team, that means someone who learns a new method quickly, builds and checks the model, and explains the conclusion in writing.</p>
 <p class="text-sm text-gray-500">Houston, TX · U.S. citizen</p></div>
-</section>
-<section id="experience" class="max-w-4xl mx-auto px-6 pb-12 reveal">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Experience</h2>
-<div class="card tilt p-6 text-gray-300 mb-6"><div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Independent Market Research & Portfolio Management · Self-employed</h3><p class="text-sm text-accent">Jan 2019 – Present · Houston, TX</p></div><ul class="mt-4 space-y-2 list-disc pl-5"><li>Run my retirement and taxable accounts on written rules I set myself: target allocation, scheduled rebalancing, tax-loss harvesting and a note on the reason for each decision.</li><li>Taught myself technical analysis through Online Trading Academy courses in supply and demand, futures, forex and options, then applied it to my own account.</li><li>Traded Micro E-mini S&amp;P 500 futures, FX (mainly EUR/USD) and gold; ran the same candlestick momentum rules on gold almost every day, and learned to step back and rework a strategy after a drawdown.</li><li>Coded a momentum-based 0-DTE SPX options strategy in Python, backtested it, then live-tested it for about 1 month; when intraday news kept reversing the trend, I paused it to rework the rules.</li></ul></div><div class="card tilt p-6 text-gray-300 mb-6"><div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Assistant · Family medical practice</h3><p class="text-sm text-accent">2023 – Present · Houston, TX</p></div><ul class="mt-4 space-y-2 list-disc pl-5"><li>Assisting with financial accounts and management.</li></ul></div>
-<h3 id="activities" class="font-semibold text-xl mt-10 mb-4">Activities & special interests</h3>
-<div class="grid sm:grid-cols-2 gap-4">
-<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">Bitcoin mining · 2021 – Present</p><p class="text-sm text-gray-300 mt-1">Began with a 6-GPU rack mining altcoins and converting the output to BTC; after a February 2022 mining conference in Round Rock and a tour of Riot's Rockdale facility, moved to an Antminer S19j Pro (104 TH/s). I weigh Texas power cost against output.</p></div>
-<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">Rice University FinTech Bootcamp · Jun – Nov 2021</p><p class="text-sm text-gray-300 mt-1">Python, machine learning and blockchain (smart-contract) programming coursework; learned to work from library documentation instead of memorizing code.</p></div>
-<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">Kappa Sigma, Texas A&M</p><p class="text-sm text-gray-300 mt-1">Elected leadership positions; Wicked Woods fundraising for veterans.</p></div>
-<div class="card tilt p-5 reveal"><p class="text-accent2 text-sm font-semibold">The BADD Project · 2016 – 2018</p><p class="text-sm text-gray-300 mt-1">Brothers Against Distracted Driving: advocated for a College Station texting-while-driving ban.</p></div>
-<div class="card tilt p-5 reveal sm:col-span-2"><p class="text-accent2 text-sm font-semibold">Service</p><p class="text-sm text-gray-300 mt-1">The Big Event, Texas A&M; The REACH Project fundraising for meals for Texas A&M staff (2018 – 2019); Houston Food Bank volunteer (Mar 2019 – Present).</p></div>
-</div>
-</section>
-<section id="case-study" class="max-w-6xl mx-auto px-6 pb-12">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-6">M&A case studies</h2>
-<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-<a href="/case-study/mara-soluna" class="card tilt p-5 text-gray-300 reveal block group hover:border-accent/60 h-full flex flex-col">
-<p class="text-xs text-accent mb-1">Independent · Public filings</p>
-<h3 class="font-semibold text-lg text-white leading-snug">MARA × Soluna: buy the power, not the company</h3>
-<ul class="mt-4 space-y-3 flex-1">
-<li><p class="text-accent2 text-sm font-semibold">Deal structure</p><p class="text-sm">$40M cash + $10M contingent for campus assets; NPV +$14.3M (whole-co –$277.8M).</p></li>
-<li><p class="text-accent2 text-sm font-semibold">Campus DCF</p><p class="text-sm">Dorothy Energy Campus at 10.5% WACC; walk-away $60.9M.</p></li>
-<li><p class="text-accent2 text-sm font-semibold">Comps &amp; risks</p><p class="text-sm">Peer $/MW at the 14-Oct-2026 close; eight structures and bid-ceiling rules.</p></li>
-</ul>
-<p class="text-sm text-accent mt-5 group-hover:translate-x-1 transition-transform">Read the case study →</p>
-</a>
-<a href="/case-study/brighthouse-aquarian" class="card tilt p-5 text-gray-300 reveal block group hover:border-accent/60 h-full flex flex-col">
-<p class="text-xs text-accent mb-1">Merger-arb · Public information</p>
-<h3 class="font-semibold text-lg text-white leading-snug">Brighthouse / Aquarian: a $22 spread priced for failure</h3>
-<ul class="mt-4 space-y-3 flex-1">
-<li><p class="text-accent2 text-sm font-semibold">Spread &amp; odds</p><p class="text-sm">$70 offer vs BHF $47.80 → $22.20 (46.4%); market 15.2% vs our 25%.</p></li>
-<li><p class="text-accent2 text-sm font-semibold">Sizing &amp; hedge</p><p class="text-sm">Expected PV $51.00 (+6.7%); 2% NAV starter (3% max), 0.43× CRBG/JXN/LNC.</p></li>
-<li><p class="text-accent2 text-sm font-semibold">Break &amp; catalysts</p><p class="text-sm">Base break $44.50; Delaware Form A and 6-Dec-2026 outside date.</p></li>
-</ul>
-<p class="text-sm text-accent mt-5 group-hover:translate-x-1 transition-transform">Read the case study →</p>
-</a>
-</div>
-</section>
-<section id="research" class="max-w-4xl mx-auto px-6 pb-12">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Independent research</h2>
-<div class="card tilt p-6 text-gray-300 reveal space-y-2">
-<p>Research notes and a target brief on outside companies.</p>
-<p>Fund research on leveraged-fund decay, and a holdings breakdown of a crypto-infrastructure fund that found about a third had shifted to AI data centers. I also proposed screening rules and 2 product ideas, and discussed my conclusions with an experienced Morgan Stanley wealth manager.</p>
-<!-- TODO: publish individual notes only once Chafic approves which ones. -->
 </div></section>
-<section id="projects" class="py-24 overflow-hidden">
-<div class="max-w-6xl mx-auto px-6"><h2 class="split text-3xl sm:text-5xl font-bold mb-3">Featured projects</h2><p class="text-gray-400 mb-10">Finance, valuation and trading tools, built Nov 2025 – Jul 2026. For apps built for fun, see <a href="#side-projects" class="text-accent2 hover:underline">hobby projects</a>.</p></div>
-<div class="max-w-6xl mx-auto px-6 mb-6"><span id="portfolio-analyzer" class="anchor-alias" data-target="flagship"></span><div id="flagship" class="card tilt reveal group grid lg:grid-cols-[1.25fr_1fr] overflow-hidden border-accent/40 hover:border-accent relative" style="box-shadow:0 0 60px -20px rgba(56,189,248,.45)">
+<section id="projects" class="sec overflow-hidden">
+<div class="wrap"><p class="eyebrow reveal">Finance &amp; valuation</p>
+<h2 class="split sec-h">Featured projects</h2>
+<p class="sec-sub">Finance, valuation and trading tools, built Nov 2025 – Jul 2026. For apps built for fun, see <a href="#side-projects" class="text-accent2 hover:underline">hobby projects</a>.</p></div>
+<div class="wrap mb-6"><span id="portfolio-analyzer" class="anchor-alias" data-target="flagship"></span><div id="flagship" class="card tilt reveal group grid lg:grid-cols-[1.25fr_1fr] overflow-hidden border-accent/40 hover:border-accent relative" style="box-shadow:0 0 60px -20px rgba(56,189,248,.45)">
 <a href="/projects/portfolio-analyzer" class="logo-panel relative min-h-64 lg:min-h-80 overflow-hidden flex items-center justify-center bg-gradient-to-br from-[#2F6FEB]/20 via-black/40 to-black/60"><span class="absolute w-56 h-56 rounded-full bg-[#2F6FEB]/20 blur-3xl" aria-hidden="true"></span><img src="/shots/Portfolio_Analyzer/logo.svg" alt="Portfolio Analyzer logo" width="176" height="176" class="relative w-36 h-36 sm:w-44 sm:h-44 drop-shadow-2xl group-hover:scale-105 transition duration-700"/></a>
 <div class="p-6 sm:p-8 flex flex-col justify-center"><p class="text-xs font-semibold uppercase tracking-widest text-accent">★ Flagship project</p>
 <h3 class="text-2xl sm:text-3xl font-bold mt-2 flex items-center gap-3">Portfolio Analyzer</h3><p class="text-xs text-gray-500 mt-1">Python · PySide6 · v3.0.0 · began as my MS capstone</p>
 <p class="text-gray-300 mt-3 text-sm leading-relaxed">A native desktop portfolio analytics app, now in the Graphite design: an 18-step pipeline with backtesting, Max-Sharpe/HRP/Black-Litterman optimization, VaR and stress tests, Brinson-Fachler attribution, a Live Market Watch cockpit and a plain-English explanation for every result. 316 automated tests.</p>
 <div class="flex flex-wrap gap-3 mt-5"><a href="/projects/portfolio-analyzer#demo" class="px-5 py-2.5 rounded-full bg-accent text-ink font-semibold text-sm inline-flex items-center gap-2 cursor-pointer"><span class="live-dot w-1.5 h-1.5 rounded-full bg-ink"></span>Try the live demo →</a><a href="/projects/portfolio-analyzer" class="px-4 py-2.5 rounded-full border border-white/20 hover:border-accent text-sm">Project details</a><a href="https://portfolio.chafic.me" target="_blank" rel="noopener" class="px-4 py-2.5 rounded-full border border-accent/50 text-accent hover:bg-accent hover:text-ink text-sm">Full web app ↗</a></div></div></div></div>
-<div id="frows" class="max-w-6xl mx-auto px-6 space-y-10 lg:space-y-16 mt-10">
+<div id="frows" class="wrap space-y-6 mt-6">
 {finance.filter(p=>!p.flagship).map((p,i)=>(<>
 {p.alias && <span id={p.alias} class="anchor-alias" data-target={p.slug}></span>}
 <a id={p.slug} href={`/projects/${p.slug}`} class={`frow card tilt group grid md:grid-cols-2 overflow-hidden hover:border-accent/60 ${i%2?'md:[&>.fimg]:order-2':''}`}>
-<div class="fimg relative h-56 md:h-72 overflow-hidden flex items-center justify-center bg-gradient-to-br from-accent/10 via-black/40 to-accent2/10">{p.icon ? <img src={`/shots/${p.repo}/${p.icon}`} alt={`${p.name} logo`} width="144" height="144" loading="lazy" decoding="async" class="w-28 h-28 md:w-36 md:h-36 drop-shadow-2xl group-hover:scale-105 transition-transform duration-700" style={`view-transition-name: shot-${p.slug}`}/> : <span class="text-3xl font-semibold text-gray-500">{p.name}</span>}</div>
+<div class="fimg relative h-48 md:h-auto md:min-h-60 overflow-hidden flex items-center justify-center bg-gradient-to-br from-accent/10 via-black/40 to-accent2/10">{p.icon ? <img src={`/shots/${p.repo}/${p.icon}`} alt={`${p.name} logo`} width="144" height="144" loading="lazy" decoding="async" class="w-28 h-28 md:w-36 md:h-36 drop-shadow-2xl group-hover:scale-105 transition-transform duration-700" style={`view-transition-name: shot-${p.slug}`}/> : <span class="text-3xl font-semibold text-gray-500">{p.name}</span>}</div>
 <div class="ftxt p-6 md:p-8 flex flex-col justify-center"><p class="text-xs text-gray-500 font-mono">0{i+2}</p><p class="text-xs text-accent mb-1">{p.tag}</p><h3 class="font-semibold text-xl sm:text-2xl" style={`view-transition-name: title-${p.slug}`}>{p.name}</h3>
 <p class="text-sm text-gray-400 mt-3 line-clamp-4">{p.desc}</p>
 <div class="flex flex-wrap gap-2 mt-4">{p.demo && <span class="text-xs px-2 py-1 rounded-full bg-accent/15 text-accent">● Live demo</span>}{p.caseStudy && <span class="text-xs px-2 py-1 rounded-full bg-white/5 text-gray-400">Case study</span>}<span class="text-xs text-gray-500 group-hover:text-accent transition">View project →</span></div></div></a></>))}
 </div></section>
-<section id="side-projects" class="max-w-6xl mx-auto px-6 py-24"><span id="hobby-projects" aria-hidden="true"></span>
-<p class="text-accent2 text-sm tracking-widest uppercase mb-2 reveal">Built for fun</p>
-<h2 class="split text-3xl sm:text-5xl font-bold mb-3">Hobby projects</h2>
-<p class="text-gray-400 mb-12 max-w-2xl reveal">Apps outside finance that I build for fun and to learn new stacks (TypeScript, Rust, Tauri), grouped into small suites.</p>
-<div class="space-y-14">{SUITES.map(su=>{const items=hobby.filter(p=>p.suite===su.id); return (
+<section id="case-study" class="sec"><div class="wrap">
+<p class="eyebrow reveal">Independent analysis · public information</p>
+<h2 class="split sec-h">M&amp;A case studies</h2>
+<div class="space-y-6">
+<a href="/case-study/brighthouse-aquarian" class="card cs-card group reveal grid md:grid-cols-[1.4fr_1fr] gap-6 md:gap-10 items-center p-6 sm:p-8 hover:border-accent/60">
+<div><p class="eyebrow-sm">Merger arbitrage</p><h3 class="text-xl sm:text-2xl font-semibold text-white leading-snug mt-1">Brighthouse / Aquarian: a $22 spread priced for failure</h3><p class="text-gray-300 mt-3 leading-relaxed">Aquarian’s $70 cash offer vs BHF at $47.80. The market implies 15.2% odds of closing; I put it at 25% and size a hedged 2% NAV starter.</p><p class="cta mt-5">Read the case study <span class="inline-block group-hover:translate-x-1 transition-transform">→</span></p></div>
+<div class="grid grid-cols-2 gap-4 md:border-l md:border-white/10 md:pl-10"><div><p class="kpi-v">$22.20</p><p class="kpi-l">Spread (46.4%)</p></div><div><p class="kpi-v">+6.7%</p><p class="kpi-l">Expected PV $51.00</p></div></div></a>
+<a href="/case-study/mara-soluna" class="card cs-card group reveal grid md:grid-cols-[1.4fr_1fr] gap-6 md:gap-10 items-center p-6 sm:p-8 hover:border-accent/60">
+<div><p class="eyebrow-sm">Asset acquisition</p><h3 class="text-xl sm:text-2xl font-semibold text-white leading-snug mt-1">MARA × Soluna: buy the power, not the company</h3><p class="text-gray-300 mt-3 leading-relaxed">$40M cash + $10M contingent for the Dorothy Energy Campus assets instead of the whole company, with a walk-away price set by a campus DCF.</p><p class="cta mt-5">Read the case study <span class="inline-block group-hover:translate-x-1 transition-transform">→</span></p></div>
+<div class="grid grid-cols-2 gap-4 md:border-l md:border-white/10 md:pl-10"><div><p class="kpi-v">+$14.3M</p><p class="kpi-l">Deal NPV (whole-co –$277.8M)</p></div><div><p class="kpi-v">$60.9M</p><p class="kpi-l">Walk-away price</p></div></div></a>
+</div>
+<div id="research" class="card reveal mt-6 p-6 sm:p-8 text-gray-300 space-y-2"><p class="eyebrow-sm">Independent research</p>
+<p>Research notes and a target brief on outside companies.</p>
+<p>Fund research on leveraged-fund decay, and a holdings breakdown of a crypto-infrastructure fund that found about a third had shifted to AI data centers. I also proposed screening rules and 2 product ideas, and discussed my conclusions with an experienced Morgan Stanley wealth manager.</p>
+<!-- TODO: publish individual notes only once Chafic approves which ones. -->
+</div>
+</div></section>
+<section id="experience" class="sec"><div class="wrap">
+<p class="eyebrow reveal">Work</p>
+<h2 class="split sec-h">Experience</h2>
+
+<div class="card p-6 sm:p-8 text-gray-300 mb-6"><div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Independent Market Research & Portfolio Management · Self-employed</h3><p class="text-sm text-gray-400 font-medium">Jan 2019 – Present · Houston, TX</p></div><ul class="mt-4 space-y-2 list-disc pl-5"><li>Run my retirement and taxable accounts on written rules I set myself: target allocation, scheduled rebalancing, tax-loss harvesting and a note on the reason for each decision.</li><li>Taught myself technical analysis through Online Trading Academy courses in supply and demand, futures, forex and options, then applied it to my own account.</li><li>Traded Micro E-mini S&amp;P 500 futures, FX (mainly EUR/USD) and gold; ran the same candlestick momentum rules on gold almost every day, and learned to step back and rework a strategy after a drawdown.</li><li>Coded a momentum-based 0-DTE SPX options strategy in Python, backtested it, then live-tested it for about 1 month; when intraday news kept reversing the trend, I paused it to rework the rules.</li></ul></div><div class="card p-6 sm:p-8 text-gray-300 mb-6"><div class="flex flex-wrap justify-between gap-2"><h3 class="font-semibold text-lg text-white">Assistant · Family medical practice</h3><p class="text-sm text-gray-400 font-medium">2023 – Present · Houston, TX</p></div><ul class="mt-4 space-y-2 list-disc pl-5"><li>Assisting with financial accounts and management.</li></ul></div>
+<h3 id="activities" class="sub-h">Activities & special interests</h3>
+<div class="grid sm:grid-cols-2 gap-4">
+<div class="card p-5 sm:p-6 reveal"><p class="text-white font-semibold">Bitcoin mining · 2021 – Present</p><p class="text-sm text-gray-300 mt-1">Began with a 6-GPU rack mining altcoins and converting the output to BTC; after a February 2022 mining conference in Round Rock and a tour of Riot's Rockdale facility, moved to an Antminer S19j Pro (104 TH/s). I weigh Texas power cost against output.</p></div>
+<div class="card p-5 sm:p-6 reveal"><p class="text-white font-semibold">Rice University FinTech Bootcamp · Jun – Nov 2021</p><p class="text-sm text-gray-300 mt-1">Python, machine learning and blockchain (smart-contract) programming coursework; learned to work from library documentation instead of memorizing code.</p></div>
+<div class="card p-5 sm:p-6 reveal"><p class="text-white font-semibold">Kappa Sigma, Texas A&M</p><p class="text-sm text-gray-300 mt-1">Elected leadership positions; Wicked Woods fundraising for veterans.</p></div>
+<div class="card p-5 sm:p-6 reveal"><p class="text-white font-semibold">The BADD Project · 2016 – 2018</p><p class="text-sm text-gray-300 mt-1">Brothers Against Distracted Driving: advocated for a College Station texting-while-driving ban.</p></div>
+<div class="card p-5 sm:p-6 reveal sm:col-span-2"><p class="text-white font-semibold">Service</p><p class="text-sm text-gray-300 mt-1">The Big Event, Texas A&M; The REACH Project fundraising for meals for Texas A&M staff (2018 – 2019); Houston Food Bank volunteer (Mar 2019 – Present).</p></div>
+</div>
+</div></section>
+<section id="side-projects" class="sec wrap"><span id="hobby-projects" aria-hidden="true"></span>
+<p class="eyebrow reveal">Built for fun</p>
+<h2 class="split sec-h">Hobby projects</h2>
+<p class="sec-sub reveal">Apps outside finance that I build for fun and to learn new stacks (TypeScript, Rust, Tauri), grouped into small suites.</p>
+<div class="space-y-10">{SUITES.map(su=>{const items=hobby.filter(p=>p.suite===su.id); return (
 <div class="reveal"><div class="flex items-baseline gap-3 mb-5"><span class="text-2xl">{su.emoji}</span><h3 class="text-xl font-semibold">{su.name}</h3><span class="text-xs text-gray-500">{items.length} apps</span></div>
 <p class="text-sm text-gray-400 -mt-3 mb-5">{su.blurb}</p>
 <div class={`grid gap-5 ${items.length===4?'md:grid-cols-2 xl:grid-cols-4':items.length>2?'md:grid-cols-3':'md:grid-cols-2'}`}>{items.map((p,i)=>{const href=p.noPage?p.url:`/projects/${p.slug}`; return (
@@ -108,17 +99,17 @@ const resumeLinks=[
 <div class="flex flex-wrap gap-2 mt-3">{p.upcoming ? <span class="badge bg-amber-400/15 text-amber-300">In development · coming soon</span> : p.demo ? <a href={demoUrl(p)} {...extAttrs(demoUrl(p))} class="badge relative z-10 bg-accent/15 text-accent hover:bg-accent hover:text-ink">● Live demo{extAttrs(demoUrl(p)).target?' ↗':''}</a> : <span class="badge bg-white/5 text-gray-400">Live demo coming soon</span>}</div>
 </div></div></>)})}</div></div>)})}</div>
 </section>
-<section id="education" class="max-w-4xl mx-auto px-6 py-24">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Education & credentials</h2>
-<div class="grid sm:grid-cols-2 gap-4 mb-16">{edu.map(([d,s,t])=>(<div class="card tilt p-5 reveal"><p class="text-xs text-accent">{d}</p><h3 class="font-semibold mt-1">{s}</h3><p class="text-sm text-gray-400 mt-1">{t}</p></div>))}</div>
+<section id="education" class="sec wrap">
+<h2 class="split sec-h">Education & credentials</h2>
+<div class="grid sm:grid-cols-2 gap-4 mb-6">{edu.map(([d,s,t])=>(<div class="card p-5 sm:p-6 reveal"><p class="text-xs text-gray-400 font-medium">{d}</p><h3 class="font-semibold mt-1">{s}</h3><p class="text-sm text-gray-400 mt-1">{t}</p></div>))}</div>
 <a href="/timeline" class="card tilt reveal block p-6 group hover:border-accent/50"><div class="flex items-center justify-between gap-4"><div><p class="text-xs text-accent uppercase tracking-widest">Timeline</p><h3 class="font-semibold text-xl mt-1">2013 to today, from Texas A&M to the CFA Level I exam</h3><p class="text-sm text-gray-400 mt-1">Education, projects, markets and service in one filterable timeline.</p></div><span class="text-accent text-2xl group-hover:translate-x-1 transition-transform">→</span></div></a></section>
-<section id="skills" class="max-w-6xl mx-auto px-6 py-24">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-10 reveal">Skills</h2>
-<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">{Object.entries(skills).map(([k,v])=>(<div class="card tilt p-5 reveal"><h3 class="font-semibold mb-3 text-accent2">{k}</h3><div class="flex flex-wrap gap-2">{v.map(s=><span class="chip inline-block text-xs px-2 py-1 rounded bg-white/5">{s}</span>)}</div></div>))}</div>
+<section id="skills" class="sec wrap">
+<h2 class="split sec-h">Skills</h2>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">{Object.entries(skills).map(([k,v])=>(<div class="card tilt p-5 reveal"><h3 class="font-semibold mb-3 text-white">{k}</h3><div class="flex flex-wrap gap-2">{v.map(s=><span class="chip inline-block text-xs px-2 py-1 rounded bg-white/5">{s}</span>)}</div></div>))}</div>
 </section>
 
-<section id="resume" class="max-w-4xl mx-auto px-6 py-16 reveal text-center">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Resume</h2>
+<section id="resume" class="sec wrap text-center reveal">
+<h2 class="split sec-h">Resume</h2>
 {RESUME_PDF_READY ? (<>
 <a href="/resume.pdf" download="Chafic_Charafeddine_Resume.pdf" class="inline-block px-5 py-3 rounded-full bg-accent text-ink font-semibold mb-8">Download PDF</a>
 <div class="card overflow-hidden"><object data="/resume.pdf#view=FitH" type="application/pdf" class="w-full h-[80vh]"><p class="p-6 text-gray-400">PDF preview unavailable. <a class="text-accent underline" href="/resume.pdf">Open the resume</a>.</p></object></div></>)
@@ -126,8 +117,8 @@ const resumeLinks=[
 <div class="mt-8 flex flex-col items-center gap-2 text-sm">
 {resumeLinks.map(([l,h])=>(<a href={h} target={h.startsWith('http')?'_blank':undefined} rel={h.startsWith('http')?'noopener':undefined} class="text-accent hover:underline font-mono">{l}</a>))}
 </div></section>
-<section id="contact" class="max-w-4xl mx-auto px-6 py-24 reveal text-center">
-<h2 class="split text-3xl sm:text-5xl font-bold mb-6">Contact</h2>
+<section id="contact" class="sec wrap text-center reveal">
+<h2 class="split sec-h">Contact</h2>
 <div class="flex flex-wrap justify-center gap-4">
 <a href="mailto:ccharafeddine@protonmail.com" class="px-5 py-3 rounded-full bg-accent text-ink font-semibold">ccharafeddine@protonmail.com</a>
 <a href="https://www.linkedin.com/in/ccharafeddine" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-accent">linkedin.com/in/ccharafeddine</a>
