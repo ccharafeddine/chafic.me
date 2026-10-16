@@ -57,16 +57,26 @@ const RAW=[
  skills:'Search algorithms (two-phase, IDA*, pattern databases), 3D rendering with three.js, Web Workers and IndexedDB caching, accessible UI, automated tests and CI.',
  shots:['02-scrambled-solution.png','01-solved.png','03-solving.png','04-exploded.png'],icon:'suite-logo.svg'},
 {slug:'chess-solver',repo:'chess-solver',name:'Chess Solver',tag:'Web + desktop app · TypeScript · Stockfish 18',demo:true,demoHref:'https://chess.chafic.me',
- desc:'Desktop chess analysis app for Windows and macOS powered by Stockfish 18. Set up any position and get engine-recommended moves with evaluations, tactical motifs, and principal variations.',
- shots:['screenshot-analysis.png','screenshot-tactics.png','screenshot-settings.png','screenshot-themes.png'],icon:'suite-logo.svg'},
+ line:'Best moves for chess and checkers.',
+ desc:'Chess and checkers analysis for the browser, Windows and macOS. The Chess tab uses Stockfish 18 for engine-recommended moves with evaluations, tactical motifs and principal variations; the new Checkers tab finds the best move in any position, including forced captures and multi-jumps.',
+ shots:['screenshot-analysis.png','01-analyze-matte-light.png','02-tour-double-jump.png','03-play-neon-dark.png','04-edit-aero-dark.png','screenshot-tactics.png'],icon:'suite-logo.svg'},
 {slug:'sudoku-solver',repo:'sudoku-solver',name:'Sudoku Solver',tag:'Web app · TypeScript · Vite',demo:true,demoHref:'https://sudoku.chafic.me',
  desc:'Play, generate or type in any 9x9 Sudoku. Solve it instantly, or get hints that name the trick a person would use next, outline the squares involved and explain it in plain words, then watch the whole puzzle solved step by step.',
  features:['Classic, Diagonal, Killer, Mini 6x6 and Mini 4x4','New puzzles from Easy to Fiendish, each with exactly one answer','Level rated by the hardest trick the human-style solver needs','Hints that name, outline and explain the next step','Step-by-step playback, forwards or backwards','Pencil marks and auto notes','Conflict and mistake highlighting','Undo/redo and a History timeline','Load and share puzzles by string or link','Lessons and an app tour','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
  shots:['screenshot-main.png','screenshot-steps.png','screenshot-killer.png','screenshot-lesson.png'],icon:'suite-logo.svg'},
 {slug:'card-solver',repo:'card-solver',name:'Card Solver',tag:'Web + desktop app · TypeScript · Vite',demo:true,demoHref:'https://cards.chafic.me',
- desc:'Poker odds and perfect blackjack, with the game theory behind every choice explained in plain words. One app with two tabs: Texas Hold\'em equity, outs, pot odds and fold/call/raise EV, and exact blackjack EV for every action under any table rules.',
- features:['Poker equity vs random hands or a painted range, 1 to 8 opponents','Exact counting for one opponent up to 1.2M deals; Monte Carlo in a background thread otherwise','Outs with exact odds next to the rule of 4 and 2','Fold, call or raise EV bars (labelled simple model, not a solver)','Preflop reference charts for a 6-player table','Blackjack table rules with live house edge','Exact EV of hit, stand, double, split and surrender','Strategy chart, a scoring trainer and optional Hi-Lo counting with the Illustrious 18','Spotlight tour and 13 lessons with quizzes','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
- shots:['screenshot-poker.png','screenshot-blackjack.png','screenshot-aero.png','screenshot-tour.png','screenshot-mobile.png'],icon:'suite-logo.svg'},
+ line:'Six card games solved: Poker, Blackjack, Kuhn poker, Video poker, Gin rummy and Cribbage.',
+ desc:'Six card games in one app, with the game theory behind every choice explained in plain words: Texas Hold\'em equity, outs and pot odds; exact blackjack EV under any table rules; Kuhn poker equilibrium play; video poker best holds; gin rummy and cribbage decisions.',
+ features:['Poker equity vs random hands or a painted range, 1 to 8 opponents','Exact counting for one opponent up to 1.2M deals; Monte Carlo in a background thread otherwise','Outs with exact odds next to the rule of 4 and 2','Fold, call or raise EV bars (labelled simple model, not a solver)','Preflop reference charts for a 6-player table','Blackjack table rules with live house edge','Exact EV of hit, stand, double, split and surrender','Strategy chart, a scoring trainer and optional Hi-Lo counting with the Illustrious 18','Kuhn poker, Video poker, Gin rummy and Cribbage tabs','Spotlight tour and lessons with quizzes','Runs in the browser, as an offline PWA, and on Windows (Tauri 2)'],
+ shots:['screenshot-poker.png','screenshot-blackjack.png','matte-dark-kuhn.png','matte-dark-vpoker.png','matte-dark-gin.png','matte-dark-cribbage.png','mobile-cribbage-score.png'],icon:'suite-logo.svg'},
+{slug:'word-solver',repo:'word-solver',name:'Word Solver',tag:'Web app · TypeScript',demo:true,demoHref:'https://words.chafic.me',
+ line:'Five-letter guess helper and word finder.',
+ desc:'A five-letter guess helper and word finder. Enter your guesses and the colour feedback to get the best next guess and the words still possible, or find words that fit a pattern and a set of letters.',
+ shots:['guess.png','guess-two-rows.png','finder.png','tour.png','mobile.png'],icon:'suite-logo.svg'},
+{slug:'connect-solver',repo:'connect-solver',name:'Connect Solver',tag:'Web app · TypeScript',demo:true,demoHref:'https://connect.chafic.me',
+ line:'Perfect play for Connect 4 and tic-tac-toe.',
+ desc:'Perfect play for Connect 4 and tic-tac-toe. Set up any position or play against the computer, see every move rated win, draw or loss, and get a plain-word reason why a move wins or must be blocked.',
+ shots:['connect-vs-computer.png','connect-why-block.png','ttt-fork.png','tour-verdicts.png','mobile.png'],icon:'suite-logo.svg'},
 ];
 // ── Section/suite metadata ──
 // category: 'finance' → "Featured projects" (pinned horizontal scroller, in this order); 'hobby' → "Hobby projects".
@@ -75,7 +85,7 @@ const RAW=[
 // /projects/<slug>/demo (create src/pages/projects/<slug>/demo.astro, like the workbench demo).
 const META={
  'derivatives-underwriting-workbench':{category:'finance'},'portfolio-analyzer':{category:'finance'},'crypto-quant-desk':{category:'finance'},'daily-melt':{category:'finance'},
- 'chess-solver':{category:'hobby',suite:'puzzle'},'cube-solver':{category:'hobby',suite:'puzzle'},'sudoku-solver':{category:'hobby',suite:'puzzle'},'card-solver':{category:'hobby',suite:'puzzle'},
+ 'chess-solver':{category:'hobby',suite:'puzzle'},'cube-solver':{category:'hobby',suite:'puzzle'},'sudoku-solver':{category:'hobby',suite:'puzzle'},'card-solver':{category:'hobby',suite:'puzzle'},'word-solver':{category:'hobby',suite:'puzzle'},'connect-solver':{category:'hobby',suite:'puzzle'},
  'gifsmith':{category:'hobby',suite:'media'},'mediasmith':{category:'hobby',suite:'media'},'clipsmith':{category:'hobby',suite:'media'},'captionsmith':{category:'hobby',suite:'media'},
 };
 export const SUITES=[

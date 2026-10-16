@@ -45,7 +45,7 @@ const resumeLinks=[
 <section id="case-study" class="max-w-4xl mx-auto px-6 pb-12">
 <h2 class="split text-3xl sm:text-5xl font-bold mb-6">M&A case studies</h2>
 <a href="/case-study/mara-soluna" class="card tilt p-6 text-gray-300 reveal block group hover:border-accent/60">
-<p class="text-xs text-accent mb-1">Independent case study · Public filings, as of 14 October 2026</p><h3 class="font-semibold text-lg text-white">MARA × Soluna: buy the power, not the company</h3>
+<p class="text-xs text-accent mb-1">Independent case study · Public filings</p><h3 class="font-semibold text-lg text-white">MARA × Soluna: buy the power, not the company</h3>
 <div class="grid sm:grid-cols-2 gap-4 mt-4">
 <div><p class="text-accent2 text-sm font-semibold">Trading comps &amp; precedents</p><p class="text-sm">Peer multiples and $/MW deals at the 14-Oct-2026 close, from Q2-2026 10-Qs and FY2025 10-Ks.</p></div>
 <div><p class="text-accent2 text-sm font-semibold">Campus DCF</p><p class="text-sm">Dorothy Energy Campus at a 10.5% wind-weighted WACC; walk-away $60.9M.</p></div>
@@ -53,7 +53,7 @@ const resumeLinks=[
 <div><p class="text-accent2 text-sm font-semibold">Alternatives &amp; risks</p><p class="text-sm">Eight structures tested; risk register and decision rules for the bid ceiling.</p></div>
 </div><p class="text-sm text-accent mt-5 group-hover:translate-x-1 transition-transform">Read the case study →</p></a>
 <a href="/case-study/brighthouse-aquarian" class="card tilt p-6 text-gray-300 reveal block group hover:border-accent/60 mt-6">
-<p class="text-xs text-accent mb-1">Independent merger-arbitrage case study · Public information, as of 14 October 2026</p><h3 class="font-semibold text-lg text-white">Brighthouse / Aquarian: a $22 spread priced for failure</h3>
+<p class="text-xs text-accent mb-1">Independent merger-arbitrage case study · Public information</p><h3 class="font-semibold text-lg text-white">Brighthouse / Aquarian: a $22 spread priced for failure</h3>
 <div class="grid sm:grid-cols-2 gap-4 mt-4">
 <div><p class="text-accent2 text-sm font-semibold">Spread &amp; implied odds</p><p class="text-sm">$70.00 cash offer vs. BHF at $47.80: a $22.20 (46.4%) spread implying a 15.2% chance of closing, against our 25%.</p></div>
 <div><p class="text-accent2 text-sm font-semibold">Break price</p><p class="text-sm">Base break $44.50, anchored on Talcott's $52 bid, fairness-opinion DDMs and a trough multiple.</p></div>
@@ -98,7 +98,7 @@ const resumeLinks=[
 <div class="h-36 bg-gradient-to-br from-accent2/10 via-transparent to-accent/10 flex items-center justify-center overflow-hidden">{p.icon ? <img src={`/shots/${p.repo}/${p.icon}`} alt={`${p.name} logo`} width="80" height="80" loading="lazy" decoding="async" class="h-20 w-20 object-contain drop-shadow-lg group-hover:scale-110 transition duration-500"/> : p.shots[0] ? <img {...img(p.repo,p.shots[0],"(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw")} alt={`${p.name} screenshot`} loading="lazy" class={p.shots[0].endsWith('.svg')?'h-16 group-hover:rotate-6 transition':'w-full h-full object-cover object-top group-hover:scale-105 transition duration-500'}/> : <span class="text-3xl font-bold tracking-tight text-white/30">{p.name.split(/\s+/).map(w=>w[0]).join('')}</span>}</div>
 <div class="p-4"><div class="flex items-center justify-between gap-2"><h4 class="font-semibold"><a href={href} {...(p.noPage?extAttrs(href):{})} class="after:absolute after:inset-0">{p.name}</a></h4></div>
 <p class="text-[11px] text-gray-500 mt-0.5">{p.tag}</p>
-<p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.desc}</p>
+<p class="text-sm text-gray-400 mt-2 line-clamp-3">{p.line ?? p.desc}</p>
 <div class="flex flex-wrap gap-2 mt-3">{p.upcoming ? <span class="badge bg-amber-400/15 text-amber-300">In development · coming soon</span> : p.demo ? <a href={demoUrl(p)} {...extAttrs(demoUrl(p))} class="badge relative z-10 bg-accent/15 text-accent hover:bg-accent hover:text-ink">● Live demo{extAttrs(demoUrl(p)).target?' ↗':''}</a> : <span class="badge bg-white/5 text-gray-400">Live demo coming soon</span>}</div>
 </div></div></>)})}</div></div>)})}</div>
 </section>
