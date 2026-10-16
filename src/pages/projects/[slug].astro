@@ -5,6 +5,8 @@ import { img } from '../../data/img.js';
 import PortfolioDemo from '../../components/PortfolioDemo.astro';
 export function getStaticPaths(){ return projects.filter(p=>!p.noPage).map(p=>({params:{slug:p.slug},props:{p}})); }
 const { p } = Astro.props;
+const REPORTS = ['cube-solver','chess-solver','sudoku-solver','card-solver','word-solver','connect-solver'];
+const report = REPORTS.includes(p.slug) ? `/reports/${p.slug}.pdf` : null;
 const imgs = p.shots.filter(s=>!s.endsWith('.svg'));
 ---
 <Base title={`${p.name} · Chafic Charafeddine`}>
@@ -22,11 +24,13 @@ const imgs = p.shots.filter(s=>!s.endsWith('.svg'));
 {p.skills && <p class="text-gray-400 mt-6 text-sm reveal"><span class="text-gray-200 font-semibold">Skills learned: </span>{p.skills}</p>}
 
 {p.webNote && <p class="mt-6 text-sm text-gray-300 card p-4 border-amber-400/30 reveal"><span class="text-amber-300 font-semibold">About the browser demo: </span>{p.webNote}</p>}
+{report && <p class="mt-6 text-sm text-gray-300 reveal">Curious how it works? The PDF is a deep dive into the game theory behind each game and how the best play is found.</p>}
 <div class="flex flex-wrap gap-3 mt-6">
 <a href={p.url} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 hover:border-accent text-sm">View on GitHub →</a>
 {p.releases && <a href={p.releases} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent2 text-ink font-semibold text-sm">Download installers (Releases) ↗</a>}
 {p.extDemo && (p.extDemo.soon ? <span aria-disabled="true" class="px-4 py-2 rounded-full border border-dashed border-amber-400/40 text-amber-300 text-sm cursor-default select-none">{p.extDemo.label} · coming soon</span> : <a href={p.extDemo.href} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-accent/50 text-accent hover:bg-accent hover:text-ink text-sm">{p.extDemo.label} ↗</a>)}
 {p.demo && <a href={demoUrl(p)} {...extAttrs(demoUrl(p))} class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Open live demo{extAttrs(demoUrl(p)).target?" ↗":""}</a>}
+{report && <a href={report} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 text-gray-200 hover:border-accent hover:text-white font-semibold text-sm transition-colors">Read the game theory (PDF)</a>}
 </div>
 {imgs.length ? (<div class="grid md:grid-cols-2 gap-6 mt-12">{imgs.map((s,i)=>{const c=p.captions?.[i]; return c ? (<figure class="card tilt overflow-hidden reveal"><a href={`/shots/${p.repo}/${s}`} target="_blank" class="block"><img {...img(p.repo,s,"(min-width:768px) 560px, 100vw")} alt={c[2]} style={i===0?`view-transition-name: shot-${p.slug}`:undefined} loading="lazy" class="w-full"/></a><figcaption class="p-4 border-t border-white/10"><p class="text-sm font-semibold text-white">{c[0]}</p><p class="text-xs text-gray-400 mt-1 leading-relaxed">{c[1]}</p></figcaption></figure>) : (<a href={`/shots/${p.repo}/${s}`} target="_blank" class="card tilt overflow-hidden reveal"><img {...img(p.repo,s,"(min-width:768px) 560px, 100vw")} alt={`${p.name}: ${s}`} style={i===0?`view-transition-name: shot-${p.slug}`:undefined} loading="lazy" class="w-full"/></a>);})}</div>)
 : (<div class="card p-10 mt-12 text-center reveal">{p.shots[0] && <img src={`/shots/${p.repo}/${p.shots[0]}`} class="h-28 mx-auto mb-6" alt=""/>}<p class="text-gray-400">{p.caseStudy ? "Paused strategy, presented as a case study." : "Screen recording coming soon."}</p></div>)}
