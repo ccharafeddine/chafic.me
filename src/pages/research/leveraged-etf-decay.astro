@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import raw from '../../content/leveraged-etf-decay.md?raw';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+const md = await createMarkdownProcessor();
+const D = '/research/leveraged-etf-decay';
+const body = raw.slice(raw.indexOf('\n## '));
+const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
+const slugify = (t) => t.toLowerCase().replace(/^\d+\.\s*/, '').replace(/^appendix ([a-z])\.\s*/, 'appendix-$1-').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const navFor = (t) => {
+  const m = {
+    'Summary': 'Summary', '1. What this note does, and what changed since August': 'What changed',
+    '2. The mechanic': 'The mechanic', '3. Verifying the August results': 'Verifying August',
+    "4. The case study, measured: Corgi's 2× crypto and fintech sleeve": 'The 2× sleeve',
+    '5. Twenty years of real funds: tracking and costs': 'Tracking & costs',
+    '6. When daily reset beats static leverage, and when it loses': 'Reset vs static',
+    '7. Monte Carlo and historical rolling windows': 'Rolling windows', '8. The sleeve under fat tails: bootstrap vs GBM': 'Fat tails',
+    '9. Leverage factor against reset frequency': 'Leverage vs reset', '10. Breakeven volatility': 'Breakeven vol',
+    '11. Gap risk': 'Gap risk', '12. Volatility products': 'Volatility products', '13. Implications': 'Implications',
+    '14. Limitations': 'Limitations', 'Appendix A. Full refreshed results': 'Full results',
+    'Appendix B. Assumptions register': 'Assumptions', 'Appendix C. Reproduction': 'Reproduction', 'References': 'References',
+  };
+  return m[t] ?? t.replace(/^\d+\.\s*/, '');
+};
+const H = { fig07_tracking_by_horizon: 992, fig08_residual_cost: 996, fig09_trend_vs_chop: 768 };
+const sections = await Promise.all(parts.map(async (s) => {
+  const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim(); const id = slugify(title);
+  let html = (await md.render(s.slice(nl + 1).replace(/---\s*$/, '').trim())).code;
+  html = html.replace(/<img src="\/research\/leveraged-etf-decay\/([a-z0-9_]+)\.1600\.webp" alt="([^"]*)"\s*\/?>/g,
+    (_, f, alt) => `<a href="${D}/${f}.1600.webp" target="_blank"><img src="${D}/${f}.1600.webp" srcset="${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w" sizes="(min-width:1024px) 768px, 100vw" width="1600" height="${H[f] ?? 853}" loading="lazy" decoding="async" alt="${alt}"></a>`);
+  return { id, title: title.replace(/^\d+\.\s*/, ''), nav: navFor(title), html };
+}));
+---
+<Base title="Leveraged and inverse ETF decay · Independent research · Chafic Charafeddine">
+<article class="max-w-6xl mx-auto px-6 py-16">
+<a data-back href="/#research" class="text-sm text-gray-400 hover:text-accent">← Back to home</a>
+<header class="mt-6 max-w-3xl">
+<p class="text-accent text-sm">Independent research · Funds · ETFs · Public information only</p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">Leveraged and inverse ETF decay</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">A daily-reset fund delivers L× the daily return, not L× the period return, so its median decays with volatility: a 2× fund on a 90%-vol stock loses 58% in a year the stock ends flat. Real prices add costs far above headline fees, and show the reset wins in calm trends and loses in chop.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-8">
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem] border-accent/40"><p class="text-[10px] uppercase tracking-widest text-accent">Flat year, 2× at 90% vol</p><p class="text-xl sm:text-2xl font-bold text-rose-400 leading-tight mt-2">−58.0%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Stock ends flat · August result reverified</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Single-stock 2× cost</p><p class="text-xl sm:text-2xl font-bold text-amber-400 leading-tight mt-2">7–34%<span class="text-sm text-gray-400">/yr</span></p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Beyond T-bills · vs 2–4% for index funds</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Sleeve vs 2× its stock</p><p class="text-xl sm:text-2xl font-bold text-sky-400 leading-tight mt-2">8 of 11</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Corgi funds trailing since launch</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">TQQQ 2010–19</p><p class="text-xl sm:text-2xl font-bold text-emerald-400 leading-tight mt-2">+4,373%</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">vs +1,276% for static 3×</p></div>
+</div>
+<div class="flex flex-wrap gap-3 mt-8">
+<a href={`${D}/leveraged-etf-decay.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Full note (PDF, 29 pp.) ↓</a>
+</div>
+<p class="text-xs text-gray-500 mt-6">Independent research written in a personal capacity. Not prepared for, reviewed by, or affiliated with any employer, client or institution. Not investment advice. Every data-derived figure was recomputed from public sources.</p>
+</header>
+<div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
+<nav aria-label="Research note sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10 max-h-[calc(100vh-7rem)] overflow-y-auto">
+{sections.map(s => <li><a href={`#${s.id}`} data-sec={s.id} class="block pl-4 -ml-px py-1 border-l-2 border-transparent text-gray-400 hover:text-white transition-colors">{s.nav}</a></li>)}
+</ul></nav>
+<div class="min-w-0 max-w-3xl">
+{sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
+<div class="cs-prose rs-prose" set:html={s.html}/>
+</section>))}
+</div></div>
+</article>
+<script>
+function csNav(){ const links=[...document.querySelectorAll<HTMLAnchorElement>('#cs-nav a')]; if(!links.length) return;
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>{const on=l.dataset.sec===e.target.id; l.classList.toggle('text-white',on); l.classList.toggle('border-accent',on); l.classList.toggle('text-gray-400',!on);}); } });},{rootMargin:'-30% 0px -60% 0px'});
+ document.querySelectorAll('.cs-sec').forEach(s=>io.observe(s)); }
+document.addEventListener('astro:page-load', csNav);
+</script>
+</Base>
