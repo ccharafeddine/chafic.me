@@ -1,300 +1,256 @@
-# MARA Holdings × Soluna Holdings: Buy the Project, Not the Company
+# MARA x Soluna: buy the power, not the company
 
-*Independent M&A case study by Chafic Charafeddine. Public information only. This was not prepared for, or on behalf of, any employer, client, or either company.*
+*Independent case study by Chafic Charafeddine (MS Finance, University of St. Thomas, 2026; CFA Level I candidate). It uses public information only. It was not prepared for, reviewed by or affiliated with MARA Holdings, Soluna Holdings or any employer or client, and it is not investment advice. All market data are closing prices on 14-Oct-2026. Financials are from the latest filings (Q2-2026 10-Qs and the FY2025 10-K) plus 8-Ks filed through September 2026. Every figure is listed in `figures.json` with its unit, as-of date and source URL, or is marked as an assumption. Model: `model/MARA_Soluna_v2_model.xlsx`. Deck: `deck/MARA_Soluna_v2_deck.pdf`.*
 
-**As of:** close of March 28, 2024. Financials are from the FY2023 Form 10-K filings. Balance sheets are at December 31, 2023 unless noted. All figures are in US$; "$M" means millions. Every number is traced to a source or labelled as an assumption in `figures.json` and the Excel model.
+## Recommendation
 
----
+**MARA should not bid for Soluna's equity.** Instead it should offer **$40M in cash plus $10M contingent** for the **Dorothy Energy Campus**: the Briscoe wind farm (149.85 MW), the energised Dorothy 1A/1B halls (50 MW) and the rights to Soluna's 50 MW load-increase request. MARA should **walk away above $60.9M**.
 
-## Summary
-
-The original thesis was that MARA should buy Soluna Holdings (SLNH) to own renewable-powered hosting capacity in Texas. I rebuilt the case from Soluna's FY2023 10-K, and the data do not support buying the whole company.
-
-- **Ownership is thin.** Soluna owns only 41.5 of its 75 operating MW on an attributable basis.
-- **Claims sit ahead of the common.** A $85M Series A preferred claim ranks above common shareholders, and $19.6M of debt needs to be refinanced in 2024.
-- **The deal value is negative.** A full tender at $4.00 per share (a 39% premium) gives a transaction enterprise value of **$35.9M**, against **$17.6M** of value to MARA. That is an NPV of **–$20.3M**, and it stays negative even if the common is acquired for nothing.
-
-The value worth having is **Dorothy 2**, a 50 MW shovel-ready expansion next to Soluna's operating Texas sites.
-
-- **Recommendation:** an **all-cash asset purchase of the Dorothy 2 project rights for up to $6.0M** ($4.0M at closing plus a $2.0M earn-out paid on energization), gated on a fixed-price build contract.
-- **Value:** the project is worth **$9.5M** to MARA (range $5.6–15.0M). Expected NPV is **+$3.6M**.
-- **Impact on MARA:** no shares issued and no HSR filing. The EPS effect is immaterial (–0.3% in 2025E, +0.8% from 2026E).
-
----
-
-## 1. Thesis
-
-MARA's question in early 2024 was how to own more of its own capacity. At year-end 2023 it hosted about 193,000 miners with third parties and self-hosted none. It had begun buying operating sites at about $0.44–0.46M per MW.
-
-Soluna has two things that look attractive:
-- curtailment-tolerant capacity behind wind farms in ERCOT
-- a 50 MW expansion that is ready to build
-
-The answer depends on what MARA would actually be paying for:
-- **Soluna Holdings, the company:** a small attributable share of three sites, a large preferred claim, debt maturing in July 2024, a going-concern opinion, and about $10M a year of corporate overhead.
-- **Dorothy 2, the project:** power and land rights that MARA could build out with its own capital.
-
-The first is worth less than it costs. The second is worth more than it costs, but only if the build cost is controlled.
-
-## 2. Company overviews
-
-### MARA Holdings (NASDAQ: MARA), FY2023
-
-| Metric | FY2023 | Source |
-|---|---|---|
-| Revenue | $387.5M | 10-K |
-| Net income | $261.2M | 10-K |
-| Adjusted EBITDA | $419.9M, of which $331.5M is fair-value gains on bitcoin | 10-K |
-| Bitcoin mined / held | 12,852 BTC mined; 15,126 BTC held ($639.7M) | 10-K |
-| Energized hashrate | 24.7 EH/s; 19.4 EH/s average operational; 25 J/TH | 10-K |
-| Cash / convertible notes | $357.3M / $330.7M principal (1%, due 2026) | 10-K |
-| Hosting model | About 193,000 miners hosted by third parties; no self-hosting | 10-K |
-| 2024 site purchases | Generate Capital sites, 390 MW, $179.0M (closed Jan 12, 2024); Garden City, TX, 200 MW, $87.3M (announced Mar 15, 2024) | 10-K/A; Applied Digital 8-K |
-| Market cap / EV, 3/28/2024 | $5.48B / $5.45B (14.1× revenue), on 12/31/2023 shares | Yahoo; model |
-
-The adjusted EBITDA figure is driven by bitcoin price gains under ASU 2023-08, so it is not a measure of operating leverage. Total margin excluding D&A was $164.2M.
-
-### Soluna Holdings (NASDAQ: SLNH), FY2023
-
-| Metric | FY2023 | Source |
-|---|---|---|
-| Revenue | $21.1M (crypto mining $10.6M; hosting $10.2M; demand response $0.3M) | 10-K |
-| Operating loss | $(20.2)M | 10-K |
-| Net loss | $(27.7)M consolidated; $(29.2)M attributable to Soluna; $(36.5)M to common | 10-K |
-| Adjusted EBITDA (company definition) | $(3.5)M for the year; positive in Q3 (+$0.4M) and Q4 (+$1.0M) | 10-K |
-| Cash | $6.4M, plus $4.0M restricted | 10-K |
-| Debt (principal) | $19.6M: convertible notes $8.7M (mature July 25, 2024); NYDIG loan $9.2M (in default); Navitas loan $1.7M | 10-K |
-| 9.0% Series A preferred | 3.06M shares; $25 liquidation preference; $8.6M of dividends in arrears; total claim $85.1M | 10-K |
-| Common shares | 2.84M (Mar 28, 2024), after a 1-for-25 reverse split in October 2023 | 10-K cover |
-| Audit opinion | Going-concern paragraph | 10-K |
-
-**Sites (12/31/2023)**
-
-| Site | MW | Soluna's share | Activity | FY2023 revenue / cash cost |
-|---|---|---|---|---|
-| Sophie, Murray, KY | 25 | 100% | Hosting | $6.0M / $3.2M |
-| Dorothy 1A, Silverton, TX | 25 | 15% (Spring Lane Capital owns 85%) | Hosting, from May 2023 | $6.9M / $4.4M |
-| Dorothy 1B, Silverton, TX | 25 | 51% (Navitas owns 49%) | Proprietary mining, 817 PH/s at 29.9 J/TH | $6.8M / $3.4M |
-| Dorothy 2, Silverton, TX | 50 | 100% | Shovel-ready | — |
-| Kati, TX | 166 | 100% | Early development | — |
-
-Soluna's attributable operating capacity is 41.5 MW, and its attributable FY2023 revenue is $10.5M.
-
-## 3. Strategic rationale: what holds and what doesn't
-
-**What holds**
-- **Owning capacity is cheaper than renting it.** Dorothy hosting earned a cash margin of about $18/MWh (my estimate from the 10-K site table, after a 10% haircut for the halving). That margin is what a third-party host keeps, and MARA saves it by self-hosting.
-- **Curtailment is a revenue line.** Dorothy enrolled in ERCOT demand response in December 2023. On a run-rate basis this is worth about $32k per MW per year (assumption: the December run-rate with a 50% haircut).
-- **Ready-to-build capacity saves time.** Dorothy 2 has its power and land in place, so it could be energized in 2025.
-
-**What doesn't**
-- **"Own Dorothy outright" is not available.** Soluna owns 15% of Dorothy 1A and 51% of Dorothy 1B. Buying Soluna would give MARA minority or joint-venture positions with partners who hold the economics.
-- **Moving MARA miners into existing Soluna sites is not a saving.** Those sites are already full of paying hosting customers. Replacing those customers with MARA's own miners only moves the margin from one line to another, so I give it no value.
-- **The capital structure takes the value.** The preferred claim ($85.1M at liquidation value) is larger than any reasonable value for the business, and the notes and the NYDIG loan need to be dealt with in 2024.
-- **The ESG benefit is real but cannot be quantified.** I treat it as qualitative.
-
-## 4. Valuation
-
-### 4.1 Market value and capital structure (3/28/2024)
-
-| | $M |
+| Headline | Value |
 |---|---|
-| Common equity (2.84M shares × $2.88) | 8.2 |
-| Series A preferred at market (3.06M × $2.79) | 8.5 |
-| Debt principal | 19.6 |
-| Less cash | (6.4) |
-| **EV attributable to Soluna** | **30.0** |
-| Plus non-controlling interests (book) and debt at carrying value | 26.6 |
-| EV, consolidated | 56.5 (2.7× FY2023 revenue) |
+| NPV of the recommended bid at a 10.5% WACC | **+$14.3M** |
+| Walk-away price (breakeven all-cash value to MARA) | **$60.9M** |
+| Unlevered IRR, before the expansion option | 13.7% |
+| NPV at MARA's own 17.0% cost of equity | +$2.1M |
+| Breakeven WACC | 18.6% |
+| Headline price / 2027E campus EBITDA | $50.0M / $10.6M = 4.7x |
+| NPV of a whole-company cash bid (30% premium, preferred redeemed) | ($277.8M) |
 
-I use the attributable figure throughout. It is the value of what a buyer of the holding company actually gets: $30.0M, or about $0.72M per attributable operating MW.
+Four facts drive the call:
 
-### 4.2 Trading comparables
+1. **Dorothy 2 is built, so the 2024 deal no longer exists.** Dorothy 2 (48 MW) was energised in November 2025. Spring Lane Capital holds the Class B interest and takes 92.5% of distributable cash until it reaches an 18% IRR.
+2. **Soluna cannot cover its overhead.** Normalised site cash margin is $22.7M a year, against $23.0M a year of cash corporate opex. Q2-26 Adjusted EBITDA was ($1.6M).
+3. **The preferred makes control expensive.** Par plus arrears on the 9% Series A preferred comes to $163.7M at an assumed 31-Dec-2026 close, against $51.7M at market. Conversion on a change of control is capped at 0.2817 common shares per preferred share, so holders would keep their claim, and a clean takeout has to pay it in full.
+4. **The campus fits MARA's 2027-28 needs.** It brings owned wind, energised halls and a path to 50 MW more. MARA's main third-party hosting contracts expire between 3Q27 and 1Q28.
 
-| Peer | EV ($M) | EV / Revenue | EV / EH/s ($M) |
-|---|---|---|---|
-| MARA | 5,451 | 14.1× | 221 |
-| RIOT | 2,229 | 7.9× | 180 |
-| CLSK | 3,902 | 18.2× (LTM Dec-23) | 390 |
-| CORZ | 1,131 | 2.3× | 67 |
-| HUT | 1,141 | n.m. | 181 |
-| IREN | 365 | n.m. | 65 |
-| BITF | 661 | 4.5× | 102 |
-| WULF | 808 | 11.7× | 147 |
-| **Peer median (ex-MARA)** | | **7.9×** (25th–75th pct: 4.5–11.7×) | **147** |
+## 1. What changed since March 2024
 
-EV is market cap plus debt and preferred, less cash, using balance-sheet-date shares and prices from 3/28/2024. CORZ uses its post-bankruptcy 3/31/2024 balance sheet. HUT and IREN revenue is not comparable because of a transition period and a June fiscal year.
+Both companies have moved from building bitcoin sites to chasing AI power.
 
-At these multiples, Soluna's attributable revenue would be worth $48–84M. **I do not rely on this.** The peers are large self-miners whose valuations price in bitcoin exposure and growth pipelines. Soluna is a minority-owned hosting business with a going-concern opinion, and its own market value is $30.0M. EV/EBITDA is left out on purpose: FY2023 EBITDA across the group includes fair-value gains on bitcoin.
+**Soluna**
+- **Nov-25:** Dorothy 2 completed and fully contracted.
+- **Apr-26:** bought Briscoe Wind (150 MW) for $53.0M and Spring Lane's 85.4% of Dorothy 1A for $16.5M.
+- **May-26:** bought Navitas' 49% of Dorothy 1B for $8.8M, so Dorothy 1 is now 100% owned.
+- **Jun-26:** formed a Kati 2 AI joint venture with Metrobloks.
+- **Sep-26:** completed Kati 1 (83 MW), bringing operating capacity to 206 MW. ERCOT conditionally classified the Kati campus as Base Load in its Batch Zero process.
 
-### 4.3 Precedent transactions ($ per MW)
+**MARA**
+- **Jan-26:** bought the Meerkat data centre (42 MW, Nebraska) for $25.2M.
+- **Feb-26:** formed a joint platform with Starwood Digital Ventures.
+- **Apr-26:** agreed to buy Long Ridge (485 MW CCGT) at about $1.5B of EV. It had not closed as of the Q2-26 10-Q.
+- **Jul-26:** agreed the HIF Matagorda deal: 2 GW of powered land for up to $600M in milestone payments.
 
-| Date | Transaction | MW | Price | $M / MW |
-|---|---|---|---|---|
-| Jan 2024 | MARA buys Generate Capital sites (Granbury, TX; Kearney, NE) | 390 | $179.0M | 0.46 |
-| Mar 2024 | MARA buys Applied Digital's Garden City, TX site | 200 | $87.3M | 0.44 |
+The v1 thesis was to buy Dorothy 2 before it was built, for $6.0M (NPV +$3.6M). That deal is now obsolete. Every alternative below was re-tested against today's capital structure and MARA's current strategy.
 
-Two pieces go into the precedent value:
-- Soluna's 41.5 attributable operating MW, valued at $0.44–0.46M per MW.
-- Dorothy 2, valued at 20–30% of that per-MW price to reflect development risk (an assumption).
+## 2. Soluna today: 206 MW operated, about 95 MW owned
 
-Together they give **$22.5–25.9M**, below the $30.0M market value. On this basis Dorothy 2 rights are worth roughly $0.09–0.14M per MW.
+Spring Lane's Class B preference captures most of the cash from Dorothy 2 and Kati 1 until its hurdle IRR is met. On that basis, Soluna's attributable capacity is 94.8 MW. The Kati 1 split is an assumption: 7.5% plus 92.5% x 13%.
 
-### 4.4 Discounted cash flow
+| Metric | Value |
+|---|---|
+| Operating capacity (Sep-26) | 206 MW |
+| Attributable capacity | 94.8 MW |
+| Briscoe wind (owned) | 149.85 MW |
+| Q2-26 revenue / LTM revenue | $15.1M / $42.1M |
+| Q2-26 gross profit | $0.8M |
+| Q2-26 Adj. EBITDA | ($1.6M) |
+| Q2-26 net loss | ($22.6M) |
+| Pro forma cash (30-Jun + $23.6M ATM - $19.1M Generate prepayment) | $117.9M |
+| Development pipeline | 6.3 GW |
 
-**Discount rate**
+**Site economics.** The run-rate is normalised from Q2-26: the one-off $1.5M Briscoe maintenance charge is added back, and Kati 1 is assumed to have averaged about 50 MW in the quarter.
+- **Site margin:** the data centres earn about $90k per MW-year after power, labour and site costs. Consolidated site cash margin is $22.7M a year, of which Briscoe wind is $7.1M. The attributable share is $15.6M.
+- **Overhead:** cash corporate opex is $23.0M a year, before $9.5M of Q2 stock compensation. That leaves attributable run-rate EBITDA of about ($7.3M) a year.
+- **Hashprice and halving:** hashprice is $38.85/PH/day (Q2-26 average: $33.63). The April 2028 halving cuts the block subsidy in half.
 
-| Input | Value | Basis |
+The read-across is that a buyer who strips out the overhead captures the site margin. A buyer of the whole company inherits both the overhead and the preferred.
+
+## 3. Capital structure: the preferred sits between MARA and the common
+
+| $M, close of 14-Oct-2026 | Market | Change of control |
 |---|---|---|
-| Risk-free rate | 4.20% | 10-year Treasury, 3/28/2024 (FRED) |
-| Equity risk premium | 4.60% | Damodaran implied ERP, January 2024 |
-| Unlevered beta | 2.42 | Median of 7 peers, 2-year weekly vs. S&P 500 |
-| Target debt / capital | 25% | Assumption |
-| Relevered beta | 3.23 | No tax shield (NOLs) |
-| Company-specific premium | 3.0% | Assumption: micro-cap, going concern, minority-owned sites |
-| Cost of equity | 22.1% | |
-| Cost of debt | 14.0% | Rate on the NYDIG loan, used as a proxy |
-| **WACC** | **20.0%** | 20.04% before rounding; MARA's own cost of equity is about 20.7% as a cross-check |
+| Common equity (247.0M FD shares) | 177.8 | 231.2 at a 30% premium ($0.94) |
+| Series A preferred (4.92M shares) | 51.7 | 163.7 (par + arrears) |
+| Debt principal (pro forma) | 22.7 | 22.7 |
+| HPE termination liability | 19.3 | 19.3 |
+| Cash (pro forma) | (117.9) | (117.9) |
+| **Attributable EV** | **153.6** | **319.0** |
+| Non-controlling interests (book) | 54.5 | 54.5 |
+| **Consolidated EV** | **208.1** | **373.5** |
+| EV per operating MW | $1.01M | $1.81M |
 
-**Operating assumptions**
-- **Bitcoin price:** held flat at $70,745. This is not a price forecast. Bitcoin sensitivities are shown separately.
-- **Network and hashprice:** network hashrate of 625 EH/s in Q2–Q4 2024 and 775 EH/s in 2025, with 3.125 BTC block subsidy plus 0.25 BTC in fees. That gives a hashprice of $55.0/PH/day in Q2–Q4 2024 and $44.4/PH/day in 2025.
-- **Site margins** (from FY2023 site data):
-  - Dorothy hosting: $0.136M per MW-year
-  - Sophie: $0.111M per MW-year
-  - Dorothy 1B: mines through 2025, then is assumed to move to hosting
-- **Uptime:** 85%.
-- **Maintenance capex:** $0.01M per MW-year.
-- **Corporate G&A:** standalone, $10.0M in 2024 rising 3% a year, against $11.1M of cash G&A in FY2023. Under MARA, $2.5M.
-- **Dorothy 2 build:** $0.45M per MW, or $22.5M, spent over 2024–25. This is an assumption set at the low end of what MARA paid per MW for operating sites. The project reaches 25% of run-rate in 2025 and is at full run-rate from 2026.
-- **Taxes:** 0% standalone, because of NOLs. 21% under MARA, ignoring NOLs because of the §382 limit.
-- **Timing:** 2024 covers only Q2–Q4. Cash flows are discounted at mid-period, and terminal growth is 2%.
+**The preferred**
+- It is a 9% cumulative perpetual preferred, and no dividends have been declared since October 2022. Arrears were $35.1M at 30-Jun-2026 and accrue at $11.1M a year.
+- At the $0.94 offer, the 0.2817 conversion cap is worth $0.26 per preferred share, against a $10.50 market price.
+- The base case assumes MARA redeems the preferred at $25 plus arrears. The specific redemption mechanics on a change of control were not verified.
 
-**Results: attributable EV, $M**
+**Excluded from the share count**
+- 24.3M warrants are excluded because their strikes are not verified. They are assumed to be out of the money at $0.72.
 
-| Case | Base (20%, 2%) | Range (WACC 18–22%, g 1–3%) | Implied terminal EV/EBITDA |
-|---|---|---|---|
-| Standalone (existing sites, standalone G&A) | (31.1) | (36.2) to (27.3) | n.m. |
-| Under MARA (G&A cut, Dorothy 2 built) | 17.6 | 12.4 to 25.0 | 4.6× |
-| Dorothy 2 only, before purchase price | 9.5 | 5.6 to 15.0 | 4.6× |
+## 4. Valuation of Soluna
 
-**Sensitivity: Under-MARA EV ($M)**
+**Trading comps.** Prices are 14-Oct-2026 closes and balance sheets are at 30-Jun-2026. EV is market cap plus debt plus NCI less unrestricted cash; bitcoin holdings are not netted.
 
-| WACC \ g | 1% | 2% | 3% |
-|---|---|---|---|
-| 18% | 21.2 | 23.0 | 25.0 |
-| 19% | 18.6 | 20.1 | 21.8 |
-| 20% | 16.3 | **17.6** | 19.1 |
-| 21% | 14.2 | 15.4 | 16.7 |
-| 22% | 12.4 | 13.4 | 14.5 |
+| | EV/LTM revenue |
+|---|---|
+| BTC-weighted peers: RIOT, CLSK, KEEL, MARA | 25th-75th percentile 7.4x-9.5x (median 9.0x) |
+| HPC-transition peers: CORZ, IREN, CIFR, WULF, HUT | 15.6x-53.6x (context only; they trade on contracted lease backlogs) |
+| Soluna, consolidated | 4.9x |
 
-**Bitcoin price (Under-MARA EV)**
-- $50k: $14.8M
-- $70.7k: $17.6M
-- $100k: $21.3M
+Soluna's cash margin is a fraction of the peers', so the gap to the peer multiple is not mispricing.
 
-Value is driven mostly by hosting margins and G&A, not by the bitcoin price. On its own, Soluna's corporate overhead is larger than the attributable site cash flow, which explains why the market prices the company mainly as an option on future development.
+**Precedents.** These are recent and directly relevant:
+- **Operating halls, $0.60-0.77M per MW:** Meerkat ($0.60M), Dorothy 1A Class B ($0.77M) and Dorothy 1B 49% ($0.72M).
+- **Wind:** Briscoe at $0.35M per MW.
+- **Powered land:** HIF Matagorda at $0.30M per MW.
+- Long Ridge ($3.09M per MW) prices dispatchable gas generation and is not comparable.
 
-### 4.5 Valuation summary (attributable EV, $M)
+**Football field, $ per SLNH share**
 
 | Method | Low | High |
 |---|---|---|
-| Market, unaffected (3/28/2024) | 30.0 | 30.0 |
-| Precedent transactions ($/MW) | 22.5 | 25.9 |
-| DCF, standalone | (36.2) | (27.3) |
-| DCF, under MARA | 12.4 | 25.0 |
-| DCF, Dorothy 2 only | 5.6 | 15.0 |
-| Comps, EV/Revenue (shown, not relied on) | 47.6 | 83.6 |
-| **Cost of the whole company at $4.00 per share** | **37.9** | **37.9** |
+| BTC-weighted comps (EV/LTM revenue, 25th-75th percentile) | 1.13 | 1.49 |
+| Precedent $/MW SOTP | 0.59 | 0.66 |
+| Standalone DCF-SOTP (WACC ±1 pt) | (0.12) | (0.08) |
+| Value to MARA with synergies (preferred redeemed / left outstanding) | (0.16) | 0.30 |
+| 52-week trading range | 0.61 | 4.42 |
+| *Reference: close / 30% premium* | *0.72* | *0.94* |
 
-## 5. Deal structure and financing
+Every cash-flow method values the common below the $0.72 share price. Only revenue multiples support the price or a premium to it. The market is paying for the 6.3 GW pipeline story, and MARA should not buy it.
 
-### 5.1 Tested and rejected: tender for all of Soluna
+## 5. Alternatives tested
 
-To control Soluna, MARA would have to deal with every claim, not just the common stock:
+All alternatives use the same inputs. NPV to MARA is value less consideration and fees, at a 10.5% WACC. The whole-company cases include synergies (75% of corporate opex removed) and $8M of integration cost.
 
-| Component | Terms | $M |
-|---|---|---|
-| Common | $4.00 per share × 2.91M fully diluted shares. Premium of 38.9% to the $2.88 spot price and 18.7% to the $3.37 30-day VWAP | 11.6 |
-| Series A preferred | Tender at $3.50 per share, a 25.4% premium to market. Leaving it in place would leave an $85M senior claim. On a change of control, holders can convert, but only up to a cap of 0.2817 common shares each, which is worth $1.13 at $4.00. | 10.7 |
-| Convertible notes | Repaid at the greater of par or as-converted value ($4.7M of the notes convert at $3.78) | 9.0 |
-| NYDIG and Navitas loans | Repaid at principal (the NYDIG settlement value is not verified) | 10.9 |
-| Less cash acquired | | (6.4) |
-| **Transaction enterprise value (TEV)** | 1.7× FY2023 revenue | **35.9** |
-| Fees | Assumption | 2.0 |
-| **Total cost** | | **37.9** |
+| | Alternative | Outlay | NPV to MARA | Verdict |
+|---|---|---|---|---|
+| A1 | Whole company, cash, 30% premium, preferred redeemed | $394.9M | ($277.8M) | Reject |
+| A2 | Whole company, all-stock, 30% premium, preferred left outstanding | $231.2M | ($162.6M) | Reject |
+| B1 | Dorothy Energy Campus at the seller's recent cost basis | $78.3M | ($15.1M) | Reject |
+| **B2** | **Dorothy Energy Campus: $40M cash + $10M contingent** | **$50.0M** | **+$14.3M** | **Recommend** |
+| C | Buy 100% of Dorothy 2 at $0.60M/MW | $28.8M | ($17.8M) | Reject |
+| D | Hosting MSA, 35 MW for 2028-30 | - | +$3.7M | Fallback (capacity is contracted) |
+| E | 19.9% PIPE in SLNH at market | $43.8M | ($35.0M) | Reject |
+| F | No transaction | - | $0.0M | Default if seller declines |
 
-- **NPV:** $17.6M of value minus $37.9M of cost gives **–$20.3M**.
-- **Common at zero:** with the common acquired for nothing, NPV is still –$8.3M. With the preferred bought at market, it is –$6.2M.
-- **Downside stress:** across residual G&A of $1.5–3.5M and WACC of 18–22%, NPV ranges from –$9.8M to –$28.6M.
-- **Paying in stock does not help.** It would mean issuing 0.99M MARA shares (0.37% dilution) for the same negative-NPV asset. The original's "stock-based consideration with a price cap" is not supported by either source document, and it fails on value whatever currency is used.
+- **A1** is negative even at $0 per common share.
+- **A2** breaks even only at $0.29 per SLNH share. At the 30% premium it would issue 28.1M MARA shares, which is 6.8% of the pro forma company.
+- **C** fails because Spring Lane's Class B claims most of Dorothy 2's cash.
 
-### 5.2 Recommended: all-cash purchase of the Dorothy 2 project rights
+## 6. The recommended structure
 
-| Term | Proposal |
+MARA buys 100% of the Briscoe and Dorothy 1 entities in a cash-free, debt-free asset purchase, funded from balance-sheet cash ($421M at 30-Jun-2026). No new MARA shares are issued. Soluna repays Generate Tranches A-1 and C, which secure Dorothy 1A and Briscoe, from the proceeds.
+
+**Perimeter**
+- **Acquired:** Briscoe Wind (149.85 MW nameplate, PPA and REC revenue, run-rate EBITDA $7.1M); Dorothy 1A/1B (50 MW of energised halls, the hosting contracts and the D1B miners; EBITDA $4.5M); and the 50 MW load request now under TDSP study (valued at $0.30M/MW x 50% probability = $7.5M).
+- **Retained by Soluna:** Dorothy 2 (with Spring Lane), Dorothy 3 land, Kati 1-2 and Sophie. Briscoe keeps selling power to Dorothy 2 under a long-term PPA, to be negotiated.
+
+**Key terms**
+- The headline $50.0M is below the $133.9M HSR threshold, so no filing is needed.
+- The asset deal gives MARA a stepped-up tax basis.
+- The hosting contracts and the Golden Spread PPA are assigned to MARA.
+- Soluna provides six months of transition services.
+
+**Why Soluna might say yes**
+- Raising $40M through its ATM at $0.72 would mean about 56M new shares (18.5% dilution).
+- The proceeds fund its share of Kati 2 (the 83 MW AI phase) without more equity.
+- It keeps Dorothy 3 and its AI story.
+
+## 7. Campus DCF
+
+Assumptions: mid-year discounting from 31-Dec-2026 at 10.5%; 21% tax; 15-year life with no terminal value; $1.0M a year each of maintenance capex and site overhead. Data-hall margin falls to 50% of run-rate after the April 2028 halving.
+
+| $M | 2027 | 2028 | 2029 | 2030+ |
+|---|---|---|---|---|
+| EBITDA (after overhead) | 10.6 | 8.9 | 8.3 | 8.3 |
+| Less: tax on EBITDA | (2.2) | (1.9) | (1.7) | (1.7) |
+| Less: maintenance capex | (1.0) | (1.0) | (1.0) | (1.0) |
+| **Unlevered FCF** | **7.4** | **6.0** | **5.6** | **5.6** |
+
+| Value bridge | $M |
 |---|---|
-| Asset | Dorothy 2 (50 MW, Silverton, TX): land and site rights, interconnection and power arrangements, permits, and engineering |
-| Price | **Up to $6.0M in cash**: $4.0M at closing plus a $2.0M earn-out if 45 MW or more is energized by September 30, 2025. That is $0.12M per MW, within the $0.09–0.14M/MW implied by the precedents. |
-| Value to MARA | **$9.5M** (range $5.6–15.0M). The price plus fees has a present value of $5.9M, so NPV is **+$3.6M** and MARA pays 62% of the value. |
-| Financing | Cash on hand. $29.0M in total: price, $22.5M build, and $0.5M of fees. That is 8% of MARA's $357.3M of year-end cash. No new debt and no shares issued. |
-| Ownership impact | 0% dilution |
-| EPS impact | –$0.003 per share in 2025E (–0.3% of FY2023 diluted EPS). +$0.008 in 2026E (+0.8%). Includes D&A on price and capex over 7 years and lost interest on the cash at the 3-month T-bill rate of 5.23%. |
-| Conditions | Assignment of the power and interconnection arrangements, with ERCOT and utility consents. Fixed-price EPC bid at or below **$0.50M per MW**: NPV is +$1.8M at $0.50 and breaks even at $0.55. Lien releases. Soluna board approval. |
-| Ongoing | Optional O&M contract with Soluna on market terms. Right of first offer (ROFO) on Kati. |
-| Regulatory | Well below the 2024 HSR threshold of $119.5M. No filing. |
+| PV of operating FCF | 45.4 |
+| + 50 MW expansion option | 7.5 |
+| = Campus value, carry-over basis | 52.9 |
+| + Step-up tax shield (7-year straight-line), net of fees, at breakeven | 8.0 |
+| **= Breakeven all-cash price (walk-away)** | **60.9** |
+| Recommended headline price | 50.0 |
+| **NPV of bid (contingent at expected value)** | **14.3** |
 
-**Why cash.** Soluna needs liquidity: it had $6.4M of cash against notes maturing in July 2024. Cash at closing is the most valuable thing MARA can offer, and MARA has plenty. The earn-out shifts construction and interconnection timing risk back to the seller. Issuing stock for a $6M asset would add disclosure work and gain nothing.
+**Discount rate.**
+- The cost of equity is 11.28%: rf 5.19% (10Y UST, 14-Oct-2026) + relevered beta 1.45 x ERP 4.20% (Damodaran implied, 1-Oct-2026).
+- The beta is a blend of wind (unlevered 0.47, Damodaran) and the miners' peer median (2.37, computed from 102 weekly returns). The blend is weighted by EBITDA (wind 61%), giving an unlevered beta of 1.21, relevered at 20% D/V.
+- With a 9.0% pre-tax cost of debt, the WACC is 10.45%, rounded to 10.5%.
+- v1 used about 20%, which was right for a pure miner; the campus is now mostly wind cash flow.
 
-**Cost in context.** All in, at $0.57M per MW for price plus build, Dorothy 2 costs more per MW than the operating sites MARA bought in Q1 2024. It is a bolt-on that earns its cost of capital, not a substitute for those purchases. The EPC gate is the main protection.
+**Sensitivity: NPV of the bid ($M)**
 
-## 6. Synergies
+| Wind EBITDA \ WACC | 8.5% | 9.5% | 10.5% | 11.5% | 12.5% |
+|---|---|---|---|---|---|
+| 80% ($5.7M) | 9.9 | 7.7 | 5.6 | 3.8 | 2.0 |
+| 90% ($6.4M) | 14.7 | 12.2 | 10.0 | 7.9 | 6.0 |
+| 100% ($7.1M) | 19.5 | 16.8 | **14.3** | 12.0 | 9.9 |
+| 110% ($7.8M) | 24.4 | 21.4 | 18.6 | 16.1 | 13.8 |
+| 120% ($8.5M) | 29.2 | 25.9 | 23.0 | 20.2 | 17.7 |
 
-| Item | Whole company | Dorothy 2 asset deal | Basis |
+Every cell is positive.
+
+**Stress tests**
+- At MARA's own 17.0% cost of equity, NPV is +$2.1M.
+- The breakeven WACC is 18.6%.
+- If the 50 MW is never approved, MARA pays no contingent and NPV is +$10.7M.
+- Paying the seller's $78.3M cost basis gives ($15.1M).
+
+## 8. Effects on MARA
+
+**Sources and uses.** MARA uses $40.9M of balance-sheet cash at closing: $40.0M of consideration plus $0.9M of fees. The $10.0M contingent payment is deferred. MARA's cash after closing is about $380M.
+
+**Per MARA share** (386.3M shares)
+- The campus deal adds $0.037 of NPV and $0.027 of 2027E EBITDA.
+- By contrast, the whole-company cash bid (A1) would destroy $0.72 per share.
+
+**Ownership.** The cash deal leaves MARA's ownership unchanged. The rejected all-stock route (A2) would hand 6.8% of MARA to former SLNH holders.
+
+## 9. Risks and mitigants
+
+| Risk | Likelihood | Impact | Mitigant |
 |---|---|---|---|
-| Corporate G&A removed | $7.7M/yr from 2025, with $2.5M one-time cost to achieve | — (no overhead acquired) | $10.3M standalone less $2.6M residual (assumption) |
-| Self-hosting margin on new capacity | $8.4M/yr EBITDA from 2026 | $8.4M/yr EBITDA from 2026 | (Dorothy margin $0.136M + demand response $0.032M) × 50 MW |
-| MARA miners moved into existing Soluna sites | $0 | $0 | Displaces paying hosting customers; not incremental |
-| AI/HPC conversion | Not valued | Not valued | Upside only; no contracted demand |
-| Funding cost | Included | Included | Build capex funded by MARA at its cost of capital |
+| Seller refuses below its $78.3M cost basis | High | Deal does not happen | Walk away above $60.9M. Lead with non-dilutive funding versus 18.5% ATM dilution. The contingent tranche bridges the gap on value. |
+| Wind output or merchant price shortfall | Medium | -20% wind EBITDA: NPV $5.6M | Diligence 10 years of P50/P90 output; assume the GSEC PPA; price merchant volumes at forward curves. |
+| 50 MW request not approved | Medium | NPV falls to $10.7M | $10M of the price is paid only on TDSP approval. |
+| Dorothy 2 PPA and shared-substation disputes | Medium | Operational friction | Long-term PPA and interconnection-sharing agreement signed at closing; cross-default carve-outs. |
+| Halving and hashprice compress hall margin | High | Already in base case (50%) | Redeploy MARA's fleet as hosting expires (3Q27-1Q28); evaluate AI conversion with MARA's Starwood Digital Ventures platform if the 50 MW is approved. |
+| Generate liens and lender consent | Low | Closing delay | Soluna repays Tranches A-1 and C at closing; payoff letters are a condition precedent. |
 
-The original claimed $8–12M of cost synergies and $5–10M of revenue synergies. Most of that was hosting savings on capacity that is already rented to other customers, so it was counted twice.
+## 10. Process and decision rules
 
-## 7. Risks
+**Process.** The timeline is illustrative.
+1. **Approach:** non-binding indication of $40M + $10M contingent, with 45 days of exclusivity.
+2. **Confirmatory diligence:** wind P50/P90, the GSEC PPA, the hosting contracts, the substation and interconnection, and the Generate payoff.
+3. **Sign:** the asset purchase agreement, the D2 PPA and interconnection-sharing agreement, and the TSA.
+4. **Close:** cash-free and debt-free, with no HSR filing; target 31-Dec-2026.
+5. **Contingent payment:** TDSP approval of the extra 50 MW triggers the $10M.
 
-| Risk | Effect | Mitigation |
-|---|---|---|
-| Build cost overrun | Each +$0.10M/MW cuts NPV by about $3.7M. Breakeven is $0.55M/MW. | Fixed-price EPC at or below $0.50M/MW as a closing condition |
-| Hosting margin compression after the halving | Breakeven margin is $0.115M per MW-year, 16% below base | Self-hosting (MARA keeps the margin); demand response income |
-| Power rights cannot be transferred | Deal fails | Assignment and consents are conditions; no payment until close |
-| Seller insolvency (going concern, NYDIG default) | Fraudulent-transfer or lien challenge | Price shown to be fair against precedents; lien releases at close; earn-out held back |
-| Partner rights (Spring Lane Capital, Navitas) over Dorothy 2 | Could block or delay the deal | Diligence item; not disclosed in the 10-K (unverified) |
-| ERCOT curtailment and policy | Lower uptime or demand response income | 85% uptime assumed; demand response is valued at a 50% haircut |
-| Opportunity cost | Operating sites were available at $0.44–0.46M/MW | Keep the deal small; it does not compete with larger acquisitions |
-| Whole-company path, if pursued | Preferred holdouts; note maturity; ~$10M of overhead | Not recommended |
+**Decision rules**
+- **Bid ceiling:** $60.9M all-cash equivalent.
+- **No bid for SLNH equity.** A cash takeout that clears the preferred is negative even at $0 per common share. An all-stock deal that leaves the preferred outstanding breaks even only at $0.29 per share.
+- **Fallback:** a 35 MW hosting MSA for 2028-30 (NPV +$3.7M) if capacity frees up.
 
-## 8. Recommendation
+**What would change the view**
+- A signed hyperscale lease at Kati 2 or Dorothy 3 with disclosed $/MW economics.
+- A restructuring of the preferred, which today puts a $164M claim ahead of the common in any takeout.
+- ERCOT confirming the Base Load positions, and the 50 MW approval arriving before signing.
 
-1. **Do not acquire Soluna Holdings.** At $4.00 per share, the TEV of $35.9M is twice the $17.6M the business is worth to MARA. Buying out the preferred, the notes and the loans uses up any control value.
-2. **Buy Dorothy 2 for up to $6.0M in cash** ($4.0M at closing plus a $2.0M earn-out). Close only with a fixed-price build at or below $0.50M per MW and assignable power rights. Expected NPV is +$3.6M; there is no dilution and no HSR filing.
-3. **Keep the larger site program going.** Operating capacity at about $0.45M per MW was the better use of MARA's capital in 2024. Dorothy 2 adds to that program and does not replace it.
+## Limitations and items not verified
 
----
-
-## What happened next (hindsight, not used in the valuation)
-
-- **Soluna built Dorothy 2 itself.** Spring Lane Capital agreed in July 2024 to finance up to $30M of a resized 48 MW project, about $0.63M per MW. Construction finished in November 2025, after phased energization from Q1 2025.
-  - At that build cost, the asset deal above would have had an NPV of about –$2.9M. That is why the EPC gate was needed.
-  - The September 2025 earn-out milestone would likely not have been met.
-- **MARA was already a Soluna customer.** It signed a co-location agreement with Soluna at Project Sophie dated January 3, 2024. This was disclosed in a March 2025 loan agreement and was not named in the FY2023 10-K. MARA could get Soluna capacity by contract without buying the company.
-- **Soluna's revenue grew and its share count exploded.**
-  - Revenue was $38.0M in FY2024 and $29.7M in FY2025. Net losses were $(63.3)M and $(53.4)M.
-  - Shares outstanding reached 244.6M by August 2026, about 86 times the March 2024 count.
-  - SLNH closed at $0.72 on October 14, 2026, down 75% from the valuation date.
-- **MARA's results swung.** Revenue was $656.4M in FY2024 and $907.1M in FY2025. Net income went from $541.3M to a net loss of $(1,311.5)M as bitcoin fair-value marks moved.
-
-## Method and sources
-
-- **Primary:** SEC EDGAR 10-K filings for FY2023 (Soluna, MARA and 10-K/A, RIOT, CORZ, HUT 10-KT, WULF), Bitfarms 40-F, CleanSpark 10-K/10-Q, IREN 6-K, the Applied Digital 8-K, and Soluna's Series A 424B5 for the preferred terms.
-- **Market data:** Yahoo Finance daily prices and volumes; FRED (DGS10, DTB3); Damodaran implied ERP; blockchain.com difficulty and fee data; FTC HSR thresholds.
-- **Model:** `model/MARA_Soluna_model.xlsx`, with live formulas, reconciled to `model/model.py`.
-- **Figure register:** `figures.json` lists value, unit, as-of date, source URL or "assumption", and a note for each figure.
+- **Not verified from filings:**
+  - Warrant strike prices.
+  - Series A change-of-control redemption mechanics.
+  - Briscoe vintage, remaining life and P50 output.
+  - Assignability of the Dorothy 2 PPA.
+  - Metrobloks JV economics (assumed 50%).
+  - Whether MARA's earlier Sophie co-location is still current.
+  - Long Ridge closing status after the 6-Aug-2026 10-Q.
+- **Estimated:** Kati 1's Q2-26 average load (about 50 MW) is an assumption.
+- **Data timing:** IREN's share count is dated 30-Apr. The Damodaran industry-beta file is the January 2026 update.
+- **Model conventions:** synergy, approval-probability and post-halving margin figures are assumptions, flagged in `figures.json`.

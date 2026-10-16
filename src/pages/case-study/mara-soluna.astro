@@ -8,14 +8,43 @@ const D = '/case-study/mara-soluna';
 const body = raw.slice(raw.indexOf('\n## '));
 const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
 const slugify = (t) => t.toLowerCase().replace(/^\d+\.\s*/, '').replace(/\(.*?\)/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const navName = { 'summary':'Summary','thesis':'Thesis','company-overviews':'Company overviews','strategic-rationale-what-holds-and-what-doesn-t':'Strategic rationale','valuation':'Valuation','deal-structure-and-financing':'Deal structure','synergies':'Synergies','risks':'Risks','recommendation':'Recommendation','what-happened-next':'Hindsight','method-and-sources':'Sources' };
+const navName = {
+  'recommendation': 'Recommendation',
+  'what-changed-since-march-2024': 'What changed',
+  'soluna-today-206-mw-operated-about-95-mw-owned': 'Soluna today',
+  'capital-structure-the-preferred-sits-between-mara-and-the-common': 'Capital structure',
+  'valuation-of-soluna': 'Valuation',
+  'alternatives-tested': 'Alternatives',
+  'the-recommended-structure': 'Deal structure',
+  'campus-dcf': 'Campus DCF',
+  'effects-on-mara': 'Effects on MARA',
+  'risks-and-mitigants': 'Risks',
+  'process-and-decision-rules': 'Process',
+  'limitations-and-items-not-verified': 'Limitations',
+};
 const figs = {
-  'summary': [['02_answer','The answer: buy the project, not the company']],
-  'company-overviews': [['04_soluna_overview','Soluna at a glance: sites, ownership and FY2023 results']],
-  'valuation': [['06_capital_structure_ev','Market value and capital structure, March 28, 2024'],['07_trading_comps','Trading comparables (shown, not relied on)'],['10_dcf','DCF results: standalone, under MARA, Dorothy 2 only'],['12_valuation_summary','Valuation summary vs. the cost of the whole company']],
-  'deal-structure-and-financing': [['13_whole_company_test','Tested and rejected: a tender for all of Soluna'],['14_recommended_structure','Recommended: all-cash purchase of Dorothy 2']],
-  'synergies': [['15_synergies','Synergies: whole company vs. asset deal']],
-  'recommendation': [['17_recommendation_hindsight','Recommendation and what happened next']],
+  'recommendation': [['02_exec_summary', 'Executive summary: buy the Dorothy Energy Campus, not SLNH equity']],
+  'what-changed-since-march-2024': [['03_timeline', 'What changed since March 2024: Soluna and MARA timelines']],
+  'soluna-today-206-mw-operated-about-95-mw-owned': [
+    ['04_capacity', 'Soluna capacity: 206 MW operated, about 95 MW attributable'],
+    ['05_site_economics', 'Site economics: site margin vs. corporate overhead'],
+  ],
+  'capital-structure-the-preferred-sits-between-mara-and-the-common': [['06_capital_structure', 'Capital structure at the 14-Oct-2026 close']],
+  'valuation-of-soluna': [
+    ['07_comps', 'Trading comparables: EV / LTM revenue'],
+    ['08_precedents', 'Precedent transactions: $/MW for halls, wind and powered land'],
+    ['09_football_field', 'Football field: value per SLNH share'],
+  ],
+  'alternatives-tested': [['10_alternatives', 'Alternatives tested: whole company, campus, hosting, PIPE']],
+  'the-recommended-structure': [['11_deal_structure', 'Recommended structure: Dorothy Energy Campus asset purchase']],
+  'campus-dcf': [
+    ['12_campus_dcf', 'Campus DCF: value bridge to the $60.9M walk-away'],
+    ['13_sensitivity', 'Sensitivity: NPV stays positive across wind and WACC'],
+    ['17_appendix_wacc', 'Appendix: WACC build (wind-weighted)'],
+  ],
+  'effects-on-mara': [['14_sources_uses_ownership', 'Sources & uses and ownership impact']],
+  'risks-and-mitigants': [['15_risks', 'Risks and mitigants']],
+  'process-and-decision-rules': [['16_recommendation', 'Process, decision rules and recommendation']],
 };
 const sections = await Promise.all(parts.map(async (s) => {
   const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim(); const id = slugify(title);
@@ -27,19 +56,18 @@ const sections = await Promise.all(parts.map(async (s) => {
 <article class="max-w-6xl mx-auto px-6 py-16">
 <a data-back href="/#case-study" class="text-sm text-gray-400 hover:text-accent">← Back to home</a>
 <header class="mt-6 max-w-3xl">
-<p class="text-accent text-sm">Independent M&A case study · Public information only · As of March 28, 2024 (FY2023 10-Ks)</p>
-<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">MARA × Soluna: buy the project, not the company</h1>
-<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">Should MARA Holdings buy Soluna Holdings to own renewable-powered hosting capacity in Texas? Rebuilt from the FY2023 10-Ks, the answer is no: the value worth having is Soluna's 50 MW Dorothy 2 project, not the company.</p>
+<p class="text-accent text-sm">Independent M&A case study · Public information only · Valuation date: close of 14 October 2026</p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight">MARA × Soluna: buy the power, not the company</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">Should MARA bid for Soluna Holdings to own renewable-powered capacity in Texas? Updated to the 14-Oct-2026 close, the answer is still no on the equity — and the value worth having has moved from an unbuilt Dorothy 2 to the Dorothy Energy Campus.</p>
 <div class="grid sm:grid-cols-3 gap-4 mt-8">
-<div class="card p-5 reveal border-accent/40"><p class="text-xs uppercase tracking-widest text-accent">Recommendation</p><p class="text-white font-semibold mt-2">All-cash purchase of Dorothy 2 for up to $6.0M</p><p class="text-xs text-gray-400 mt-1">$4.0M at closing + $2.0M earn-out on energization</p></div>
-<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">Dorothy 2 NPV</p><p class="text-3xl font-bold text-emerald-400 mt-1">+$3.6M</p><p class="text-xs text-gray-400 mt-1">Worth $9.5M to MARA (range $5.6–15.0M)</p></div>
-<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">Whole company at $4.00/share</p><p class="text-3xl font-bold text-red-400 mt-1">–$20.3M</p><p class="text-xs text-gray-400 mt-1">$37.9M total cost vs. $17.6M of value</p></div>
+<div class="card p-5 reveal border-accent/40"><p class="text-xs uppercase tracking-widest text-accent">Recommendation</p><p class="text-white font-semibold mt-2">$40M cash + $10M contingent for the Dorothy Energy Campus</p><p class="text-xs text-gray-400 mt-1">Briscoe wind, Dorothy 1A/1B, and rights to another 50 MW</p></div>
+<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">Campus bid NPV</p><p class="text-3xl font-bold text-emerald-400 mt-1">+$14.3M</p><p class="text-xs text-gray-400 mt-1">Walk away above $60.9M · 4.7× 2027E EBITDA</p></div>
+<div class="card p-5 reveal"><p class="text-xs uppercase tracking-widest text-gray-400">Whole-company cash bid</p><p class="text-3xl font-bold text-red-400 mt-1">–$277.8M</p><p class="text-xs text-gray-400 mt-1">30% premium, preferred redeemed · Reject</p></div>
 </div>
 <div class="flex flex-wrap gap-3 mt-8">
-<a href={`${D}/MARA_Soluna_deck.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Deck (PDF) ↓</a>
-<a href={`${D}/MARA_Soluna_memo.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 hover:border-accent text-sm">Memo (PDF) ↓</a>
+<a href={`${D}/MARA_Soluna_v2_deck.pdf`} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Deck (PDF) ↓</a>
 </div>
-<p class="text-xs text-gray-500 mt-6">Not prepared for, or on behalf of, any employer, client, or either company. All figures in US$; "$M" means millions.</p>
+<p class="text-xs text-gray-500 mt-6">Not prepared for, reviewed by, or affiliated with MARA Holdings, Soluna Holdings, or any employer or client. Not investment advice. All figures in US$; "$M" means millions.</p>
 </header>
 <div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
 <nav aria-label="Case study sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10">
@@ -49,7 +77,7 @@ const sections = await Promise.all(parts.map(async (s) => {
 {sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
 <h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
 <div class="cs-prose reveal" set:html={s.html}/>
-{s.figs.map(([f, cap]) => (<figure class="card overflow-hidden mt-8 reveal"><a href={`${D}/${f}.1600.webp`} target="_blank" class="block"><img src={`${D}/${f}.1600.webp`} srcset={`${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w`} sizes="(min-width:1024px) 768px, 100vw" width="1600" height="901" loading="lazy" decoding="async" alt={`Slide: ${cap}`} class="w-full"/></a><figcaption class="px-4 py-3 border-t border-white/10 text-xs text-gray-400">{cap}</figcaption></figure>))}
+{s.figs.map(([f, cap]) => (<figure class="card overflow-hidden mt-8 reveal"><a href={`${D}/${f}.1600.webp`} target="_blank" class="block"><img src={`${D}/${f}.1600.webp`} srcset={`${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w`} sizes="(min-width:1024px) 768px, 100vw" width="1600" height="900" loading="lazy" decoding="async" alt={`Slide: ${cap}`} class="w-full"/></a><figcaption class="px-4 py-3 border-t border-white/10 text-xs text-gray-400">{cap}</figcaption></figure>))}
 </section>))}
 </div></div>
 </article>
