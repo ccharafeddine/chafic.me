@@ -125,7 +125,7 @@ const resumeLinks=[
 <h2 class="split sec-h">Resume</h2>
 {RESUME_PDF_READY ? (<>
 <a href="/resume.pdf" download="Chafic_Charafeddine_Resume.pdf" class="inline-block px-5 py-3 rounded-full bg-accent text-ink font-semibold mb-8">Download PDF</a>
-<div class="card overflow-hidden"><object data="/resume.pdf#view=FitH" type="application/pdf" class="w-full h-[80vh]"><p class="p-6 text-gray-400">PDF preview unavailable. <a class="text-accent underline" href="/resume.pdf">Open the resume</a>.</p></object></div></>)
+<div class="card overflow-hidden"><div data-pdf-embed="/resume.pdf#view=FitH" class="w-full h-[80vh] flex items-center justify-center"><p class="p-6 text-gray-400">PDF preview unavailable. <a class="text-accent underline" href="/resume.pdf">Open the resume</a>.</p></div></div></>)
 : (<p class="text-gray-400 mb-6">PDF coming soon.</p>)}
 <div class="mt-8 flex flex-col items-center gap-2 text-sm">
 {resumeLinks.map(([l,h])=>(<a href={h} target={h.startsWith('http')?'_blank':undefined} rel={h.startsWith('http')?'noopener':undefined} class="text-accent hover:underline font-mono">{l}</a>))}

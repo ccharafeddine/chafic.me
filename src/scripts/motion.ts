@@ -167,8 +167,25 @@ function restoreScroll(y: number) {
   const go = () => { if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); window.scrollTo(0, y); };
   go(); requestAnimationFrame(go); setTimeout(() => { ScrollTrigger.refresh(); go(); }, 120); setTimeout(go, 400);
 }
+// Resume preview: the browser's PDF viewer can grab focus when it finishes loading, and the browser then scrolls
+// the page down to it. So the <object> is only created once the resume section is about to come into view.
+function lazyPdf() {
+  const boxes = document.querySelectorAll<HTMLElement>('[data-pdf-embed]');
+  if (!boxes.length) return;
+  const mount = (box: HTMLElement) => {
+    if (box.dataset.mounted) return; box.dataset.mounted = '1';
+    const o = document.createElement('object');
+    o.type = 'application/pdf'; o.data = box.dataset.pdfEmbed!; o.className = 'w-full h-full';
+    o.innerHTML = box.innerHTML; box.replaceChildren(o); box.classList.remove('flex', 'items-center', 'justify-center');
+  };
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { mount(e.target as HTMLElement); io.unobserve(e.target); } }), { rootMargin: '200px 0px' });
+  boxes.forEach(b => io.observe(b));
+  cleanups.push(() => io.disconnect());
+}
+
 document.addEventListener('astro:page-load', () => {
   init();
+  lazyPdf();
   setTimeout(unhide, 2500);
   const y = restoreY; restoreY = null;
   requestAnimationFrame(() => {
