@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import raw from '../../content/daily-melt.md?raw';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import { projects } from '../../data/projects.js';
+const p = projects.find(x => x.slug === 'daily-melt');
+const md = await createMarkdownProcessor();
+const D = '/shots/spx-income-trader';
+const PDF = '/reports/daily-melt-post-mortem.pdf';
+const body = raw.slice(raw.indexOf('\n## '));
+const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
+const slugify = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const NAV = { 'Why it lost: look-ahead bias': 'Look-ahead bias', 'The iron condor alternative': 'Iron condor', 'The evidence-gated plan': 'Evidence gates' };
+const H = { fig1_live_record: 991, fig2_lookahead: 660, fig3_baseline_equity: 658, fig4_cost_waterfall: 696, fig5_side_exit: 551, fig6_model_vs_live: 749, fig7_condor_equity: 662, fig8_condor_sensitivity: 700 };
+const sections = await Promise.all(parts.map(async (s) => {
+  const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim();
+  let html = (await md.render(s.slice(nl + 1).trim())).code;
+  html = html.replace(/<img src="\/shots\/spx-income-trader\/([a-z0-9_]+)\.1600\.webp" alt="([^"]*)"\s*\/?>/g,
+    (_, f, alt) => `<a href="${D}/${f}.1600.webp" target="_blank"><img src="${D}/${f}.1600.webp" srcset="${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w" sizes="(min-width:1024px) 768px, 100vw" width="1600" height="${H[f] ?? 800}" loading="lazy" decoding="async" alt="${alt}"></a>`);
+  return { id: slugify(title), title, nav: NAV[title] ?? title, html };
+}));
+---
+<Base title="SPX Income Trader post-mortem · Chafic Charafeddine">
+<article class="max-w-6xl mx-auto px-6 py-16">
+<a data-back href="/#projects" class="text-sm text-gray-400 hover:text-accent">← All projects</a>
+<header class="mt-6 max-w-3xl">
+<p class="text-accent text-sm">Post-mortem · Systematic options strategy · Python</p>
+<p class="text-xs text-gray-400 mt-1">Built January 2026 · Live March – May 2026 · Post-mortem October 2026</p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-2 leading-tight" style="view-transition-name: title-daily-melt">SPX Income Trader (“Daily Melt”)</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">An automated 0DTE S&amp;P 500 credit-spread strategy that I live-tested for seven weeks and then paused. This is my blameless review of what the live test showed, the rebuilt backtest that explained the result, and the evidence-gated plan for any future live trading.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-8">
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem] border-accent/40"><p class="text-[10px] uppercase tracking-widest text-accent">Net live P&amp;L</p><p class="text-xl sm:text-2xl font-bold text-rose-400 leading-tight mt-2">−$3,326.72</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">After all fees · reconciled with the broker</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Live trades</p><p class="text-xl sm:text-2xl font-bold text-white leading-tight mt-2">21</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">9 wins · 12 losses (42.9%)</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Trial length</p><p class="text-xl sm:text-2xl font-bold text-sky-400 leading-tight mt-2">~7 weeks</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Mar 10 – May 1, 2026 · then paused</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Contracts per trade</p><p class="text-xl sm:text-2xl font-bold text-amber-400 leading-tight mt-2">1–4</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Sized by risk · 2% of equity per day</p></div>
+</div>
+<div class="flex flex-wrap gap-3 mt-8">
+<a href={PDF} target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-accent text-ink font-semibold text-sm">Read the post-mortem (PDF, 12 pp.) ↓</a>
+<a href={p.url} target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-white/20 hover:border-accent text-sm">View on GitHub →</a>
+</div>
+<p class="text-xs text-gray-500 mt-6">A personal research and engineering project. Nothing here is investment advice or a recommendation to use any strategy. Options trading involves substantial risk of loss. Backtested and simulated results are hypothetical and do not represent actual trading; live figures are from a small personal account and are shown only to document the project.</p>
+</header>
+<div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
+<nav aria-label="Post-mortem sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10 max-h-[calc(100vh-7rem)] overflow-y-auto">
+{sections.map(s => <li><a href={`#${s.id}`} data-sec={s.id} class="block pl-4 -ml-px py-1 border-l-2 border-transparent text-gray-400 hover:text-white transition-colors">{s.nav}</a></li>)}
+</ul></nav>
+<div class="min-w-0 max-w-3xl">
+{sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
+<div class="cs-prose rs-prose" set:html={s.html}/>
+</section>))}
+</div></div>
+</article>
+<script>
+function csNav(){ const links=[...document.querySelectorAll<HTMLAnchorElement>('#cs-nav a')]; if(!links.length) return;
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>{const on=l.dataset.sec===e.target.id; l.classList.toggle('text-white',on); l.classList.toggle('border-accent',on); l.classList.toggle('text-gray-400',!on);}); } });},{rootMargin:'-30% 0px -60% 0px'});
+ document.querySelectorAll('.cs-sec').forEach(s=>io.observe(s)); }
+document.addEventListener('astro:page-load', csNav);
+</script>
+</Base>

@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { projects, demoUrl, extAttrs } from '../../data/projects.js';
 import { img } from '../../data/img.js';
 import PortfolioDemo from '../../components/PortfolioDemo.astro';
-export function getStaticPaths(){ return projects.filter(p=>!p.noPage).map(p=>({params:{slug:p.slug},props:{p}})); }
+export function getStaticPaths(){ return projects.filter(p=>!p.noPage&&!p.customPage).map(p=>({params:{slug:p.slug},props:{p}})); }
 const { p } = Astro.props;
 const REPORTS = ['cube-solver','chess-solver','sudoku-solver','card-solver','word-solver','connect-solver'];
 const report = REPORTS.includes(p.slug) ? `/reports/${p.slug}.pdf` : null;
