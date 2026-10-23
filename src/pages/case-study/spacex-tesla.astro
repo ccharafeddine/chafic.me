@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import raw from '../../content/spacex-tesla.md?raw';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+const md = await createMarkdownProcessor();
+const D = '/case-study/spacex-tesla';
+// Drop the title block (rendered in the hero); split the narrative into its "## " sections.
+const body = raw.slice(raw.indexOf('\n## '));
+const parts = body.split(/\n(?=## )/).map(s => s.trim()).filter(Boolean);
+const slugify = (t) => t.toLowerCase().replace(/^\d+\.\s*/, '').replace(/\(.*?\)/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const navName = {
+  'bottom-line': 'Bottom line', 'where-it-stands': 'Where it stands', 'why-do-it': 'Why do it',
+  'standalone-valuation-two-very-expensive-stocks': 'Standalone valuation',
+  'exchange-ratio-math': 'Exchange ratio (hypothetical)', 'structure-and-consideration': 'Structure',
+  'governance-and-minority-shareholders': 'Governance', 'regulatory-and-approval-path': 'Approvals',
+  'market-reaction': 'Market reaction', 'risks': 'Risks', 'what-to-watch': 'What to watch',
+  'what-could-not-be-verified': 'Not verified', 'sources': 'Sources',
+};
+const figs = {
+  'standalone-valuation-two-very-expensive-stocks': [['fig1_value_contribution', 'Figure 1. Market value at the 22-Oct-2026 close, and each company\u2019s share of the combined total by market value, revenue and adjusted EBITDA']],
+  'exchange-ratio-math': [['fig2_premium_sensitivity', 'Figure 2. Hypothetical premium scenarios: ownership, Musk\u2019s control and economics, and the value transferred. Illustrative only; no terms have been agreed.']],
+};
+const sections = await Promise.all(parts.map(async (s) => {
+  const nl = s.indexOf('\n'); const title = s.slice(3, nl).trim(); const id = slugify(title);
+  const html = (await md.render(s.slice(nl + 1).replace(/---\s*$/, '').trim())).code;
+  return { id, title, nav: navName[id] ?? title, html, figs: figs[id] ?? [] };
+}));
+---
+<Base title="SpaceX / Tesla potential combination case study · Chafic Charafeddine">
+<article class="max-w-6xl mx-auto px-6 py-16">
+<a data-back href="/#case-study" class="text-sm text-gray-400 hover:text-accent">← Back to home</a>
+<header class="mt-6 max-w-3xl">
+<p class="text-accent text-sm">Independent M&amp;A case study · Potential combination under review · Public information only</p>
+<p class="mt-3"><span class="text-xs px-2 py-1 rounded-full bg-amber-400/15 text-amber-300">● In progress · updated as filings arrive</span></p>
+<h1 class="text-4xl sm:text-5xl font-bold mt-3 leading-tight">SpaceX / Tesla: pricing a merger that is still under review</h1>
+<p class="text-lg text-gray-300 mt-4 leading-relaxed reveal">No deal has been agreed. Both boards have formed special committees to evaluate a potential combination, and no terms are public. At the 22-Oct-2026 close the two companies were worth $3.45T together, and a zero-premium swap is 2.588 SPCX per TSLA. My view: a deal is plausible but not close, and the premium, not the logic, will decide it. Tesla's shareholder vote, not antitrust, is the binding constraint.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-8">
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem] border-accent/40"><p class="text-[10px] uppercase tracking-widest text-accent">Status</p><p class="text-base sm:text-lg font-semibold leading-snug text-white mt-2">Under review: special committees only</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">No agreement, terms or filing with a ratio</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Combined market value</p><p class="text-xl sm:text-2xl font-bold text-sky-400 leading-tight mt-2">$3.45T</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">SpaceX $1.97T · Tesla $1.48T (22-Oct close)</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Market ratio</p><p class="text-xl sm:text-2xl font-bold text-emerald-400 leading-tight mt-2">2.588x</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">SPCX per TSLA · Tesla holders 43.0% at no premium</p></div>
+<div class="card p-3 sm:p-4 reveal flex flex-col min-h-[8.5rem]"><p class="text-[10px] uppercase tracking-widest text-gray-400">Hypothetical 20–35% premium</p><p class="text-xl sm:text-2xl font-bold text-amber-400 leading-tight mt-2">$296B–$518B</p><p class="text-[11px] text-gray-400 mt-auto pt-2 leading-snug">Value synergies must earn back for SpaceX holders</p></div>
+</div>
+<p class="text-xs text-gray-500 mt-6">Not prepared for, reviewed by, or affiliated with SpaceX, Tesla, their advisors, or any employer or client. Not investment advice. All figures in US$. Every exchange ratio, premium and ownership split is a hypothetical built from public figures; no transaction has been agreed.</p>
+</header>
+<div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-12 mt-16">
+<nav aria-label="Case study sections" class="hidden lg:block"><ul id="cs-nav" class="sticky top-24 space-y-1 text-sm border-l border-white/10">
+{sections.map(s => <li><a href={`#${s.id}`} data-sec={s.id} class="block pl-4 -ml-px py-1 border-l-2 border-transparent text-gray-400 hover:text-white transition-colors">{s.nav}</a></li>)}
+</ul></nav>
+<div class="min-w-0 max-w-3xl">
+{sections.map(s => (<section id={s.id} class="cs-sec pt-6 pb-10 border-b border-white/5 last:border-0">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4 reveal">{s.title}</h2>
+<div class="cs-prose reveal" set:html={s.html}/>
+{s.figs.map(([f, cap]) => (<figure class="card overflow-hidden mt-8 reveal"><a href={`${D}/${f}.1600.webp`} target="_blank" class="block"><img src={`${D}/${f}.1600.webp`} srcset={`${D}/${f}.800.webp 800w, ${D}/${f}.1600.webp 1600w`} sizes="(min-width:1024px) 768px, 100vw" width="1600" height="611" loading="lazy" decoding="async" alt={cap} class="w-full bg-white"/></a><figcaption class="px-4 py-3 border-t border-white/10 text-xs text-gray-400">{cap}</figcaption></figure>))}
+</section>))}
+</div></div>
+</article>
+<script>
+function csNav(){ const links=[...document.querySelectorAll<HTMLAnchorElement>('#cs-nav a')]; if(!links.length) return;
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>{const on=l.dataset.sec===e.target.id; l.classList.toggle('text-white',on); l.classList.toggle('border-accent',on); l.classList.toggle('text-gray-400',!on);}); } });},{rootMargin:'-30% 0px -60% 0px'});
+ document.querySelectorAll('.cs-sec').forEach(s=>io.observe(s)); }
+document.addEventListener('astro:page-load', csNav);
+</script>
+</Base>
